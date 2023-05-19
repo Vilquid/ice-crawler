@@ -100,8 +100,8 @@ pub struct BIMIRecord
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct MTARecord
 {
-	pub(crate) version: String,
-	pub(crate) sn: String,
+	pub version: String,
+	pub sn: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
