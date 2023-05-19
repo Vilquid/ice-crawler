@@ -29,6 +29,7 @@ pub struct Retour{
 	starttls: String,
 	versions: [String;4],
 	note: u16,
+	ip: String,
 }
 
 impl Termination for Retour {
@@ -56,14 +57,15 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 	const LEPETIT:u64=256;
 	const LAPS:u64=17;
 		
-	let mut ip=add.clone();
+	let mut ipa=add.clone();
+		
 
 	add=add+":25";
 	let mut pol=String::new();
 	// let domain = domain;
 	let mut vec: Vec<String> = vec![pol.clone(); 600];
 	let init="test";
-	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: Default::default(), note: 0, ip: ip.clone()};
+	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: Default::default(), note: 0, ip: ipa.clone()};
 	let mut juj=0;
 	let (tx, rx) = mpsc::channel::<Renvoi>();
 	pol.push_str("test");
