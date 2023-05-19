@@ -12,7 +12,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'search', component: ServersComponent, canActivate: [AuthGuard]},
+  {path: 'search', component: ServersComponent},
+  // add ',canActivate: [AuthGuard]' for login restriction in search page
   {path: 'aboutus', component: AboutusComponent}
 
 ];
