@@ -1,0 +1,62 @@
+name: workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  clone:
+    name: clone down repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: upload repo
+        uses: actions/upload-artifact@v3
+        with:
+          name: code
+          path: .
+  Build-Data_MS:
+    runs-on: ubuntu-latest
+    needs: [clone]
+    steps:
+      - name: download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh data
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh data
+  Build-Smtp_MS:
+    runs-on: ubuntu-latest
+    needs: [clone]
+    steps:
+      - name: download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh smtp
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh smtp
+  Build-Icecrawlerui:
+    runs-on: ubuntu-latest
+    needs: [clone]
+    steps:
+      - name: download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker-ui.sh && ci/build-docker-ui.sh web-ui
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh web-ui
