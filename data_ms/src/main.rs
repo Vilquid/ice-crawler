@@ -23,6 +23,7 @@ mod tls;
 
 #[post("/")]
 async fn pourpost(req: Json<Input>) -> HttpResponse {
+	println!("c'est modifié");
 	let mut contenu= Input {domain: req.domain.to_string(), ip: req.ip.to_string() };
 	if contenu.domain.eq("") {
 		println!("rien reçu");
