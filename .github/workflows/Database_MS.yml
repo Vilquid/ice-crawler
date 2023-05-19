@@ -1,4 +1,4 @@
-name: workflow
+name: Build-Database_MS
 on:
   push:
     branches:
