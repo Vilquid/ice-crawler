@@ -450,14 +450,14 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
     	requete2=requete2 + &i;
     }
 
-    requete2=requete2 + &", ".to_string() + &req.dns.spf.qualifier.clone() + &", ".to_string();
+    requete2=requete2 + &"\", \"".to_string() + &req.dns.spf.qualifier.clone() + &"\", \"".to_string();
 
 
 for i in &req.dns.spf.ip {
     	requete2=requete2 + &i;
 }
 
-requete2=requete2 + &", ".to_string();
+requete2=requete2 + &"\", \"".to_string();
 
 
 for i in &req.dns.spf.include {
@@ -465,7 +465,7 @@ for i in &req.dns.spf.include {
 }
 
 
-requete2=requete2 + &", ".to_string() + &req.dns.spf.all.clone() + &", ".to_string() + &req.dns.tls.v.clone() + &", ".to_string() + &req.dns.tls.rua.clone() + &") ".to_string();
+requete2=requete2 +&"\", \"".to_string() + &req.dns.spf.all.clone() + &"\", \"".to_string() + &req.dns.tls.v.clone() + &"\", \"".to_string() + &req.dns.tls.rua.clone() + &"\"); ".to_string();
     
     let mut pool = mysql::MySqlConnectOptions::new()
     	.host("mysql.default")
