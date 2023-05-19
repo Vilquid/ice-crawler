@@ -92,28 +92,3 @@ kubectl delete pod <nom_du_pod>
 ```bash
 curl -F "config=@Kong-endpoints-icecrawler.yaml" http://10.10.20.122:8001/config
 ```
-
-## Afficher une base de données
-
-Ouvrir le terminal du pod mysql
-
-```bash
-mysql
-SHOW DATABASES;
-USE <nom_de_la_base_de_données>;
-SHOW TABLES;
-SELECT * FROM <nom_de_la_table>;
-``` 
-
-## Supprimer une foreign key
-
-```bash
-ALTER TABLE servers DROP FOREIGN KEY domaine;
-SHOW CREATE TABLE servers;
-```
-
-## Supprimer une table
-
-```bash
-ALTER TABLE domains ADD timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-```
