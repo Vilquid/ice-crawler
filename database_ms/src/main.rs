@@ -24,7 +24,6 @@ pub struct DATAResult
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct Retour{
-	ip: String,
 	certificat: String,
 	liste: Vec<String>,
 	cyfaible: String,
@@ -46,6 +45,7 @@ pub struct DNSRecord
 	pub mta: MTARecord,
 	pub tls: TLSRecord,
 	pub certificate: CertificateRecord,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -62,6 +62,7 @@ pub struct DMARCRecord
 	pub aspf: String,
 	pub adkim: String,
 	pub fo: String,
+	pub note: String,
 }
 
 
@@ -74,6 +75,7 @@ pub struct SPFRecord
 	pub ip: Vec<String>,
 	pub include: Vec<String>,
 	pub all: String,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -84,6 +86,7 @@ pub struct DANERecord
 	pub signature_cle_publique: bool,
 	pub presence_hash: bool,
 	pub hash: String,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -95,6 +98,7 @@ pub struct BIMIRecord
 	pub url_reputation: String,
 	pub hash: String,
 	pub s: String,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -102,6 +106,7 @@ pub struct MTARecord
 {
 	pub version: String,
 	pub sn: String,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -109,56 +114,58 @@ pub struct TLSRecord
 {
 	pub v: String,
 	pub rua: String,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct CertificateRecord
 {
-    pub domain: String,
-    pub signature_algorithm_server: String,
-    pub issuer_server: IssuerDetails,
-    pub validity_server: ValidityDetails,
-    pub subject_server: SubjectDetails,
-    pub extensions_server: ExtensionsDetails,
-    pub signature_algorithm_intermediate: String,
-    pub issuer_intermediate: IssuerDetails,
-    pub validity_intermediate: ValidityDetails,
-    pub subject_intermediate: SubjectDetails,
-    pub extensions_intermediate: ExtensionsDetails,
+	pub domain: String,
+	pub signature_algorithm_server: String,
+	pub issuer_server: IssuerDetails,
+	pub validity_server: ValidityDetails,
+	pub subject_server: SubjectDetails,
+	pub extensions_server: ExtensionsDetails,
+	pub signature_algorithm_intermediate: String,
+	pub issuer_intermediate: IssuerDetails,
+	pub validity_intermediate: ValidityDetails,
+	pub subject_intermediate: SubjectDetails,
+	pub extensions_intermediate: ExtensionsDetails,
+	pub note: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct IssuerDetails
 {
-    pub city: String,
-    pub state: String,
-    pub locality: String,
-    pub organization: String,
-    pub common_name: String,
+	pub city: String,
+	pub state: String,
+	pub locality: String,
+	pub organization: String,
+	pub common_name: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct SubjectDetails
 {
-    pub city: String,
-    pub state: String,
-    pub locality: String,
-    pub organization: String,
-    pub common_name: String,
+	pub city: String,
+	pub state: String,
+	pub locality: String,
+	pub organization: String,
+	pub common_name: String,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct ValidityDetails
 {
-    pub not_before: String,
-    pub not_after: String,
-    pub is_valid: bool,
+	pub not_before: String,
+	pub not_after: String,
+	pub is_valid: bool,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct ExtensionsDetails
 {
-    pub subject_alternative_names: Vec<String>,
+	pub subject_alternative_names: Vec<String>,
 }
 
 
