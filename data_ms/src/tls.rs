@@ -605,7 +605,7 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 		}
 		index+=1;
 
-		thread::sleep(Duration::from_millis(500));
+		thread::sleep(Duration::from_millis(250));
 	}
 
 	println!("je suis prêt pour transfer de données");
