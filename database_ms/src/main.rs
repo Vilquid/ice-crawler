@@ -254,7 +254,7 @@ async fn rechercheutilisateur(req: HttpRequest) -> HttpResponse {
         
         
     let mut conn = mysql::MySqlConnectOptions::new()
-    	.host("mysql.default:9010")
+    	.host("mysql.default")
     	.username("ice_crawler_user")
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
@@ -302,7 +302,7 @@ async fn ajoututilisateur(req: Json<Utilisateur>) -> HttpResponse {
     	let mut requete=String::from("INSERT INTO users (mail, hash, sel) VALUES ( "); 
     	requete=requete + &req.mail.clone() + &",".to_string() + &req.hash.clone() + &",".to_string() + &req.sel.clone() + &");".to_string();
     	let mut pool = mysql::MySqlConnectOptions::new()
-    		.host("mysql.default:9010")
+    		.host("mysql.default")
     		.username("ice_crawler_user")
     		.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     		.database("ice_crawler_DB")
@@ -371,7 +371,7 @@ async fn recuperation(req: HttpRequest) -> HttpResponse {
         
         
     let mut conn = mysql::MySqlConnectOptions::new()
-    	.host("mysql.default:9010")
+    	.host("mysql.default")
     	.username("ice_crawler_user")
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
@@ -468,7 +468,7 @@ for i in &req.dns.spf.include {
 requete2=requete2 + &", ".to_string() + &req.dns.spf.all.clone() + &", ".to_string() + &req.dns.tls.v.clone() + &", ".to_string() + &req.dns.tls.rua.clone() + &") ".to_string();
     
     let mut pool = mysql::MySqlConnectOptions::new()
-    	.host("mysql.default:9010")
+    	.host("mysql.default")
     	.username("ice_crawler_user")
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
