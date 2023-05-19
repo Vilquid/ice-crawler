@@ -30,6 +30,7 @@ pub struct Retour{
 	starttls: String,
 	versions: [String;4],
 	note: u16,
+	ip: String,
 }
 
 
