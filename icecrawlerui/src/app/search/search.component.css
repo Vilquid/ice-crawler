@@ -1,0 +1,77 @@
+.banner {
+    overflow: hidden;
+    background-image: url('../../assets/BGSearch.png');
+  }
+
+  .banner p {
+    font-size: 20px;
+    opacity: .8;
+    color: #07072cf2;
+    font-weight: 600;
+  }
+
+  .banner .nav-link.text-dark {
+    color: #ffffff;
+  }
+
+  .banner .nav-link.text-dark:hover {
+    color: #ffffff;
+  }
+
+  .banner .navbar-brand {
+    color: #ffffff;
+  }
+
+  .banner img{
+    max-width: 60%;
+    padding: 1%;
+  }
+  .bg-cover {
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+  }
+
+  .border-primary {
+    border-color: #f2f2f2 !important
+  }
+
+  .overlay {
+    position: relative;
+  }
+
+  .overlay::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: .8;
+}
+
+.section{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.form-control {
+    height: 50px;
+    border-radius: 25px;
+    border: 0;
+    padding: 0 20px
+}
+
+.form-control:focus {
+    border: 0;
+    box-shadow: none !important
+}
+
+textarea.form-control {
+    height: 150px;
+    padding: 20px
+}

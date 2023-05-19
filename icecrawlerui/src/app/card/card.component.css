@@ -1,0 +1,30 @@
+@import url(../../assets/icons/css/icons.css); 
+
+.card-img-top{
+    font-size: 80px;
+    text-align: center;
+}
+
+.card-link{
+    color:white;
+}
+
+.catb{
+    border-radius: 4px;
+    background: #0b132c;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.caty{
+    border-radius: 4px;
+    background: #b8a908;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    margin-left: 6%;
+}
+

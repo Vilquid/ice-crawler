@@ -1,0 +1,156 @@
+.topwavepart {
+    position:relative;
+    text-align:center;
+    background-image: url("../../assets/BlueBG.jpg");
+    color:white;
+  }
+  .logo {
+    width:170px;
+    fill:white;
+    padding-right:15px;
+    display:inline-block;
+    vertical-align: middle;
+  }
+
+  .inner-topwavepart {
+    height:68vh;
+    width:100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .flex { /*Flexbox for containers*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .waves {
+    position:relative;
+    width: 100%;
+    height:15vh;
+    margin-bottom:-7px; /*Fix for safari gap*/
+    min-height:100px;
+    max-height:150px;
+  }
+
+  .content {
+    position:relative;
+    height:20vh;
+    text-align:center;
+    background-color: white;
+    margin-top: 10%;
+  }
+
+  /* Animation */
+
+  .parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+  }
+  .parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  .parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+  .parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  .parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+  @keyframes move-forever {
+    0% {
+     transform: translate3d(-90px,0,0);
+    }
+    100% {
+      transform: translate3d(85px,0,0);
+    }
+  }
+
+  /*Shrinking for mobile*/
+  @media (max-width: 768px) {
+    .waves {
+      height:40px;
+      min-height:40px;
+    }
+    .content {
+      height:30vh;
+    }
+    h1 {
+      font-size:24px;
+    }
+  }
+
+  /* Part 1 - stats  */
+
+  .featured-services .icon-box {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 31px 0 rgba(50, 65, 108, 0.199);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    z-index: 1;
+  }
+
+  .featured-services .icon-box::before {
+    content: "";
+    position: absolute;
+    background: #d9f1f2;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 100%;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+
+  .featured-services .icon-box:hover::before {
+    background: #d4051dc9;
+    top: 0;
+    border-radius: 0px;
+  }
+
+  .featured-services .icon {
+    margin-bottom: 15px;
+  }
+
+  .featured-services .icon i {
+    font-size: 48px;
+    line-height: 1;
+    color: #d4051dc9;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .featured-services .title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .featured-services .title a {
+    color: #0b132c;
+    font-size: 20px;
+  }
+
+  .featured-services .description {
+    font-size: 15px;
+    line-height: 28px;
+    margin-bottom: 0;
+  }
+
+  .featured-services .icon-box:hover .title a,
+  .featured-services .icon-box:hover .description {
+    color: #fff;
+  }
+
+  .featured-services .icon-box:hover .icon i {
+    color: #fff;
+  }
