@@ -923,6 +923,7 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 	println!("cyfaible={:?}",fin.cyfaible);
 	println!("fin.liste={:?}",fin.liste);
 	println!("la note={:?}",fin.note);
+	println!("ip={:?}",fin.ip);
 
 	return fin;
 
