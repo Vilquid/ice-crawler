@@ -68,7 +68,6 @@ pub struct DMARCRecord
 #[derive(Deserialize,Serialize, Encode, Type)]
 pub struct SPFRecord
 {
-	pub domain: String,
 	pub version: String,
 	pub mechanisms: Vec<String>,
 	pub qualifier: String,
