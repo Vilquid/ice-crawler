@@ -1,0 +1,26 @@
+<app-search></app-search>
+<div class="container">
+    <div class="notices tip" data-aos="fade-right">
+        <p>Ici vous pouvez lancer une recherche pour une liste de nom de domaine.
+        <u>Attention : Le chargement des données peut être long, une fois la recherche lancé veuillez patienter</u></p>
+    </div>
+
+    <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
+
+    <form (ngSubmit)="submit()" [formGroup]="domainForm">
+        <label>Nom de Domaine: </label>
+        <input formControlName="domain">
+        <button type="submit">Envoyer</button>
+        </form>
+    <br/>    
+
+    <div class="person-boxes" *ngIf="servers!=null">
+        <ng-container *ngFor="let server of servers | filter:texterecherche">
+            <app-server-single [server]="server" data-aos="fade-up" data-aos-delay="600"></app-server-single>
+        </ng-container>
+    </div>
+    <div class="person-boxes" *ngIf="(servers | filter:texterecherche).length==0">
+        <p class="warningsign">&#9888; Aucun resultat</p>
+    </div>
+</div>
+

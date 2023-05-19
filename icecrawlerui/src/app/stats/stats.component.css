@@ -1,0 +1,73 @@
+ @import url(../../assets/icons/css/icons.css); 
+
+#statbox{
+    margin-top:10%;
+    text-align: center;
+}
+
+.statbox .icon-box {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 31px 0 rgba(50, 65, 108, 0.199);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    z-index: 1;
+  }
+  
+  .statbox .icon-box::before {
+    content: "";
+    position: absolute;
+    background: #d9f1f2;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 100%;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  
+  .statbox .icon-box:hover::before {
+    background: #0858b5d8;
+    top: 0;
+    border-radius: 0px;
+  }
+  
+  .statbox .icon {
+    margin-bottom: 15px;
+  }
+  
+  .statbox .icon i {
+    font-size: 64px;
+    line-height: 1;
+    color: #0e193a ;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .statbox .title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .statbox .title a {
+    color: #0b132c;
+    font-size: 20px;
+  }
+  
+  .statbox .description {
+    font-size: 15px;
+    line-height: 28px;
+    margin-bottom: 0;
+  }
+  
+  .statbox .icon-box:hover .title a,
+  .statbox .icon-box:hover .description {
+    color: #fff;
+  }
+  
+  .statbox .icon-box:hover .icon i {
+    color: #fff;
+  }
+

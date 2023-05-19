@@ -1,0 +1,74 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css");
+
+footer {
+    background: #0b132c;
+    display: flex;
+    align-items: center;
+    padding: 3%;
+    justify-content: space-between;
+    margin-top: 6%;
+
+  }
+  
+  .left-side-foot {
+    display: flex;
+    align-items: center;
+  }
+
+
+  .right-side-foot {
+    display: flex;
+    align-items: center;
+  }
+  
+  .link-foot {
+    color: #e0dfdf;
+    display: flex;
+    align-items: center;
+    margin-right: 4rem;
+    transition: all 0.5s;
+  }
+  .link-foot a{
+    color:white;
+    text-decoration: none;
+
+  }
+  
+  .link-foot:hover {
+    transform: scale(1.10);
+    cursor: pointer;
+  }
+  
+  i {
+    margin-right: 1rem;
+  }
+  .option {
+    font-weight: 300;
+    color: var(--footer);
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+  .copyright {
+    color: white;
+    font-weight: 700;
+    margin-right: 3rem;
+    text-align: left;
+    display: block;
+  }
+  .img-footer {
+    width: 60px;
+    height: 60px;
+    margin-right: 2rem;
+    opacity: 0.8;
+    transition: all 0.5s;
+  }
+
+  .img-footer:hover{
+    transform: scale(1.10);
+  }
+
+  @media screen and (max-width: 500px) {
+    .copyright {
+      margin-right: 1rem;
+      font-size: 11px;
+    }
+}
