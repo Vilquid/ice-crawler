@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp
+  namespace: default 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9001
+  selector:
+    pod-name: smtp
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smtp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-name: smtp
+  template:
+    metadata:
+      labels:
+        pod-name: smtp
+    spec:
+      containers:
+      - name: smtp
+        image: "docker.io/icecrawler/smtp:latest"
+        imagePullPolicy: Always 
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 9001

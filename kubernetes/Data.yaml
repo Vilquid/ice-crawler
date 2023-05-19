@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: data
+  namespace: default 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9002
+  selector:
+    pod-name: data
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-name: data
+  template:
+    metadata:
+      labels:
+        pod-name: data
+    spec:
+      containers:
+      - name: data
+        image: "docker.io/icecrawler/data:latest"
+        imagePullPolicy: Always 
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 9002
+
+

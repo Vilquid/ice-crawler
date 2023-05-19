@@ -1,0 +1,12 @@
+[package]
+name = "domain_ms"
+version = "0.1.0"
+edition = "2021"
+authors = ["Mathis"]
+
+
+[dependencies]
+trust-dns-resolver = "0.20.1"
+#ipnetwork = "0.17.0 -> pour spf
+regex = "1.7.0"
+ipinfo = "0.5.1"

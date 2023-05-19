@@ -1,0 +1,50 @@
+_format_version: "1.1"
+
+services:
+- name: data
+  url: http://data.default/
+  routes:
+  - name: data-route
+    paths:
+    - /data
+    strip_path: true
+
+- name: web-ui
+  url: http://web-ui.default/
+  routes:
+  - name: web-ui-route
+    paths:
+    - /
+    strip_path: true
+
+- name: smtp
+  url: http://smtp.default/
+  routes:
+  - name: smtp-route
+    paths:
+    - /smtp
+    strip_path: true
+
+- name: bdd
+  url: http://mysql.default:3306
+  routes:
+  - name: bdd-route
+    paths:
+    - /bdd
+    strip_path: true
+
+- name: database
+  url: http://database.default/
+  routes:
+  - name: database-route
+    paths:
+    - /database
+    strip_path: true
+    
+- name: postgres_db
+  url: http://postgres.default:5432
+  routes:
+    - name: postgres_db-route
+      paths:
+      - /postgres_db
+      strip_path: true

@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ui
+  namespace: default 
+spec:
+  ports:
+  - port: 80 
+    protocol: TCP
+    targetPort: 80
+  selector:
+    pod-name: web-ui
+  type: ClusterIP 
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-ui
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-name: web-ui
+  template:
+    metadata:
+      labels:
+        pod-name: web-ui
+    spec:
+      containers:
+      - name: web-ui
+        image: "docker.io/icecrawler/web-ui:latest"
+        imagePullPolicy: Always 
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 80
+
+

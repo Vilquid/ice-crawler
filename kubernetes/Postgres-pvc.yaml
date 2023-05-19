@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgresql-data
+  namespace: default
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi # Sets PV Volume size
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /volume1/data
+    server: 10.10.2.1
+    readOnly: false
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-data-claim
+  namespace: default
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi # Sets volume size
