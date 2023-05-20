@@ -9,13 +9,13 @@ import { CertificateRecord } from "./certificate-record"
 
 export interface DNSRecord {
 	domain: string,
+	note: string,
 	dmarc?: DMARCRecord,
 	spf?: SPFRecord,
 	dane?: DANERecord,
 	bimi?: BIMIRecord,
 	mta?: MTARecord,
 	tls?: TLSRecord,
-	certificate?: CertificateRecord,
-	note: string
+	certificate?: CertificateRecord
 }
 

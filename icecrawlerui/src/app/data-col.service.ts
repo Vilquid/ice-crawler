@@ -525,6 +525,7 @@ export class DataColService {
 
         let dnsR: DNSRecord = {
           domain: data.dns.domain,
+          note: data.dns.note
         }
 
           let dmarcR: DMARCRecord = {
@@ -539,17 +540,18 @@ export class DataColService {
             aspf: data.dns.dmarc.aspf,
             adkim: data.dns.dmarc.adkim,
             fo: data.dns.dmarc.fo,
+            note: data.dns.dmarc.note
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-            domain: data.dns.spf.domain,
             version: data.dns.spf.version,
             mechanisms: [],
             qualifier: data.dns.spf.qualifier,
             ip: [],
             include: [],
-            all: data.dns.spf.all
+            all: data.dns.spf.all,
+            note: data.dns.spf.note
           }
             const mechanismsL: string[]=[];
             for (let i in data.dns.spf.mechanisms){
@@ -575,7 +577,8 @@ export class DataColService {
             signature_certificat: data.dns.dane.signature_certificat,
             signature_cle_publique: data.dns.dane.signature_cle_publique,
             presence_hash: data.dns.dane.presence_hash,
-            hash: data.dns.dane.hash
+            hash: data.dns.dane.hash,
+            note: data.dns.dane.note
           }
           dnsR.dane = daneR
 
@@ -585,19 +588,22 @@ export class DataColService {
             url_politique: data.dns.bimi.url_politique,
             url_reputation: data.dns.bimi.url_reputation,
             hash: data.dns.bimi.hash,
-            s: data.dns.bimi.s
+            s: data.dns.bimi.s,
+            note: data.dns.bimi.note
           }
           dnsR.bimi = bimiR
 
           let mtaR: MTARecord = {
             version: data.dns.mta.version,
-            sn: data.dns.mta.sn
+            sn: data.dns.mta.sn,
+            note: data.dns.mta.note
           }
           dnsR.mta =  mtaR
 
           let tlsR: TLSRecord = {
             v: data.dns.tls.v,
-            rua: data.dns.tls.rua
+            rua: data.dns.tls.rua,
+            note: data.dns.tls.note
           }
           dnsR.tls = tlsR
 
@@ -648,7 +654,8 @@ export class DataColService {
             },
             extensions_intermediate: {
               subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
-            }
+            },
+            note: data.dns.certificate.note
           }
           dnsR.certificate = certificateR
 
