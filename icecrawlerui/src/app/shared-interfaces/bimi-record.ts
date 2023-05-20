@@ -5,5 +5,6 @@ export interface BIMIRecord
 	url_politique: string,
 	url_reputation: string,
 	hash: string,
-  s: string
+  	s: string,
+	note: string
 }

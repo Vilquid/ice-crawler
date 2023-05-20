@@ -40,6 +40,8 @@ export class DataColService {
 
         let dnsR: DNSRecord = {
           domain: data[k].dns.domain,
+          note: data[k].dns.note
+
         }
 
           let dmarcR: DMARCRecord = {
@@ -54,17 +56,21 @@ export class DataColService {
             aspf: data[k].dns.dmarc.aspf,
             adkim: data[k].dns.dmarc.adkim,
             fo: data[k].dns.dmarc.fo,
+            note: data[k].dns.dmarc.note
+
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-            domain: data[k].dns.spf.domain,
+
             version: data[k].dns.spf.version,
             mechanisms: [],
             qualifier: data[k].dns.spf.qualifier,
             ip: [],
             include: [],
-            all: data[k].dns.spf.all
+            all: data[k].dns.spf.all,
+            note: data[k].dns.spf.note
+
           }
             const mechanismsL: string[]=[];
             for (let i in data[k].dns.spf.mechanisms){
@@ -90,7 +96,9 @@ export class DataColService {
             signature_certificat: data[k].dns.dane.signature_certificat,
             signature_cle_publique: data[k].dns.dane.signature_cle_publique,
             presence_hash: data[k].dns.dane.presence_hash,
-            hash: data[k].dns.dane.hash
+            hash: data[k].dns.dane.hash,
+            note: data[k].dns.dane.note
+
           }
           dnsR.dane = daneR
 
@@ -100,19 +108,25 @@ export class DataColService {
             url_politique: data[k].dns.bimi.url_politique,
             url_reputation: data[k].dns.bimi.url_reputation,
             hash: data[k].dns.bimi.hash,
-            s: data[k].dns.bimi.s
+            s: data[k].dns.bimi.s,
+            note: data[k].dns.bimi.note
+
           }
           dnsR.bimi = bimiR
 
           let mtaR: MTARecord = {
             version: data[k].dns.mta.version,
-            sn: data[k].dns.mta.sn
+            sn: data[k].dns.mta.sn,
+            note: data[k].dns.mta.note
+
           }
           dnsR.mta =  mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
-            rua: data[k].dns.tls.rua
+            rua: data[k].dns.tls.rua,
+            note: data[k].dns.tls.note
+
           }
           dnsR.tls = tlsR
 
@@ -163,7 +177,9 @@ export class DataColService {
             },
             extensions_intermediate: {
               subject_alternative_names: data[k].dns.certificate.extensions_server.subject_alternative_names
-            }
+            },
+            note: data[k].dns.certificate.note
+
           }
           dnsR.certificate = certificateR
 
@@ -190,6 +206,8 @@ export class DataColService {
 
         let dnsR: DNSRecord = {
           domain: data[k].dns.domain,
+          note: data[k].dns.note
+
         }
 
           let dmarcR: DMARCRecord = {
@@ -204,17 +222,20 @@ export class DataColService {
             aspf: data[k].dns.dmarc.aspf,
             adkim: data[k].dns.dmarc.adkim,
             fo: data[k].dns.dmarc.fo,
+            note: data[k].dns.dmarc.note
+
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-            domain: data[k].dns.spf.domain,
             version: data[k].dns.spf.version,
             mechanisms: [],
             qualifier: data[k].dns.spf.qualifier,
             ip: [],
             include: [],
-            all: data[k].dns.spf.all
+            all: data[k].dns.spf.all,
+            note: data[k].dns.spf.note
+
           }
             const mechanismsL: string[]=[];
             for (let i in data[k].dns.spf.mechanisms){
@@ -240,7 +261,9 @@ export class DataColService {
             signature_certificat: data[k].dns.dane.signature_certificat,
             signature_cle_publique: data[k].dns.dane.signature_cle_publique,
             presence_hash: data[k].dns.dane.presence_hash,
-            hash: data[k].dns.dane.hash
+            hash: data[k].dns.dane.hash,
+            note: data[k].dns.dane.note
+
           }
           dnsR.dane = daneR
 
@@ -250,19 +273,25 @@ export class DataColService {
             url_politique: data[k].dns.bimi.url_politique,
             url_reputation: data[k].dns.bimi.url_reputation,
             hash: data[k].dns.bimi.hash,
-            s: data[k].dns.bimi.s
+            s: data[k].dns.bimi.s,
+            note: data[k].dns.bimi.note
+
           }
           dnsR.bimi = bimiR
 
           let mtaR: MTARecord = {
             version: data[k].dns.mta.version,
-            sn: data[k].dns.mta.sn
+            sn: data[k].dns.mta.sn,
+            note: data[k].dns.mta.note
+
           }
           dnsR.mta =  mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
-            rua: data[k].dns.tls.rua
+            rua: data[k].dns.tls.rua,
+            note: data[k].dns.tls.note
+
           }
           dnsR.tls = tlsR
 
@@ -313,7 +342,9 @@ export class DataColService {
             },
             extensions_intermediate: {
               subject_alternative_names: data[k].dns.certificate.extensions_server.subject_alternative_names
-            }
+            },
+            note: data[k].dns.certificate.note
+
           }
           dnsR.certificate = certificateR
 
@@ -340,6 +371,7 @@ export class DataColService {
 
         let dnsR: DNSRecord = {
           domain: data[k].dns.domain,
+          note: data[k].dns.note
         }
 
           let dmarcR: DMARCRecord = {
@@ -354,17 +386,18 @@ export class DataColService {
             aspf: data[k].dns.dmarc.aspf,
             adkim: data[k].dns.dmarc.adkim,
             fo: data[k].dns.dmarc.fo,
+            note: data[k].dns.dmarc.note
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-            domain: data[k].dns.spf.domain,
             version: data[k].dns.spf.version,
             mechanisms: [],
             qualifier: data[k].dns.spf.qualifier,
             ip: [],
             include: [],
-            all: data[k].dns.spf.all
+            all: data[k].dns.spf.all,
+            note: data[k].dns.spf.note
           }
             const mechanismsL: string[]=[];
             for (let i in data[k].dns.spf.mechanisms){
@@ -390,7 +423,8 @@ export class DataColService {
             signature_certificat: data[k].dns.dane.signature_certificat,
             signature_cle_publique: data[k].dns.dane.signature_cle_publique,
             presence_hash: data[k].dns.dane.presence_hash,
-            hash: data[k].dns.dane.hash
+            hash: data[k].dns.dane.hash,
+            note: data[k].dns.dane.note
           }
           dnsR.dane = daneR
 
@@ -400,19 +434,22 @@ export class DataColService {
             url_politique: data[k].dns.bimi.url_politique,
             url_reputation: data[k].dns.bimi.url_reputation,
             hash: data[k].dns.bimi.hash,
-            s: data[k].dns.bimi.s
+            s: data[k].dns.bimi.s,
+            note: data[k].dns.bimi.note
           }
           dnsR.bimi = bimiR
 
           let mtaR: MTARecord = {
             version: data[k].dns.mta.version,
-            sn: data[k].dns.mta.sn
+            sn: data[k].dns.mta.sn,
+            note: data[k].dns.mta.note
           }
           dnsR.mta =  mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
-            rua: data[k].dns.tls.rua
+            rua: data[k].dns.tls.rua,
+            note: data[k].dns.tls.note
           }
           dnsR.tls = tlsR
 
@@ -463,7 +500,8 @@ export class DataColService {
             },
             extensions_intermediate: {
               subject_alternative_names: data[k].dns.certificate.extensions_server.subject_alternative_names
-            }
+            },
+            note: data[k].dns.certificate.note
           }
           dnsR.certificate = certificateR
 
@@ -487,6 +525,7 @@ export class DataColService {
 
         let dnsR: DNSRecord = {
           domain: data.dns.domain,
+          note: data.dns.note
         }
 
           let dmarcR: DMARCRecord = {
@@ -501,17 +540,18 @@ export class DataColService {
             aspf: data.dns.dmarc.aspf,
             adkim: data.dns.dmarc.adkim,
             fo: data.dns.dmarc.fo,
+            note: data.dns.dmarc.note
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-            domain: data.dns.spf.domain,
             version: data.dns.spf.version,
             mechanisms: [],
             qualifier: data.dns.spf.qualifier,
             ip: [],
             include: [],
-            all: data.dns.spf.all
+            all: data.dns.spf.all,
+            note: data.dns.spf.note
           }
             const mechanismsL: string[]=[];
             for (let i in data.dns.spf.mechanisms){
@@ -537,7 +577,8 @@ export class DataColService {
             signature_certificat: data.dns.dane.signature_certificat,
             signature_cle_publique: data.dns.dane.signature_cle_publique,
             presence_hash: data.dns.dane.presence_hash,
-            hash: data.dns.dane.hash
+            hash: data.dns.dane.hash,
+            note: data.dns.dane.note
           }
           dnsR.dane = daneR
 
@@ -547,19 +588,22 @@ export class DataColService {
             url_politique: data.dns.bimi.url_politique,
             url_reputation: data.dns.bimi.url_reputation,
             hash: data.dns.bimi.hash,
-            s: data.dns.bimi.s
+            s: data.dns.bimi.s,
+            note: data.dns.bimi.note
           }
           dnsR.bimi = bimiR
 
           let mtaR: MTARecord = {
             version: data.dns.mta.version,
-            sn: data.dns.mta.sn
+            sn: data.dns.mta.sn,
+            note: data.dns.mta.note
           }
           dnsR.mta =  mtaR
 
           let tlsR: TLSRecord = {
             v: data.dns.tls.v,
-            rua: data.dns.tls.rua
+            rua: data.dns.tls.rua,
+            note: data.dns.tls.note
           }
           dnsR.tls = tlsR
 
@@ -610,7 +654,8 @@ export class DataColService {
             },
             extensions_intermediate: {
               subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
-            }
+            },
+            note: data.dns.certificate.note
           }
           dnsR.certificate = certificateR
 

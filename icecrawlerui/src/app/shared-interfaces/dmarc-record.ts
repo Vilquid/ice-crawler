@@ -10,5 +10,6 @@ export interface DMARCRecord
 	rf: string,
 	aspf: string,
 	adkim: string,
-	fo: string
+	fo: string,
+	note: string
 }

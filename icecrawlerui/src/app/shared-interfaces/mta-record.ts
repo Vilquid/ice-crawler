@@ -1,5 +1,6 @@
 export interface MTARecord
 {
 	version: string,
-	sn: string
+	sn: string,
+	note: string
 }

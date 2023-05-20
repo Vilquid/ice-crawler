@@ -4,5 +4,6 @@ export interface DANERecord
 	signature_certificat: boolean,
 	signature_cle_publique: boolean,
 	presence_hash: boolean,
-	hash: string
+	hash: string,
+	note: string
 }
