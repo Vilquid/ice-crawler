@@ -45,8 +45,7 @@ export class ServersComponent implements OnInit {
       submit() {////
 
       let data: SendToDomain = {
-      "domain": this.domainForm.value.domain,
-      "ip": "142.250.147.27"
+      "domain": this.domainForm.value.domain
       }
 
       this.dataCol.getBackupData(data).subscribe(
