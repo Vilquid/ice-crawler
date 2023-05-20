@@ -425,8 +425,8 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
         return HttpResponse::Ok().body("error empty data structure!!");
     }
     
-    //let mut requete=String::from("INSERT INTO servers (ip, domaine, tls.certificat, tls.liste, tls.cyfaible, tls.starttls, tls.note) VALUES ( 192.168.22.223, google.com, hthqeh, qehteht, thrth, Sgrgge, drhrhrh)");
-    let mut requete=String::from("INSERT INTO servers (ip, domaine, tls.certificat, tls.liste, tls.cyfaible, tls.starttls, tls.note) VALUES ( \" ");
+    //let mut requete=String::from("INSERT INTO servers ('ip', 'domaine', 'tls.certificat', 'tls.liste', 'tls.cyfaible', 'tls.starttls', 'tls.note') VALUES ( 192.168.22.223, google.com, hthqeh, qehteht, thrth, Sgrgge, drhrhrh)");
+    let mut requete=String::from("INSERT INTO servers ('ip', 'domaine', 'tls.certificat', 'tls.liste', 'tls.cyfaible', 'tls.starttls', 'tls.note') VALUES ( \" ");
     requete=requete + &req.tls.ip.clone() + &&"\", \"".to_string() + &req.dns.domain.clone() + &"\", \"".to_string() + &req.tls.certificat.clone() + &"\", \"".to_string();
     for i in &req.tls.liste {
     	requete=requete + &i.clone();
