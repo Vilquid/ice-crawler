@@ -48,7 +48,7 @@ export class ServersComponent implements OnInit {
       "domain": this.domainForm.value.domain
       }
 
-      this.dataCol.getBackupData(data).subscribe(
+      this.dataCol.launchScanByDomain(data).subscribe(
       p => {
         console.log(p)
         this.servers = this.servers.concat(p)
