@@ -28,7 +28,7 @@ export class DataColService {
 
   launchScanByCIDR(CIDR: SendToCIDR): Observable<DATAResult[]>{            // Post
       const url = "http://10.10.20.122/database"
-      return this.httpClient.post<DATAResult>(url,CIDR).pipe(
+      return this.httpClient.post<DATAResult[]>(url,CIDR).pipe(
       map((data: any) => {
         console.log(data)
         let dataresult: DATAResult = {
@@ -173,7 +173,7 @@ export class DataColService {
 
   launchScanByDomain(domainName: SendToDomain): Observable<any>{  // Post
     const url = "http://10.10.20.122/database"
-      return this.httpClient.post<DATAResult>(url,domainName).pipe(
+      return this.httpClient.post<DATAResult[]>(url,domainName).pipe(
       map((data: any) => {
         console.log(data)
         let dataresult: DATAResult = {
