@@ -479,11 +479,11 @@ requete2=requete2 +&"\", \"".to_string() + &req.dns.spf.all.clone() + &"\", \"".
         
     sqlx::query(requete.as_str())
         .execute(&mut pool)
-        .await.expect("bruh");
+        .await.expect("bruh1");
         
     sqlx::query(requete2.as_str())
         .execute(&mut pool)
-        .await.expect("bruh");
+        .await.expect("bruh2");
 
     
 	return HttpResponse::Ok().body("ok");
