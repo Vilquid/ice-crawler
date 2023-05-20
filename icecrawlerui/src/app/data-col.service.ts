@@ -41,6 +41,7 @@ export class DataColService {
         let dnsR: DNSRecord = {
           domain: data[k].dns.domain,
           note: data[k].dns.note
+
         }
 
           let dmarcR: DMARCRecord = {
@@ -56,10 +57,12 @@ export class DataColService {
             adkim: data[k].dns.dmarc.adkim,
             fo: data[k].dns.dmarc.fo,
             note: data[k].dns.dmarc.note
+
           }
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
+
             version: data[k].dns.spf.version,
             mechanisms: [],
             qualifier: data[k].dns.spf.qualifier,
@@ -67,6 +70,7 @@ export class DataColService {
             include: [],
             all: data[k].dns.spf.all,
             note: data[k].dns.spf.note
+
           }
             const mechanismsL: string[]=[];
             for (let i in data[k].dns.spf.mechanisms){
@@ -94,6 +98,7 @@ export class DataColService {
             presence_hash: data[k].dns.dane.presence_hash,
             hash: data[k].dns.dane.hash,
             note: data[k].dns.dane.note
+
           }
           dnsR.dane = daneR
 
@@ -105,6 +110,7 @@ export class DataColService {
             hash: data[k].dns.bimi.hash,
             s: data[k].dns.bimi.s,
             note: data[k].dns.bimi.note
+
           }
           dnsR.bimi = bimiR
 
@@ -112,6 +118,7 @@ export class DataColService {
             version: data[k].dns.mta.version,
             sn: data[k].dns.mta.sn,
             note: data[k].dns.mta.note
+
           }
           dnsR.mta =  mtaR
 
@@ -119,6 +126,7 @@ export class DataColService {
             v: data[k].dns.tls.v,
             rua: data[k].dns.tls.rua,
             note: data[k].dns.tls.note
+
           }
           dnsR.tls = tlsR
 
@@ -171,6 +179,7 @@ export class DataColService {
               subject_alternative_names: data[k].dns.certificate.extensions_server.subject_alternative_names
             },
             note: data[k].dns.certificate.note
+
           }
           dnsR.certificate = certificateR
 
@@ -198,6 +207,7 @@ export class DataColService {
         let dnsR: DNSRecord = {
           domain: data[k].dns.domain,
           note: data[k].dns.note
+
         }
 
           let dmarcR: DMARCRecord = {
@@ -213,6 +223,7 @@ export class DataColService {
             adkim: data[k].dns.dmarc.adkim,
             fo: data[k].dns.dmarc.fo,
             note: data[k].dns.dmarc.note
+
           }
           dnsR.dmarc = dmarcR
 
@@ -224,6 +235,7 @@ export class DataColService {
             include: [],
             all: data[k].dns.spf.all,
             note: data[k].dns.spf.note
+
           }
             const mechanismsL: string[]=[];
             for (let i in data[k].dns.spf.mechanisms){
@@ -251,6 +263,7 @@ export class DataColService {
             presence_hash: data[k].dns.dane.presence_hash,
             hash: data[k].dns.dane.hash,
             note: data[k].dns.dane.note
+
           }
           dnsR.dane = daneR
 
@@ -262,6 +275,7 @@ export class DataColService {
             hash: data[k].dns.bimi.hash,
             s: data[k].dns.bimi.s,
             note: data[k].dns.bimi.note
+
           }
           dnsR.bimi = bimiR
 
@@ -269,6 +283,7 @@ export class DataColService {
             version: data[k].dns.mta.version,
             sn: data[k].dns.mta.sn,
             note: data[k].dns.mta.note
+
           }
           dnsR.mta =  mtaR
 
@@ -276,6 +291,7 @@ export class DataColService {
             v: data[k].dns.tls.v,
             rua: data[k].dns.tls.rua,
             note: data[k].dns.tls.note
+
           }
           dnsR.tls = tlsR
 
@@ -328,6 +344,7 @@ export class DataColService {
               subject_alternative_names: data[k].dns.certificate.extensions_server.subject_alternative_names
             },
             note: data[k].dns.certificate.note
+
           }
           dnsR.certificate = certificateR
 
