@@ -473,6 +473,8 @@ requete2=requete2 +&"\", \"".to_string() + &req.dns.spf.all.clone() + &"\", \"".
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
     	.connect().await.expect("skill issue");
+	println!("requete={:?}",requete);
+	println!("requete2={:?}",requete2);
         
         
     sqlx::query(requete.as_str())
