@@ -15,5 +15,6 @@ export interface CertificateRecord
     issuer_intermediate?: IssuerDetails,
     validity_intermediate?: ValidityDetails,
     subject_intermediate?: SubjectDetails,
-    extensions_intermediate?: ExtensionsDetails
+    extensions_intermediate?: ExtensionsDetails,
+    note: string
 }

@@ -15,6 +15,7 @@ export interface DNSRecord {
 	bimi?: BIMIRecord,
 	mta?: MTARecord,
 	tls?: TLSRecord,
-	certificate?: CertificateRecord
+	certificate?: CertificateRecord,
+	note: string
 }
 
