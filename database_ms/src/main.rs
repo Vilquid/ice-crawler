@@ -456,7 +456,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 	let cidre = cidr_notation(cidr.as_str());
 	
 				
-	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE servers.`tls.ip` BETWEEN \"");
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE servers.ip BETWEEN \"");
 	requete=requete + &cidre.debut.clone() + &"\" AND \"".to_string() + &cidre.fin.clone() + &"\";".to_string();
 	
 	let mut conn = mysql::MySqlConnectOptions::new()
