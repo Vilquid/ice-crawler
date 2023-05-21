@@ -1,5 +1,7 @@
 use printx509cert::{PrintX509Cert};
 use serde::Serialize;
+use chrono::{Utc, TimeZone, DateTime};
+
 
 
 /// # Brief
@@ -80,6 +82,7 @@ pub struct ValidityDetails
     pub not_before: String,
     pub not_after: String,
     pub is_valid: bool,
+
 }
 
 /// # Brief
@@ -264,20 +267,24 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
         note += 1.0;
     }
 
+
     if signature_intermediate.to_string() != "vide"
     {
         note += 1.0;
     }
+
 
     if issuer_intermediate.city.to_string() != "vide"
     {
         note += 0.25;
     }
 
+
     if issuer_intermediate.state.to_string() != "vide"
     {
         note += 0.25;
     }
+
 
     if issuer_intermediate.locality.to_string() != "vide"
     {
@@ -289,15 +296,18 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
         note += 0.25;
     }
 
+
     if issuer_intermediate.common_name.to_string() != "vide"
     {
         note += 0.25;
     }
 
+
     if validity_intermediate.is_valid
     {
         note += 1.0;
     }
+
 
     if subject_intermediate.common_name.to_string() != "vide"
     {
