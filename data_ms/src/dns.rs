@@ -31,7 +31,7 @@ pub struct DNSRecord
 	pub bimi: BIMIRecord,
 	pub mta: MTARecord,
 	pub tls: TLSRecord,
-	pub certificate: Cert,
+	pub certificate: CertificateRecord,
 	pub note: String,
 }
 
