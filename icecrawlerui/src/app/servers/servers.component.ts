@@ -47,7 +47,7 @@ export class ServersComponent implements OnInit {
       duration:1100
     });
 
-    this.radioForm.setValue({radio: "domain"})
+    this.radioForm.setValue({radio: "cidr"})
     }
 
       submitDomain() {////
@@ -64,7 +64,7 @@ export class ServersComponent implements OnInit {
 
     }
     submitCIDR() {////
-
+      console.log("herei am")
       let data: SendToCIDR = {
       "CIDR": this.cidrForm.value.cidr
       }
