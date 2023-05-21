@@ -28,7 +28,7 @@ export class DataColService {
 
   launchScanByCIDR(CIDR: SendToCIDR): Observable<DATAResult[]>{            // Post
       const url = "http://10.10.20.122/database/cidr"
-      return this.httpClient.get<DATAResult[]>(url).pipe(
+      return this.httpClient.post<DATAResult[]>(url,CIDR).pipe(
       map((data: any[]) => {
         const AllData: DATAResult[] = []
 

@@ -64,16 +64,21 @@ export class ServersComponent implements OnInit {
 
     }
     submitCIDR() {////
-      console.log("herei am")
-      let data: SendToCIDR = {
-      "CIDR": this.cidrForm.value.cidr
-      }
+      
+      let regex = new RegExp("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(/(3[0-2]|2[0-9]|1[0-9]|[0-9]))$")
+      if (regex.test(this.cidrForm.value.CIDR)) {
+        let data: SendToCIDR = {
+        "CIDR": this.cidrForm.value.CIDR
+        }
+        console.log(data)
 
-      this.dataCol.launchScanByCIDR(data).subscribe(
-      p => {
-        console.log(p)
-        this.servers = this.servers.concat(p)
-      })
+        this.dataCol.launchScanByCIDR(data).subscribe(
+        p => {
+          console.log(p)
+          this.servers = this.servers.concat(p)
+        })
+      }
+      
 
     }
 
