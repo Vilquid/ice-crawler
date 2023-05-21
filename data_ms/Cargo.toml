@@ -9,7 +9,7 @@ authors = ["Mathis", "Paul"]
 actix-web = "4"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-regex = "1.7.0"
+regex = "1.8.1"
 ipinfo = "0.5.1"
 printx509cert = { git = "https://github.com/LeMonde21/print-x509-cert" }
 dns-lookup = "1.0.8"
