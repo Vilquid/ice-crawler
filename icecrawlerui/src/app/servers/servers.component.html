@@ -5,7 +5,6 @@
         <u>Attention : Le chargement des données peut être long, une fois la recherche lancé veuillez patienter</u></p>
     </div>
 
-    <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
 
     
     <form [formGroup]="radioForm">
@@ -23,9 +22,7 @@
             </label>
         </div>
     </div>
-    </form> 
-    
-    
+    </form>   
 
     <ng-container *ngIf="radioForm.value.radio=='domain'">
         <form (ngSubmit)="submitDomain()" [formGroup]="domainForm">
@@ -43,6 +40,7 @@
         </form>
     </ng-container>  
 
+    <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
 
 
     <div class="person-boxes" *ngIf="servers!=null">
