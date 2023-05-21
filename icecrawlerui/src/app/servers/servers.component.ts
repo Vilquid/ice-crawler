@@ -133,6 +133,7 @@ export class ServersComponent implements OnInit {
     tls: "TLS temporary string"
   };
 
+
   constructor(private dataCol: DataColService, private cache: CacheService) {
 
     this.domainForm = new UntypedFormGroup///
@@ -154,6 +155,7 @@ export class ServersComponent implements OnInit {
     AOS.init({
       duration:1100
     });
+
 
     this.servers.push(this.server_test)
 

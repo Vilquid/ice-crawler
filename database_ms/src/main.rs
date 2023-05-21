@@ -9,6 +9,8 @@ use std::thread::yield_now;
 use std::thread::sleep;
 use futures::StreamExt;
 use sqlx::mysql::MySqlRow;
+use std::net::{IpAddr, Ipv4Addr};
+use regex::Regex;
 
 
 
@@ -184,20 +186,26 @@ pub struct Utilisateur{
 	pub hash: String,
 	pub sel: String,
 }
+
+#[derive(Serialize, Deserialize, Encode, Type)]
+pub struct Cidr{
+	CIDR: String,
+}
+
+#[derive(Serialize, Deserialize, Encode, Type)]
+pub struct Domaine{
+	domain: Vec<String>,
+}
 		
-#[derive(Deserialize,Serialize, Encode, Type)]
-pub struct Testar{
-	pub message: String,		
+#[derive(Serialize, Deserialize, Encode, Type)]
+pub struct IpRange
+{
+	pub debut: String,
+	pub fin: String,
 }
 
 		
-//penser à supprimer
-#[post("/testt")]
-async fn testi(req: Json<Testar>) -> HttpResponse {
-	println!("bougez-vous, j'arrive!");
-	println!("vous avez envoyé {}",req.message);
-	return HttpResponse::Ok().body("oui");
-}
+
 		
 		
 		
@@ -316,97 +324,175 @@ async fn ajoututilisateur(req: Json<Utilisateur>) -> HttpResponse {
        return HttpResponse::Ok().body("ok");
 }
 
-#[get("/")]
-async fn recuperation(req: HttpRequest) -> HttpResponse {
-	println!("bougez-vous, j'arrive!");
-    let requet = req.query_string();
-    if requet.eq("") {
-        return HttpResponse::Ok().body("rien reçu");
-    }
+
+fn parse_cidr(cidr: &str) -> Result<(IpAddr, u8)>
+{
+	let parts: Vec<&str> = cidr.split("/").collect();
+	let regex_cidr = Regex::new(r"^([0-9]{1,3}.){3}[0-9]{1,3}/(\d|[1-2]\d|3[0-2])$").unwrap();
+
+	// Vérification de la validité de la notation CIDR
+	if parts.len() != 2 || !regex_cidr.is_match(cidr)
+	{
+		return parse_cidr("192.168.0.0/24")
+	}
+
+	// Parsing de cidr
+	let ip = parts[0].parse::<IpAddr>().unwrap();
+	let bits = parts[1].parse::<u8>().unwrap();
+
+	Ok((ip, bits))
+}
+
+pub(crate) fn cidr_notation(cidr: &str) -> IpRange
+{
+	let (ip, bits) = parse_cidr(cidr).unwrap();
+
+	// Gestion du cas où cidr se termine par /0
+	return if bits == 0
+	{
+		IpRange
+		{
+			debut: "0.0.0.0".to_string(),
+			fin: "255.255.255.255".to_string(),
+		}
+	} else {
+		// Initialisation de la variable ip_range
+		let mut ip_range = IpRange
+		{
+			debut: "vide".to_string(),
+			fin: "vide".to_string(),
+		};
+
+		// Calcul de la première adresse IP du réseau
+		match ip
+		{
+			IpAddr::V4(ip) => {
+				let mask = (1u32 << (32 - bits)) - 1;
+				let network = u32::from(ip) & !mask;
+
+				ip_range.debut = IpAddr::V4(Ipv4Addr::from(network)).to_string();
+			}
+
+			_ => {}
+		}
+
+		// Calcul de la dernière adresse IP du réseau
+		match ip
+		{
+			IpAddr::V4(ip) => {
+				let mask = (1u32 << (32 - bits)) - 1;
+				let network = u32::from(ip) | mask;
+
+				ip_range.fin = IpAddr::V4(Ipv4Addr::from(network)).to_string();
+			}
+
+			_ => {}
+		}
+
+		ip_range
+	}
+}
+
+
+#[post("/domaine")]
+async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
+	let test = req.domain.clone();
+	if test[0].eq("") {
+		return HttpResponse::Ok().body("rien reçu");
+	}
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE domains.domain=");
+	let taille = test.len();
+	let mut flag = 1;
+	for i in test {
+		if flag < taille {
+			requete = requete + &"\"".to_string() + &i.clone() + &"\" OR domains.domain=".to_string();
+			flag += 1;
+		}
+		else {
+			requete = requete + &"\"".to_string() + &i.clone() + &"\" ;".to_string();
+		}
+	}
+	
+	let mut conn = mysql::MySqlConnectOptions::new()
+    		.host("mysql.default")
+    		.username("ice_crawler_user")
+    		.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
+    		.database("ice_crawler_DB")
+    		.connect().await.expect("defaut de connexion");
     
-    let mut caracteristique = String::new();
-    let mut select = String::new();
-    let mut controle = String::from("&");
-    let mut flag=0;
-    for i in requet.chars(){
-        if i.eq(&'=') {
-            controle = '='.to_string();
-            caracteristique =  caracteristique + &i.to_string();
-            flag=0;
-        }
-        else if i.eq(&'&') {
-            if flag == 2 {
-                caracteristique = caracteristique + &"\"".to_string();
-            }
-            controle = '&'.to_string();
-            caracteristique =  caracteristique + &" AND ".to_string();
-            select = select + &", ".to_string();
-        }
-        else if controle.eq("&") {
-            select = select + &i.to_string();
-            caracteristique =  caracteristique + &i.to_string();
-        }
-        else if controle.eq("="){
-            if flag == 0 {
-                if i.eq(&'0') || i.eq(&'1') || i.eq(&'2') || i.eq(&'3') || i.eq(&'4') || i.eq(&'5') || i.eq(&'6') || i.eq(&'7') || i.eq(&'8') || i.eq(&'9') || i.eq(&'T') {
-                    flag=1;
-                }
-                else{
-                    flag = 2;
-                    caracteristique = caracteristique + &"\"".to_string();
-                }
-            }
-                    
-            caracteristique =  caracteristique + &i.to_string();
-        }
-        //println!("{select}");
-    }
-    if flag == 2 {
-        caracteristique = caracteristique + &"\"".to_string();
-    }
-    //let mut ordre=select.clone();
-    select = "SELECT ".to_string() + &select + &" FROM servers INNER JOIN domains WHERE ".to_string() + &caracteristique.clone();
-    //println!("{select}");
-   
-        
-        
-    let mut conn = mysql::MySqlConnectOptions::new()
+    	let mut result = sqlx::query(requete.as_str())
+        		.fetch(&mut conn);
+        let mut tamp=Vec::new();
+	let mut reponse=String::new();
+    	while let Some(row) = result.next().await {
+    	
+        	tamp.push(row.expect("mais voilà c'était sûr en fait!"));
+    	}
+    	for j in tamp{
+    		for i in j.columns(){
+    			reponse=reponse + j.get(i.ordinal());
+    		}
+    	
+    	}
+    	let retour = Re{resultat: vec![reponse]};
+    	
+    	let renvoi = serde_json::to_string(&retour);
+    	
+    	return HttpResponse::Ok().body(renvoi.expect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh!!!!").clone());
+	
+
+}
+
+#[post("/cidr")]
+async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
+	println!("bougez-vous, j'arrive!");
+	let regex_cidr = Regex::new(r"^([0-9]{1,3}.){3}[0-9]{1,3}/(\d|[1-2]\d|3[0-2])$").unwrap();
+	let mut cidr=req.CIDR.clone();
+	if cidr.eq("") {
+		return HttpResponse::Ok().body("rien reçu");
+	}
+	
+	
+	let cidre = cidr_notation(cidr.as_str());
+	
+				
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE servers.ip BETWEEN \"");
+	requete=requete + &cidre.debut.clone() + &"\" AND \"".to_string() + &cidre.fin.clone() + &"\";".to_string();
+	
+	let mut conn = mysql::MySqlConnectOptions::new()
     	.host("mysql.default")
     	.username("ice_crawler_user")
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
-    	.connect().await.expect("skill issue");
+    	.connect().await.expect("defaut de connexion");
     
-    let mut result = sqlx::query(requet)
-        .fetch(&mut conn);
-    
-    
-    
-    let mut tamp=Vec::new();
-    let mut reponse=String::new();
-    
-    while let Some(row) = result.next().await {
+    	let mut result = sqlx::query(requete.as_str())
+        	.fetch(&mut conn);
     	
-        tamp.push(row.expect("mais voilà c'était sûr en fait!"));
-    }
-    for j in tamp{
-    	for i in j.columns(){
-    		reponse=reponse + j.get(i.ordinal());
+    	let mut tamp=Vec::new();
+	let mut reponse=String::new();
+    	while let Some(row) = result.next().await {
+    	
+        	tamp.push(row.expect("mais voilà c'était sûr en fait!"));
     	}
+    	for j in tamp{
+    		for i in j.columns(){
+    			reponse=reponse + j.get(i.ordinal());
+    		}
     	
-    }
-    
-    let retour = Re{resultat: vec![reponse]};
-    
-    
-    
-    
-    let renvoi = serde_json::to_string(&retour);
-    
-    
-    
-    return HttpResponse::Ok().body(renvoi.expect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh!!!!").clone());
+    	}
+    	let retour = Re{resultat: vec![reponse]};
+    	
+    	let renvoi = serde_json::to_string(&retour);
+    	
+    	return HttpResponse::Ok().body(renvoi.expect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh!!!!").clone());
+		
 }
+    
+    
+    
+    
+
 
 
 
@@ -498,10 +584,10 @@ async fn main() -> std::io::Result<()> {
 	App::new()
 		.wrap(cors)
     		.service(admission)
-            	.service(recuperation)
+            	.service(recupcidr)
+            	.service(recupdomain)
             	.service(ajoututilisateur)
             	.service(rechercheutilisateur)
-		.service(testi)
     })
     .bind(("0.0.0.0", 9009)).expect("REASON")
     .run()
