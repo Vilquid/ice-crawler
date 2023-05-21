@@ -11,7 +11,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 regex = "1.7.0"
 ipinfo = "0.5.1"
-checkssl = { git = "https://github.com/LeMonde21/checkssl" }
+printx509cert = { git = "https://github.com/LeMonde21/print-x509-cert" }
 dns-lookup = "1.0.8"
 json = "0.12.4"
 actix-cors = "0.6.4"
