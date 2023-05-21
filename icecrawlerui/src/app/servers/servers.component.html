@@ -1,27 +1,32 @@
 <app-search></app-search>
 <div class="container">
     <div class="notices tip" data-aos="fade-right">
-        <p>Ici vous pouvez lancer une recherche pour une liste de nom de domaine.
+        <p>Ici vous pouvez lancer une recherche par liste de nom de domaine ou par CIDR.
         <u>Attention : Le chargement des données peut être long, une fois la recherche lancé veuillez patienter</u></p>
     </div>
 
 
     
     <form [formGroup]="radioForm">
-    <div class="radio">
-        <div class="wrapper">
-            <input type="radio" value="domain" formControlName="radio" id="option-1" checked>
-            <input type="radio" value="cidr" formControlName="radio" id="option-2">
-            <label for="option-1" class="option option-1">
-                <div class="dot"></div>
-                    <span>Domains</span>
-            </label>
-            <label for="option-2" class="option option-2">
-                <div class="dot"></div>
-                <span>CIDR</span>
-            </label>
+        <div class="radio">
+            <div class="wrapper">
+                <input type="radio" value="domain" formControlName="radio" id="option-1" checked>
+                <input type="radio" value="cidr" formControlName="radio" id="option-2">
+                <label for="option-1" class="option option-1">
+                    <div class="dot"></div>
+                        <span>Domaines</span>
+                </label>
+                <label for="option-2" class="option option-2">
+                    <div class="dot"></div>
+                    <span>CIDR</span>
+                </label>
+            </div>
         </div>
-    </div>
+        <div class="section-title container">
+            <h2>{{ radioForm.value.radio }}</h2>
+            <ng-container *ngIf="radioForm.value.radio=='domain'"><p>Test1</p></ng-container> 
+            <ng-container *ngIf="radioForm.value.radio=='cidr'"><p>Test2</p></ng-container> 
+        </div>
     </form>   
 
     <ng-container *ngIf="radioForm.value.radio=='domain'">
@@ -41,7 +46,6 @@
     </ng-container>  
 
     <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
-
 
     <div class="person-boxes" *ngIf="servers!=null">
         <ng-container *ngFor="let server of servers | filter:texterecherche">
