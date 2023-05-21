@@ -174,20 +174,20 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
 
 
 
-            println!("PKI Algorithm OID: {}", certificate.server.pki_algorithm_oid);
-            println!("PKI Algorithm Bytes: {}", certificate.server.pki_algorithm_bytes);
-            println!("PKI Algorithm Exponent: {}", certificate.server.pki_algorithm_exponent);
-            println!("Signature Value: {}", certificate.server.signature_value);
-            println!("Extensions authority key id: {}", certificate.server.extensions_authority_key_identifier);
-            println!("Extensions authority key cert issuer: {}", certificate.server.extensions_authority_key_cert_issuer);
-            println!("Extensions authority key cert serial: {}", certificate.server.extensions_authority_key_cert_serial);
-            println!("Extensions Basic Constraints: {}", certificate.server.extensions_basic_constraints);
-            println!("Extensions crl full name: {}", certificate.server.extensions_crl_full_name);
-            println!("Extensions crl reasons: {}", certificate.server.extensions_crl_reasons);
-            println!("Extensions crl issue: {}", certificate.server.extensions_crl_issuer);
-            println!("Extensions crl key usage: {}", certificate.server.extensions_key_usage);
-            println!("Extensions subject key identifier: {}", certificate.server.extensions_subject_key_identifier);
-            println!("Extensions SANS: {}", certificate.server.extensions_subject_alternate_names);
+            println!("Server PKI Algorithm OID: {}", certificate.server.pki_algorithm_oid);
+            println!("Server PKI Algorithm Bytes: {}", certificate.server.pki_algorithm_bytes);
+            println!("Server PKI Algorithm Exponent: {}", certificate.server.pki_algorithm_exponent);
+            println!("Server Signature Value: {}", certificate.server.signature_value);
+            println!("Server Extensions authority key id: {}", certificate.server.extensions_authority_key_identifier);
+            println!("Server Extensions authority key cert issuer: {}", certificate.server.extensions_authority_key_cert_issuer);
+            println!("Server Extensions authority key cert serial: {}", certificate.server.extensions_authority_key_cert_serial);
+            println!("Server Extensions Basic Constraints: {}", certificate.server.extensions_basic_constraints);
+            println!("Server Extensions crl full name: {}", certificate.server.extensions_crl_full_name);
+            println!("Server Extensions crl reasons: {}", certificate.server.extensions_crl_reasons);
+            println!("Server Extensions crl issue: {}", certificate.server.extensions_crl_issuer);
+            println!("Server Extensions crl key usage: {}", certificate.server.extensions_key_usage);
+            println!("Server Extensions subject key identifier: {}", certificate.server.extensions_subject_key_identifier);
+            println!("Server Extensions SANS: {}", certificate.server.extensions_subject_alternate_names);
 
 
 
@@ -209,20 +209,20 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
             subject_intermediate.organization = certificate.intermediate.subject_organization;
             subject_intermediate.common_name = certificate.intermediate.subject_common_name;
 
-            println!("PKI Algorithm OID: {}", certificate.intermediate.pki_algorithm_oid);
-            println!("PKI Algorithm Bytes: {}", certificate.intermediate.pki_algorithm_bytes);
-            println!("PKI Algorithm Exponent: {}", certificate.intermediate.pki_algorithm_exponent);
-            println!("Signature Value: {}", certificate.intermediate.signature_value);
-            println!("Extensions authority key id: {}", certificate.intermediate.extensions_authority_key_identifier);
-            println!("Extensions authority key cert issuer: {}", certificate.intermediate.extensions_authority_key_cert_issuer);
-            println!("Extensions authority key cert serial: {}", certificate.intermediate.extensions_authority_key_cert_serial);
-            println!("Extensions Basic Constraints: {}", certificate.intermediate.extensions_basic_constraints);
-            println!("Extensions crl full name: {}", certificate.intermediate.extensions_crl_full_name);
-            println!("Extensions crl reasons: {}", certificate.intermediate.extensions_crl_reasons);
-            println!("Extensions crl issue: {}", certificate.intermediate.extensions_crl_issuer);
-            println!("Extensions crl key usage: {}", certificate.intermediate.extensions_key_usage);
-            println!("Extensions subject key identifier: {}", certificate.intermediate.extensions_subject_key_identifier);
-            println!("Extensions SANS: {}", certificate.intermediate.extensions_subject_alternate_names);
+            println!("Intermediate PKI Algorithm OID: {}", certificate.intermediate.pki_algorithm_oid);
+            println!("Intermediate PKI Algorithm Bytes: {}", certificate.intermediate.pki_algorithm_bytes);
+            println!("Intermediate PKI Algorithm Exponent: {}", certificate.intermediate.pki_algorithm_exponent);
+            println!("Intermediate Signature Value: {}", certificate.intermediate.signature_value);
+            println!("Intermediate Extensions authority key id: {}", certificate.intermediate.extensions_authority_key_identifier);
+            println!("Intermediate Extensions authority key cert issuer: {}", certificate.intermediate.extensions_authority_key_cert_issuer);
+            println!("Intermediate Extensions authority key cert serial: {}", certificate.intermediate.extensions_authority_key_cert_serial);
+            println!("Intermediate Extensions Basic Constraints: {}", certificate.intermediate.extensions_basic_constraints);
+            println!("Intermediate Extensions crl full name: {}", certificate.intermediate.extensions_crl_full_name);
+            println!("Intermediate Extensions crl reasons: {}", certificate.intermediate.extensions_crl_reasons);
+            println!("Intermediate Extensions crl issue: {}", certificate.intermediate.extensions_crl_issuer);
+            println!("Intermediate Extensions crl key usage: {}", certificate.intermediate.extensions_key_usage);
+            println!("Intermediate Extensions subject key identifier: {}", certificate.intermediate.extensions_subject_key_identifier);
+            println!("Intermediate Extensions SANS: {}", certificate.intermediate.extensions_subject_alternate_names);
 
 
         }
