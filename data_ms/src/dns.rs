@@ -2,7 +2,7 @@ use std::clone;
 use regex::Regex;
 use serde::Serialize;
 use crate::bimi::{bimi, BIMIRecord};
-use crate::certificate::{certificat, CertificateRecord};
+use crate::certificate::{certificat, Cert};
 use crate::dane::{dane, DANERecord};
 use crate::dmarc::{dmarc, DMARCRecord};
 use crate::ipinfo::ip_info;
@@ -31,7 +31,7 @@ pub struct DNSRecord
 	pub bimi: BIMIRecord,
 	pub mta: MTARecord,
 	pub tls: TLSRecord,
-	pub certificate: CertificateRecord,
+	pub certificate: Cert,
 	pub note: String,
 }
 
