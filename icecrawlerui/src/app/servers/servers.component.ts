@@ -5,6 +5,7 @@ import { CacheService } from '../cache.service';
 import * as AOS from 'aos';
 import { DATAResult } from '../shared-interfaces/data-result';
 import { SendToDomain } from '../shared-interfaces/send-to-domain';
+import { SendToCIDR } from '../shared-interfaces/send-to-cidr';
 
 
 
@@ -19,12 +20,24 @@ export class ServersComponent implements OnInit {
 
   domainForm: UntypedFormGroup///
   domainCtrl = new FormControl<string>('', { nonNullable: true })///
+  cidrForm: UntypedFormGroup///
+  cidrCtrl = new FormControl<string>('', { nonNullable: true })///
+  radioForm: UntypedFormGroup///
+  radioCtrl = new FormControl<string>('', { nonNullable: true })///
 
   constructor(private dataCol: DataColService, private cache: CacheService) {
 
     this.domainForm = new UntypedFormGroup///
         ({
         domain: this.domainCtrl,
+        })
+    this.cidrForm = new UntypedFormGroup///
+        ({
+        CIDR: this.cidrCtrl,
+        })
+    this.radioForm = new UntypedFormGroup///
+        ({
+        radio: this.radioCtrl,
         })
   }
 
@@ -34,15 +47,10 @@ export class ServersComponent implements OnInit {
       duration:1100
     });
 
+    this.radioForm.setValue({radio: "domain"})
+    }
 
-    /*this.dataCol.getData().subscribe(  //true get
-      p => {
-        this.servers = this.servers.concat(p)
-      }
-    )*/
-  }
-
-      submit() {////
+      submitDomain() {////
 
       let data: SendToDomain = {
       "domain": this.domainForm.value.domain
@@ -55,5 +63,19 @@ export class ServersComponent implements OnInit {
       })
 
     }
+    submitCIDR() {////
+
+      let data: SendToCIDR = {
+      "CIDR": this.cidrForm.value.cidr
+      }
+
+      this.dataCol.launchScanByCIDR(data).subscribe(
+      p => {
+        console.log(p)
+        this.servers = this.servers.concat(p)
+      })
+
+    }
+
 
 }

@@ -7,12 +7,43 @@
 
     <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
 
-    <form (ngSubmit)="submit()" [formGroup]="domainForm">
-        <label>Nom de Domaine: </label>
-        <input formControlName="domain">
-        <button type="submit">Envoyer</button>
+    
+    <form [formGroup]="radioForm">
+    <div class="radio">
+        <div class="wrapper">
+            <input type="radio" value="domain" formControlName="radio" id="option-1" checked>
+            <input type="radio" value="cidr" formControlName="radio" id="option-2">
+            <label for="option-1" class="option option-1">
+                <div class="dot"></div>
+                    <span>Domains</span>
+            </label>
+            <label for="option-2" class="option option-2">
+                <div class="dot"></div>
+                <span>CIDR</span>
+            </label>
+        </div>
+    </div>
+    </form> 
+    
+    
+
+    <ng-container *ngIf="radioForm.value.radio=='domain'">
+        <form (ngSubmit)="submitDomain()" [formGroup]="domainForm">
+            <label>Nom de Domaine: </label>
+            <input formControlName="domain">
+            <button type="submit">Envoyer</button>
         </form>
-    <br/>    
+    </ng-container>
+    
+    <ng-container *ngIf="radioForm.value.radio=='cidr'">
+        <form (ngSubmit)="submitCIDR()" [formGroup]="cidrForm">
+            <label>CIDR: </label>
+            <input formControlName="CIDR">
+            <button type="submit">Envoyer</button>
+        </form>
+    </ng-container>  
+
+
 
     <div class="person-boxes" *ngIf="servers!=null">
         <ng-container *ngFor="let server of servers | filter:texterecherche">
@@ -23,4 +54,3 @@
         <p class="warningsign">&#9888; Aucun resultat</p>
     </div>
 </div>
-
