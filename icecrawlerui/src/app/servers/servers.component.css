@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
 
+.section-title{
+  padding-bottom:0%;
+  margin-top:0%;
+}
+
 .radio{
     align-items: center; 
     justify-content: center; 
