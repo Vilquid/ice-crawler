@@ -6,7 +6,7 @@
     </div>
 
 
-    
+
     <form [formGroup]="radioForm">
         <div class="center">
             <div class="wrapper">
@@ -24,10 +24,10 @@
         </div>
         <div class="section-title container">
             <h2>{{ radioForm.value.radio }}</h2>
-            <ng-container *ngIf="radioForm.value.radio=='domaines'"><p>Pour effectuer une recherche sur une liste de noms de domaines il suffit de déposer un fichier au format ".csv"</p></ng-container> 
-            <ng-container *ngIf="radioForm.value.radio=='cidr'"><p>Pour effectuer une recherche par CIDR il suffit d'entrer une adresse ip ainsi que son masque, e.g. 10.10.10.10/25</p></ng-container> 
+            <ng-container *ngIf="radioForm.value.radio=='domaines'"><p>Pour effectuer une recherche sur une liste de noms de domaines il suffit de déposer un fichier au format ".csv"</p></ng-container>
+            <ng-container *ngIf="radioForm.value.radio=='cidr'"><p>Pour effectuer une recherche par CIDR il suffit d'entrer une adresse ip ainsi que son masque, e.g. 10.10.10.10/25</p></ng-container>
         </div>
-    </form>   
+    </form>
 
     <ng-container *ngIf="radioForm.value.radio=='domaines'">
         <div class="center">
@@ -37,8 +37,16 @@
             <button type="submit">Envoyer</button>
         </form>
         </div>
+
+      <div class="center">
+        <form>
+          <label>Nom de Domaine (fichier .csv): </label>
+          <input type="file" (change)="onFileSelected($event)" accept=".csv" />
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
     </ng-container>
-    
+
     <ng-container *ngIf="radioForm.value.radio=='cidr'">
         <div class="center">
         <form (ngSubmit)="submitCIDR()" [formGroup]="cidrForm">
@@ -48,7 +56,7 @@
             </div>
         </form>
         </div>
-    </ng-container>  
+    </ng-container>
 
     <input type="text" class="form-control" name="search" [(ngModel)]="texterecherche" placeholder="Entrez votre recherche..." data-aos="fade-up" data-aos-delay="400">
 
