@@ -111,10 +111,10 @@ CREATE UNIQUE INDEX `id_UNIQUE` ON `ice_crawler_DB`.`domains` (`id` ASC);
 CREATE TABLE IF NOT EXISTS `ice_crawler_DB`.`servers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `ip` VARCHAR(45) NOT NULL,
-  `domaine` INT NOT NULL,
+  `domaine` TINYTEXT NOT NULL,
   `tls.certificat` VARCHAR(45) NOT NULL,
   `tls.liste` VARCHAR(30000) NOT NULL,
-  `tls.cyfaible` VARCHAR(45) NOT NULL COMMENT 'Cypher suite la plus élevée acceptée par le serveur',
+  `tls.cyfaible` VARCHAR(45) NOT NULL,
   `tls.starttls` VARCHAR(45) NOT NULL,
   `tls.note` FLOAT NOT NULL,
   `timestamp` DATETIME NOT NULL,

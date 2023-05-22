@@ -123,5 +123,7 @@ pub(crate) fn bimi(domain: String) -> BIMIRecord
 		note += 1.2;
 	}
 
+	bimi_record.note = note;
+
 	bimi_record
 }

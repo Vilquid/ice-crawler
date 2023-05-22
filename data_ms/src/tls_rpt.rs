@@ -76,12 +76,12 @@ pub(crate) fn tls_rtp(domain: String) -> TLSRecord
 
 	if tls_record.v != "vide"
 	{
-		note += 5;
+		note += 5.0;
 	}
 
 	if tls_record.rua != "vide"
 	{
-		note += 5;
+		note += 5.0;
 	}
 
 	tls_record.note = note;
