@@ -1,4 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { CircleProgressComponent } from 'ng-circle-progress';
 
 @Component({
   selector: 'app-progress-bar',
@@ -6,6 +7,8 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./progress-bar.component.css']
 })
 export class ProgressBarComponent implements OnInit {
+
+  @Input() info: any
 
   constructor() { }
 
