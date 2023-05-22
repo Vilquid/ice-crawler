@@ -48,7 +48,7 @@ pub struct DNSRecord
 	pub mta: MTARecord,
 	pub tls: TLSRecord,
 	pub certificate: CertificateRecord,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -65,7 +65,7 @@ pub struct DMARCRecord
 	pub aspf: String,
 	pub adkim: String,
 	pub fo: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -78,7 +78,7 @@ pub struct SPFRecord
 	pub ip: Vec<String>,
 	pub include: Vec<String>,
 	pub all: String,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -89,7 +89,7 @@ pub struct DANERecord
 	pub signature_cle_publique: bool,
 	pub presence_hash: bool,
 	pub hash: String,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -101,7 +101,7 @@ pub struct BIMIRecord
 	pub url_reputation: String,
 	pub hash: String,
 	pub s: String,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -109,7 +109,7 @@ pub struct MTARecord
 {
 	pub version: String,
 	pub sn: String,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -117,7 +117,7 @@ pub struct TLSRecord
 {
 	pub v: String,
 	pub rua: String,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
@@ -134,7 +134,7 @@ pub struct CertificateRecord
 	pub validity_intermediate: ValidityDetails,
 	pub subject_intermediate: SubjectDetails,
 	pub extensions_intermediate: ExtensionsDetails,
-	pub note: String,
+	pub note: f32,
 }
 
 #[derive(Deserialize,Serialize, Encode, Type)]
