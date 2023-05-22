@@ -127,14 +127,14 @@ CREATE TABLE IF NOT EXISTS `ice_crawler_DB`.`servers` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `ice_crawler_DB`.`servers` (`id` ASC);
+CREATE INDEX `id_UNIQUE` ON `ice_crawler_DB`.`servers` (`id` ASC);
 CREATE INDEX `domaine_idx` ON `ice_crawler_DB`.`servers` (`domaine` ASC);
-CREATE UNIQUE INDEX `ip_UNIQUE` ON `ice_crawler_DB`.`servers` (`ip` ASC);
-CREATE UNIQUE INDEX `domaine_UNIQUE` ON `ice_crawler_DB`.`servers` (`domaine` ASC);
-CREATE UNIQUE INDEX `tls.certificat_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.certificat` ASC);
-CREATE UNIQUE INDEX `tls.cyfaible_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.cyfaible` ASC);
-CREATE UNIQUE INDEX `tls.starttls_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.starttls` ASC);
-CREATE UNIQUE INDEX `tls.note_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.note` ASC);
+CREATE INDEX `ip_UNIQUE` ON `ice_crawler_DB`.`servers` (`ip` ASC);
+CREATE INDEX `domaine_UNIQUE` ON `ice_crawler_DB`.`servers` (`domaine` ASC);
+CREATE INDEX `tls.certificat_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.certificat` ASC);
+CREATE INDEX `tls.cyfaible_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.cyfaible` ASC);
+CREATE INDEX `tls.starttls_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.starttls` ASC);
+CREATE INDEX `tls.note_UNIQUE` ON `ice_crawler_DB`.`servers` (`tls.note` ASC);
 
 -- -----------------------------------------------------
 -- Table `ice_crawler_DB`.`users`
