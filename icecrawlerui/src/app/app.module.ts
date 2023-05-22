@@ -23,7 +23,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { DropZoneComponent } from './drop-zone/drop-zone.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { DropZoneComponent } from './drop-zone/drop-zone.component';
     SearchComponent,
     ServersComponent,
     ServerSingleComponent,
-    DropZoneComponent,
   ],
   imports: [
     BrowserModule,
