@@ -22,7 +22,7 @@ pub struct BIMIRecord
 	pub url_reputation: String,
 	pub hash: String,
 	pub s: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -48,7 +48,7 @@ pub(crate) fn bimi(domain: String) -> BIMIRecord
 		url_reputation: "vide".to_string(),
 		hash: "vide".to_string(),
 		s: "vide".to_string(),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
 	if output_str.is_empty()
@@ -122,8 +122,6 @@ pub(crate) fn bimi(domain: String) -> BIMIRecord
 	{
 		note += 1.2;
 	}
-
-	bimi_record.note = note.to_string();
 
 	bimi_record
 }

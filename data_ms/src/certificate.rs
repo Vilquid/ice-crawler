@@ -31,7 +31,7 @@ pub struct CertificateRecord
     pub validity_intermediate: ValidityDetails,
     pub subject_intermediate: SubjectDetails,
     pub extensions_intermediate: ExtensionsDetails,
-    pub note: String,
+    pub note: f32,
 }
 
 /// # Brief
@@ -353,6 +353,6 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
             common_name: subject_intermediate.common_name.to_string(),
         },
         extensions_intermediate: ExtensionsDetails { subject_alternative_names: extensions_intermediate.subject_alternative_names },
-        note: note.to_string().parse().unwrap(),
+        note,
     }
 }

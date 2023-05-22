@@ -34,7 +34,7 @@ pub struct DMARCRecord
 	pub aspf: String,
 	pub adkim: String,
 	pub fo: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -73,7 +73,7 @@ pub(crate) fn dmarc(domain: String) -> DMARCRecord
 		aspf: "vide".to_string(),
 		adkim: "vide".to_string(),
 		fo: "vide".to_string(),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
 	if dmarc_record.is_empty()
@@ -178,7 +178,7 @@ pub(crate) fn dmarc(domain: String) -> DMARCRecord
 		note += 0.5;
 	}
 
-	dmarc.note = note.to_string();
+	dmarc.note = note;
 
 	return dmarc;
 }

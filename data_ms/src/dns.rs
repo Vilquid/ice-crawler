@@ -32,7 +32,7 @@ pub struct DNSRecord
 	pub mta: MTARecord,
 	pub tls: TLSRecord,
 	pub certificate: CertificateRecord,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -63,21 +63,10 @@ pub(crate) fn dns(ip_domain: &str) -> DNSRecord
 		mta: mta(domain.clone()),
 		tls: tls_rtp(domain.clone()),
 		certificate: certificat(domain.clone()),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
-	let mut note = 0.0;
-	let dmarc = n.dmarc.note.parse::<f64>().unwrap();
-	let spf = n.spf.note.parse::<f64>().unwrap();
-	let dane = n.dane.note.parse::<f64>().unwrap();
-	let bimi = n.bimi.note.parse::<f64>().unwrap();
-	let mta = n.mta.note.parse::<f64>().unwrap();
-	let tls = n.tls.note.parse::<f64>().unwrap();
-	let certificate = n.certificate.note.parse::<f64>().unwrap();
+	n.note = ((n.dane.note + n.dmarc.note + n.mta.note + n.tls.note) / 4.0 * 2.0 + (n.bimi.note + n.certificate.note + n.spf.note) / 3.0) / 3.0;
 
-	note = ((dane + dmarc + mta + tls) / 4.0 * 2.0 + (bimi + certificate + spf) / 3.0) / 3.0;
-
-	n.note = note.to_string();
-
-	return n;
+	return n.clone();
 }

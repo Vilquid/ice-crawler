@@ -23,6 +23,7 @@ USE `ice_crawler_DB` ;
 CREATE TABLE IF NOT EXISTS `ice_crawler_DB`.`domains` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id du domaine',
   `domain` TINYTEXT NOT NULL COMMENT 'Nom du domaine',
+  `note` FLOAT NOT NULL COMMENT 'Note du domaine',
   `bimi.version` TINYTEXT NOT NULL COMMENT 'Version de BIMI',
   `bimi.url_expediteur` MEDIUMTEXT NOT NULL,
   `bimi.url_politique` MEDIUMTEXT NOT NULL,
@@ -85,6 +86,13 @@ CREATE TABLE IF NOT EXISTS `ice_crawler_DB`.`domains` (
   `spf.all` MEDIUMTEXT NOT NULL,
   `tls_rpt.v` TINYTEXT NOT NULL,
   `tls_rpt.rua` TINYTEXT NOT NULL,
+  `bimi.note` FLOAT NOT NULL,
+  `certificate.note` FLOAT NOT NULL,
+  `dane.note` FLOAT NOT NULL,
+  `dmarc.note` FLOAT NOT NULL,
+  `mta_sts.note` FLOAT NOT NULL,
+  `spf.note` FLOAT NOT NULL,
+  `tls_rpt.note` FLOAT NOT NULL,
   `timestamp` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `server`

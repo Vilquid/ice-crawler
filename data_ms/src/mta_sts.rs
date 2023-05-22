@@ -15,7 +15,7 @@ pub struct MTARecord
 {
 	pub version: String,
 	pub sn: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -42,7 +42,7 @@ pub(crate) fn mta(domain: String) -> MTARecord
 	{
 		version: "vide".to_string(),
 		sn: "vide".to_string(),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
 	if output_str.is_empty()
@@ -96,19 +96,19 @@ pub(crate) fn mta(domain: String) -> MTARecord
 		mta_record.version = mta_record.version.replace("ve", "vide");
 	}
 
-	let mut note = 0;
+	let mut note:f32 = 0.0;
 
 	if mta_record.version != "vide"
 	{
-		note += 5;
+		note += 5.0;
 	}
 
 	if mta_record.sn != "vide"
 	{
-		note += 5;
+		note += 5.0;
 	}
 
-	mta_record.note = note.to_string();
+	mta_record.note = note;
 
 	return mta_record;
 }
