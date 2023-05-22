@@ -20,7 +20,6 @@ pub struct DATAResult
 
 pub(crate) fn data(structure: Input) -> DATAResult
 {
-	// println!("domain: {}", &structure.domain);
 	let dns = dns(&structure.domain);
 
 	let tls = tls(String::from(structure.ip), String::from(structure.domain.clone()));

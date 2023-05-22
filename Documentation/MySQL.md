@@ -21,7 +21,7 @@ ALTER TABLE servers DROP FOREIGN KEY domaine;
 SHOW CREATE TABLE servers;
 ```
 
-## Supprimer une table
+## Ajouter une table
 
 ```bash
 ALTER TABLE domains ADD timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

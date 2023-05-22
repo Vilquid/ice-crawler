@@ -22,7 +22,7 @@ pub struct SPFRecord
 	pub ip: Vec<String>,
 	pub include: Vec<String>,
 	pub all: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -50,7 +50,7 @@ pub(crate) fn spf(domain: String) -> SPFRecord
 		ip: vec![],
 		include: vec![],
 		all: "vide".to_string(),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
 	// Retour d'une structure vide si le serveur ne renvoie rien d'intéressant
@@ -97,7 +97,7 @@ pub(crate) fn spf(domain: String) -> SPFRecord
 		}
 	}
 
-	let mut note = 0.0;
+	let mut note:f32 = 0.0;
 
 	if spf_record.version != "vide"
 	{
@@ -129,7 +129,7 @@ pub(crate) fn spf(domain: String) -> SPFRecord
 		note += 1.5;
 	}
 
-	spf_record.note = note.to_string();
+	spf_record.note = note;
 
 	spf_record
 }

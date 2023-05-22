@@ -10,7 +10,7 @@ pub struct TLSRecord
 {
 	pub v: String,
 	pub rua: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -31,7 +31,7 @@ pub(crate) fn tls_rtp(domain: String) -> TLSRecord
 	{
 		v: "vide".to_string().to_owned(),
 		rua: "vide".to_string().to_owned(),
-		note: "0".to_string().to_owned(),
+		note: 0.0,
 	};
 
 	if output_str.is_empty()
@@ -72,7 +72,7 @@ pub(crate) fn tls_rtp(domain: String) -> TLSRecord
 		}
 	}
 
-	let mut note = 0;
+	let mut note:f32 = 0.0;
 
 	if tls_record.v != "vide"
 	{
@@ -84,7 +84,7 @@ pub(crate) fn tls_rtp(domain: String) -> TLSRecord
 		note += 5;
 	}
 
-	tls_record.note = note.to_string();
+	tls_record.note = note;
 
 	return tls_record;
 }

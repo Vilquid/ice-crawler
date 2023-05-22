@@ -20,7 +20,7 @@ pub struct DANERecord
 	pub signature_cle_publique: bool,
 	pub presence_hash: bool,
 	pub hash: String,
-	pub note: String,
+	pub note: f32,
 }
 
 
@@ -86,34 +86,34 @@ pub(crate) fn dane(domain: String) -> DANERecord
 		dane_record.forme_certificat = dane_record.forme_certificat.trim_matches('\n').trim().to_string();
 	}
 
-	let mut note = 0;
+	let mut note = 0.0;
 
 	if dane_record.forme_certificat != "vide"
 	{
-		note += 2;
+		note += 2.0;
 	}
 
 	if dane_record.signature_certificat
 	{
-		note += 2;
+		note += 2.0;
 	}
 
 	if dane_record.signature_cle_publique
 	{
-		note += 2;
+		note += 2.0;
 	}
 
 	if dane_record.presence_hash
 	{
-		note += 2;
+		note += 2.0;
 	}
 
 	if dane_record.hash != "vide"
 	{
-		note += 2;
+		note += 2.0;
 	}
 
-	dane_record.note = note.to_string();
+	dane_record.note = note;
 
 	dane_record
 }
