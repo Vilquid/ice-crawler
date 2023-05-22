@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DATAResult } from '../shared-interfaces/data-result';
+import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-server-single',
@@ -9,6 +10,11 @@ import { DATAResult } from '../shared-interfaces/data-result';
 export class ServerSingleComponent implements OnInit {
 
   @Input() server: any
+
+  info = {
+    note: 5,
+    domain: 'example.com'
+  }
 
   constructor() { }
 
