@@ -45,7 +45,7 @@ pub(crate) fn dane(domain: String) -> DANERecord
 		signature_cle_publique: false,
 		presence_hash: false,
 		hash: "vide".to_string().to_owned(),
-		note: "0".to_string(),
+		note: 0.0,
 	};
 
 	// Si la sortie de dig est vide, on retourne un DANERecord vide

@@ -68,5 +68,8 @@ pub(crate) fn dns(ip_domain: &str) -> DNSRecord
 
 	n.note = ((n.dane.note + n.dmarc.note + n.mta.note + n.tls.note) / 4.0 * 2.0 + (n.bimi.note + n.certificate.note + n.spf.note) / 3.0) / 3.0;
 
-	return n.clone();
+	let n_bis = n.clone();
+
+	return n_bis;
+
 }
