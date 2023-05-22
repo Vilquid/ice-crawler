@@ -132,15 +132,15 @@
           <div class="accordion-body">
 			<div class="center-text">
 					<p><strong>Signature</strong></p>
-			</div>			
+			</div>
             <p><strong>Signature</strong>: {{ server.dns.certificate.signature_algorithm_server }}</p>
-            
+
             <!-- Add styling to group related information -->
             <div class="certificate-section">
 				<div class="center-text">
 					<p><strong>Issuer</strong></p>
 				</div>
-				<p><strong>Ville:</strong> {{ server.dns.certificate.issuer_server.city }}</p>
+				<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_server.city }}</p>
 				<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_server.state }}</p>
 				<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_server.locality }}</p>
 				<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_server.organization }}</p>
@@ -160,7 +160,7 @@
 				<div class="center-text">
 					<p><strong>Subject</strong></p>
 				</div>
-				<p><strong>Ville:</strong> {{ server.dns.certificate.subject_server.city }}</p>
+				<p><strong>Pays:</strong> {{ server.dns.certificate.subject_server.city }}</p>
 				<p><strong>Etat:</strong> {{ server.dns.certificate.subject_server.state }}</p>
 				<p><strong>Localité:</strong> {{ server.dns.certificate.subject_server.locality }}</p>
 				<p><strong>Organisation:</strong> {{ server.dns.certificate.subject_server.organization }}</p>
@@ -187,7 +187,7 @@
 				<div class="center-text">
 					<p><strong>Issuer intermédiaire</strong></p>
 				</div>
-				<p><strong>Ville:</strong> {{ server.dns.certificate.issuer_intermediate.city }}</p>
+				<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_intermediate.city }}</p>
 				<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_intermediate.state }}</p>
 				<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_intermediate.locality }}</p>
 				<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_intermediate.organization }}</p>
@@ -207,7 +207,7 @@
 				<div class="center-text">
 					<p><strong>Subject intermédiaire</strong></p>
 				</div>
-				<p><strong>Ville:</strong> {{ server.dns.certificate.subject_intermediate.city }}</p>
+				<p><strong>Pays:</strong> {{ server.dns.certificate.subject_intermediate.city }}</p>
 				<p><strong>Etat:</strong> {{ server.dns.certificate.subject_intermediate.state }}</p>
 				<p><strong>Localité:</strong> {{ server.dns.certificate.subject_intermediate.locality }}</p>
 				<p><strong>Organisation:</strong> {{ server.dns.certificate.subject_intermediate.organization }}</p>
