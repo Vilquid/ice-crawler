@@ -29,7 +29,7 @@ export class ServersComponent implements OnInit {
   server_test: DATAResult = {
     dns: {
       domain: "example.com",
-      note: "Some notes about the DNS",
+      note: "8",
       dmarc: {
         v: "DMARC version",
         p: "DMARC policy",
@@ -42,7 +42,7 @@ export class ServersComponent implements OnInit {
         aspf: "DMARC alignment mode for SPF",
         adkim: "DMARC alignment mode for DKIM",
         fo: "DMARC failure options",
-        note: "Some notes about DMARC",
+        note: "5",
       },
       spf: {
         version: "SPF version",
@@ -51,7 +51,7 @@ export class ServersComponent implements OnInit {
         ip: ["SPF IP 1", "SPF IP 2"],
         include: ["SPF include 1", "SPF include 2"],
         all: "SPF all",
-        note: "Some notes about SPF",
+        note: "6",
       },
       dane: {
         forme_certificat: "DANE certificate form",
@@ -59,7 +59,7 @@ export class ServersComponent implements OnInit {
         signature_cle_publique: true,
         presence_hash: true,
         hash: "DANE hash",
-        note: "Some notes about DANE",
+        note: "4",
       },
       bimi: {
         version: "BIMI version",
@@ -68,17 +68,17 @@ export class ServersComponent implements OnInit {
         url_reputation: "BIMI reputation URL",
         hash: "BIMI hash",
         s: "BIMI s",
-        note: "Some notes about BIMI",
+        note: "7",
       },
       mta: {
         version: "MTA-STS version",
         sn: "MTA-STS sn",
-        note: "Some notes about MTA-STS",
+        note: "7",
       },
       tls: {
         v: "TLS-RPT version",
         rua: "TLS-RPT report URI",
-        note: "Some notes about TLS-RPT",
+        note: "9",
       },
       certificate: {
         domain: "example.com",
@@ -128,7 +128,7 @@ export class ServersComponent implements OnInit {
         extensions_intermediate: {
           subject_alternative_names: ["Intermediate subject alternative names 1", "Intermediate subject alternative names 2"],
         },
-        note: "Some notes about the certificate",
+        note: "6",
       },
     },
     tls: "TLS temporary string"

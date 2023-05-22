@@ -11,12 +11,16 @@
   background-color: #283d58;
   color: #fff;
   padding: 15px;
+  display: flex;
+  justify-content: center
 }
 
 .card-title {
   color: #fff;
-  font-size: 20px;
+  font-size: 30px;
   margin: 0;
+  text-align: center;
+  display:flex
 }
 
 .card-body {
@@ -32,6 +36,9 @@
   background-color: #283d58;
   padding: 10px 15px;
   cursor: pointer;
+  display: flex; /* Add flex display */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between;
 }
 
 .accordion-button {
@@ -43,6 +50,7 @@
   text-align: center;
   width: 100%;
   border-radius: 5px; /* Added border-radius for slightly rounder buttons */
+  margin-right: 10px; /* Add margin to create space between button and note */
 }
 
 .accordion-body {
@@ -76,3 +84,15 @@
     text-align: center;
   }
 
+.note {
+  font-size:40px;
+  margin-left: 10px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+
+  
