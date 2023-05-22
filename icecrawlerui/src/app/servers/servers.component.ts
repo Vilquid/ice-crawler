@@ -7,6 +7,7 @@ import {DATAResult} from '../shared-interfaces/data-result';
 import {SendToDomain} from '../shared-interfaces/send-to-domain';
 import {SendToCIDR} from '../shared-interfaces/send-to-cidr';
 import { Papa } from 'ngx-papaparse';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -134,7 +135,7 @@ export class ServersComponent implements OnInit {
   };
 
 
-  constructor(private dataCol: DataColService, private cache: CacheService, private papa: Papa) {
+  constructor(private dataCol: DataColService, private cache: CacheService, private papa: Papa, private snackBar: MatSnackBar) {
 
     this.domainForm = new UntypedFormGroup///
       ({
@@ -198,6 +199,17 @@ export class ServersComponent implements OnInit {
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
 
+    if (file.type !== 'text/csv') {
+      console.error('Invalid file format. Please select a CSV file.');
+      // Handle the error scenario, such as showing an error message to the user.
+
+      this.snackBar.open('Veuillez sélectionner uniquement un fichier CSV.', 'Fermer', {
+        duration: 3000, // Durée d'affichage de la snackbar en millisecondes
+      });
+
+      return;
+    }
+
     this.papa.parse(file, {
       header: true,
       complete: (result: any) => {
@@ -210,6 +222,7 @@ export class ServersComponent implements OnInit {
       }
     });
   }
+
 
 
   processCSV(data: any[]): void {
