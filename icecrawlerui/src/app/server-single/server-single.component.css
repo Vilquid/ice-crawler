@@ -1,20 +1,78 @@
-button
-{
-    background-color: #003dbd;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 0.5em;
-    width: 10em;
+
+.card {
+  background-color: #1a2533;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
-div .accordion-body
-{
-    margin-left: 2em;
+.card-header {
+  background-color: #283d58;
+  color: #fff;
+  padding: 15px;
 }
+
+.card-title {
+  color: #fff;
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-body {
+  padding: 15px;
+  color: #fff;
+}
+
+.accordion-item {
+  margin-bottom: 10px;
+}
+
+.accordion-header {
+  background-color: #283d58;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.accordion-button {
+  color: #fff;
+  background-color: #374b6e;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  border-radius: 5px; /* Added border-radius for slightly rounder buttons */
+}
+
+.accordion-body {
+  background-color: #374b6e;
+  padding: 10px 15px;
+}
+
+.certificate-section {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.certificate-section p {
+  margin: 5px 0;
+}
+
+.certificate-section p strong {
+  font-weight: bold;
+}
+
+.certificate-section p:first-child {
+  margin-top: 0;
+}
+
+.certificate-section p:last-child {
+  margin-bottom: 0;
+}
+
+.center-text {
+    text-align: center;
+  }
+
