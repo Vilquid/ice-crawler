@@ -400,7 +400,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	if test[0].eq("") {
 		return HttpResponse::Ok().body("rien reçu");
 	}
-	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE domains.domain=");
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers.domaine`=`domains.domain` WHERE domains.domain=");
 	let taille = test.len();
 	let mut flag = 1;
 	for i in test {
@@ -456,7 +456,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 	let cidre = cidr_notation(cidr.as_str());
 	
 				
-	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains WHERE servers.ip BETWEEN `");
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers.domaine`=`domains.domain` WHERE servers.ip BETWEEN `");
 	requete=requete + &cidre.debut.clone() + &"` AND `".to_string() + &cidre.fin.clone() + &"`;".to_string();
 		
 	println!("requete={}",requete);
