@@ -39,10 +39,10 @@
         </div>
 
       <div class="center">
-        <form>
-          <div class="drop-area" >
-            <label>Plusieurs noms de domaine (fichier .csv) : </label>
-            <input type="file" (change)="onFileSelected($event)" accept=".csv" />
+        <form (ngSubmit)="onSubmit()">
+          <div class="drop-area">
+            <label>Nom de Domaine (fichier .csv): </label>
+            <input type="file" accept=".csv" />
             <button type="submit">Envoyer</button>
           </div>
         </form>

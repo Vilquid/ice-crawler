@@ -6,8 +6,8 @@ import * as AOS from 'aos';
 import {DATAResult} from '../shared-interfaces/data-result';
 import {SendToDomain} from '../shared-interfaces/send-to-domain';
 import {SendToCIDR} from '../shared-interfaces/send-to-cidr';
-import { Papa } from 'ngx-papaparse';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Papa} from 'ngx-papaparse';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -196,39 +196,42 @@ export class ServersComponent implements OnInit {
 
   }
 
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+  onSubmit(): void {
+    const fileInput: HTMLInputElement | null = document.querySelector('input[type="file"]');
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const file: File = fileInput.files[0];
 
-    if (file.type !== 'text/csv') {
-      console.error('Invalid file format. Please select a CSV file.');
-      // Handle the error scenario, such as showing an error message to the user.
-
-      this.snackBar.open('Veuillez sélectionner uniquement un fichier CSV.', 'Fermer', {
-        duration: 3000, // Durée d'affichage de la snackbar en millisecondes
-      });
-
-      return;
-    }
-
-    this.papa.parse(file, {
-      header: true,
-      complete: (result: any) => {
-        const data = result.data;
-        this.processCSV(data);
-      },
-      error: (error: any) => {
-        console.error('CSV parsing error:', error);
+      if (file.type !== 'text/csv') {
+        console.error('Invalid file format. Please select a CSV file.');
         // Handle the error scenario, such as showing an error message to the user.
+
+        this.snackBar.open('Veuillez sélectionner uniquement un fichier CSV.', 'Fermer', {
+          duration: 3000, // Durée d'affichage de la snackbar en millisecondes
+        });
+
+        return;
       }
-    });
+
+      this.papa.parse(file, {
+        header: false, // Set header option to false
+        complete: (result: any) => {
+          const data: Array<string> = result.data
+            .flat()// Convert the data to a flat array of strings
+            .filter((value: string) => value.trim() !== '');// Filter out empty values
+          console.log("CSV content:", data);
+          this.processCSV(data);
+        },
+        error: (error: any) => {
+          console.error('CSV parsing error:', error);
+          // Handle the error scenario, such as showing an error message to the user.
+        }
+      });
+    }
   }
-
-
 
   processCSV(data: any[]): void {
     data.forEach((row: any) => {
-      // Assuming your CSV file has a column named 'domain' for the domain value
-      const domain = row.domain;
+      const domain = row;
 
       if (domain) {
         const data: SendToDomain = {
@@ -248,5 +251,6 @@ export class ServersComponent implements OnInit {
       }
     });
   }
+
 
 }
