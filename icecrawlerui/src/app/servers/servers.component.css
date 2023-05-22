@@ -6,8 +6,8 @@
 }
 
 .center{
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     display: flex
 }
 
@@ -126,5 +126,15 @@ input[type="radio"]{
   right: 0px;
   color:#fff ;
   background-color:transparent;
-  pointer-events: painted;  
+  pointer-events: painted;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.drop-area.hover {
+  border-color: #666;
 }
