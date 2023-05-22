@@ -40,11 +40,15 @@
 
       <div class="center">
         <form>
-          <label>Nom de Domaine (fichier .csv): </label>
-          <input type="file" (change)="onFileSelected($event)" accept=".csv" />
-          <button type="submit">Envoyer</button>
+          <div class="drop-area" >
+            <label>Plusieurs noms de domaine (fichier .csv) : </label>
+            <input type="file" (change)="onFileSelected($event)" accept=".csv" />
+            <button type="submit">Envoyer</button>
+          </div>
         </form>
       </div>
+
+
     </ng-container>
 
     <ng-container *ngIf="radioForm.value.radio=='cidr'">
