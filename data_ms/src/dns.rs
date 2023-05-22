@@ -71,5 +71,4 @@ pub(crate) fn dns(ip_domain: &str) -> DNSRecord
 	let n_bis = n.clone();
 
 	return n_bis;
-
 }
