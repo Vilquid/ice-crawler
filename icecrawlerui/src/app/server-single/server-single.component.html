@@ -1,230 +1,282 @@
 <div class="card">
-  <div class="card-header">
-    <h3 class="card-title">{{ server.dns.domain }}</h3>
-	<h4><p class="note"><strong>{{ server.dns.note }}</strong></p></h4>
-  </div>
-  <div class="card-body">
-    <div id="accordion">
-      <div class="accordion-item">
-        <h5 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            DMARC
-          </button>
-		  <p class="note"><strong>{{ server.dns.dmarc.note }}</strong></p>
-        </h5>
-        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordion">
-			<div class="accordion-body">
-				<!-- DMARC content here -->
-				<p><strong>v:</strong> {{ server.dns.dmarc.v }}</p>
-				<p><strong>p:</strong> {{ server.dns.dmarc.p }}</p>
-				<p><strong>sp:</strong> {{ server.dns.dmarc.sp }}</p>
-				<p><strong>pct:</strong> {{ server.dns.dmarc.pct }}</p>
-				<p><strong>ruf:</strong> {{ server.dns.dmarc.ruf }}</p>
-				<p><strong>rua:</strong> {{ server.dns.dmarc.rua }}</p>
-				<p><strong>ri:</strong> {{ server.dns.dmarc.ri }}</p>
-				<p><strong>rf:</strong> {{ server.dns.dmarc.rf }}</p>
-				<p><strong>aspf:</strong> {{ server.dns.dmarc.aspf }}</p>
-				<p><strong>adkim:</strong> {{ server.dns.dmarc.adkim }}</p>
-				<p><strong>fo:</strong> {{ server.dns.dmarc.fo }}</p>
-			</div>
-        </div>
-      </div>
+	<div class="card-header">
+		<h3 class="card-title">{{ server.dns.domain }}</h3>
+		<h4>
+			<p class="note"><strong>{{ server.dns.note }}</strong></p>
+		</h4>
+	</div>
+	<div class="card-body">
+		<div id="accordion">
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						DMARC
+					</button>
+					<p class="note"><strong>{{ server.dns.dmarc.note }}</strong></p>
+				</h5>
+				<div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
 
-	  <div class="accordion-item">
-        <h5 class="accordion-header" id="headingTwo">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            SPF
-          </button>
-		  <p class="note"><strong>{{ server.dns.spf.note }}</strong></p>
-        </h5>
-        <div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo" data-bs-parent="#accordion">
-			<div class="accordion-body">
-				<!-- SPF content here -->
-				<p><strong>version:</strong> {{ server.dns.spf.version }}</p>
-				<p><strong>mechanisms:</strong> {{ server.dns.spf.mechanisms }}</p>
-				<p><strong>qualifier:</strong> {{ server.dns.spf.qualifier }}</p>
-				<p><strong>ip:</strong> {{ server.dns.spf.ip }}</p>
-				<p><strong>include:</strong> {{ server.dns.spf.include }}</p>
-				<p><strong>all:</strong> {{ server.dns.spf.all }}</p>
+						<p><strong>v:</strong> {{ server.dns.dmarc.v }}</p>
+						<p><strong>p:</strong> {{ server.dns.dmarc.p }}</p>
+						<p><strong>sp:</strong> {{ server.dns.dmarc.sp }}</p>
+						<p><strong>pct:</strong> {{ server.dns.dmarc.pct }}</p>
+						<p><strong>ruf:</strong> {{ server.dns.dmarc.ruf }}</p>
+						<p><strong>rua:</strong> {{ server.dns.dmarc.rua }}</p>
+						<p><strong>ri:</strong> {{ server.dns.dmarc.ri }}</p>
+						<p><strong>rf:</strong> {{ server.dns.dmarc.rf }}</p>
+						<p><strong>aspf:</strong> {{ server.dns.dmarc.aspf }}</p>
+						<p><strong>adkim:</strong> {{ server.dns.dmarc.adkim }}</p>
+						<p><strong>fo:</strong> {{ server.dns.dmarc.fo }}</p>
+					</div>
+				</div>
 			</div>
-        </div>
-      </div>
 
-	  <div class="accordion-item">
-        <h5 class="accordion-header" id="headingThree">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            DANE
-          </button>
-		  <p class="note"><strong>{{ server.dns.dane.note }}</strong></p>
-        </h5>
-        <div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree" data-bs-parent="#accordion">
-          	<div class="accordion-body">
-				<!-- DANE content here -->
-				<p><strong>Forme du certificat:</strong> {{ server.dns.dane.forme_certificat }}</p>
-				<p><strong>Signature du certificat:</strong> {{ server.dns.dane.signature_certificat }}</p>
-				<p><strong>Signature de la clé publique:</strong> {{ server.dns.dane.signature_cle_publique }}</p>
-				<p><strong>Présence du hash:</strong> {{ server.dns.dane.presence_hash }}</p>
-				<p><strong>Hash:</strong> {{ server.dns.dane.hash }}</p>
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingTwo">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						SPF
+					</button>
+					<p class="note"><strong>{{ server.dns.spf.note }}</strong></p>
+				</h5>
+				<div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+
+						<p><strong>version:</strong> {{ server.dns.spf.version }}</p>
+						<p><strong>mechanisms:</strong> {{ server.dns.spf.mechanisms }}</p>
+						<p><strong>qualifier:</strong> {{ server.dns.spf.qualifier }}</p>
+						<p><strong>ip:</strong> {{ server.dns.spf.ip }}</p>
+						<p><strong>include:</strong> {{ server.dns.spf.include }}</p>
+						<p><strong>all:</strong> {{ server.dns.spf.all }}</p>
+					</div>
+				</div>
 			</div>
-        </div>
-      </div>
 
-	  <div class="accordion-item">
-        <h5 class="accordion-header" id="headingFour">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            BIMI
-          </button>
-		  <p class="note"><strong>{{ server.dns.bimi.note }}</strong></p>
-        </h5>
-        <div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour" data-bs-parent="#accordion">
-			<div class="accordion-body">
-				<!-- BIMI content here -->
-				<p><strong>Version:</strong> {{ server.dns.bimi.version }}</p>
-				<p><strong>URL de l'expéditeur:</strong> {{ server.dns.bimi.url_expediteur }}</p>
-				<p><strong>URL de la politique:</strong> {{ server.dns.bimi.url_politique }}</p>
-				<p><strong>URL de la réputation:</strong> {{ server.dns.bimi.url_reputation }}</p>
-				<p><strong>Hash:</strong> {{ server.dns.bimi.hash }}</p>
-				<p><strong>S:</strong> {{ server.dns.bimi.s }}</p>
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingThree">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						DANE
+					</button>
+					<p class="note"><strong>{{ server.dns.dane.note }}</strong></p>
+				</h5>
+				<div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+
+						<p><strong>Forme du certificat:</strong> {{ server.dns.dane.forme_certificat }}</p>
+						<p><strong>Signature du certificat:</strong> {{ server.dns.dane.signature_certificat }}</p>
+						<p><strong>Signature de la clé publique:</strong> {{ server.dns.dane.signature_cle_publique }}
+						</p>
+						<p><strong>Présence du hash:</strong> {{ server.dns.dane.presence_hash }}</p>
+						<p><strong>Hash:</strong> {{ server.dns.dane.hash }}</p>
+					</div>
+				</div>
 			</div>
-        </div>
-      </div>
 
-	  <div class="accordion-item">
-        <h5 class="accordion-header" id="headingFive">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-            MTA-STS
-          </button>
-		  <p class="note"><strong>{{ server.dns.mta.note }}</strong></p>
-        </h5>
-		<div id="collapseFive" class="accordion-collapse collapse " aria-labelledby="headingFive" data-bs-parent="#accordion">
-			<div class="accordion-body">
-				<!-- MTA-STS content here -->
-				<p><strong>Version:</strong> {{ server.dns.mta.version }}</p>
-				<p><strong>SN:</strong> {{ server.dns.mta.sn }}</p>
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingFour">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+						BIMI
+					</button>
+					<p class="note"><strong>{{ server.dns.bimi.note }}</strong></p>
+				</h5>
+				<div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+
+						<p><strong>Version:</strong> {{ server.dns.bimi.version }}</p>
+						<p><strong>URL de l'expéditeur:</strong> {{ server.dns.bimi.url_expediteur }}</p>
+						<p><strong>URL de la politique:</strong> {{ server.dns.bimi.url_politique }}</p>
+						<p><strong>URL de la réputation:</strong> {{ server.dns.bimi.url_reputation }}</p>
+						<p><strong>Hash:</strong> {{ server.dns.bimi.hash }}</p>
+						<p><strong>S:</strong> {{ server.dns.bimi.s }}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingFive">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+						MTA-STS
+					</button>
+					<p class="note"><strong>{{ server.dns.mta.note }}</strong></p>
+				</h5>
+				<div id="collapseFive" class="accordion-collapse collapse " aria-labelledby="headingFive"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+
+						<p><strong>Version:</strong> {{ server.dns.mta.version }}</p>
+						<p><strong>SN:</strong> {{ server.dns.mta.sn }}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingSix">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+						TLS-RPT
+					</button>
+
+					<p class="note"><strong>{{ server.dns.tls.note }}</strong></p>
+				</h5>
+				<div id="collapseSix" class="accordion-collapse collapse " aria-labelledby="headingSix"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+
+						<p><strong>Version:</strong> {{ server.dns.tls.v }}</p>
+						<p><strong>Report URI:</strong> {{ server.dns.tls.rua }}</p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingSeven">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+						Certificat
+					</button>
+					<p class="note"><strong>{{ server.dns.certificate.note }}</strong></p>
+				</h5>
+				<div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+						<div class="center-text">
+							<p><strong>Signature</strong></p>
+						</div>
+						<p><strong>Signature</strong>: {{ server.dns.certificate.signature_algorithm_server }}</p>
+
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Issuer</strong></p>
+							</div>
+							<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_server.city }}</p>
+							<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_server.state }}</p>
+							<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_server.locality }}</p>
+							<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_server.organization }}
+							</p>
+							<p><strong>Nom commun:</strong> {{ server.dns.certificate.issuer_server.common_name }}</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Validity</strong></p>
+							</div>
+							<p><strong>Début de validité:</strong> {{ server.dns.certificate.validity_server.not_before
+								}}</p>
+							<p><strong>Fin de validité:</strong> {{ server.dns.certificate.validity_server.not_after }}
+							</p>
+							<p><strong>Est valide ?:</strong> {{ server.dns.certificate.validity_server.is_valid }}</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Subject</strong></p>
+							</div>
+							<p><strong>Pays:</strong> {{ server.dns.certificate.subject_server.city }}</p>
+							<p><strong>Etat:</strong> {{ server.dns.certificate.subject_server.state }}</p>
+							<p><strong>Localité:</strong> {{ server.dns.certificate.subject_server.locality }}</p>
+							<p><strong>Organisation:</strong> {{ server.dns.certificate.subject_server.organization }}
+							</p>
+							<p><strong>Nom commun:</strong> {{ server.dns.certificate.subject_server.common_name }}</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Extensions</strong></p>
+							</div>
+							<p><strong>Nom alternatif:</strong> {{
+								server.dns.certificate.extensions_server.subject_alternative_names }}</p>
+						</div>
+
+
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Signature intermédiaire</strong></p>
+							</div>
+							<p><strong>Signature:</strong> {{ server.dns.certificate.signature_algorithm_intermediate }}
+							</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Issuer intermédiaire</strong></p>
+							</div>
+							<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_intermediate.city }}</p>
+							<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_intermediate.state }}</p>
+							<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_intermediate.locality }}</p>
+							<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_intermediate.organization
+								}}</p>
+							<p><strong>Nom commun:</strong> {{ server.dns.certificate.issuer_intermediate.common_name }}
+							</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Validity intermédiaire</strong></p>
+							</div>
+							<p><strong>Début de validité:</strong> {{
+								server.dns.certificate.validity_intermediate.not_before }}</p>
+							<p><strong>Fin de validité:</strong> {{
+								server.dns.certificate.validity_intermediate.not_after }}</p>
+							<p><strong>Est valide ?:</strong> {{ server.dns.certificate.validity_intermediate.is_valid
+								}}</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Subject intermédiaire</strong></p>
+							</div>
+							<p><strong>Pays:</strong> {{ server.dns.certificate.subject_intermediate.city }}</p>
+							<p><strong>Etat:</strong> {{ server.dns.certificate.subject_intermediate.state }}</p>
+							<p><strong>Localité:</strong> {{ server.dns.certificate.subject_intermediate.locality }}</p>
+							<p><strong>Organisation:</strong> {{
+								server.dns.certificate.subject_intermediate.organization }}</p>
+							<p><strong>Nom commun:</strong> {{ server.dns.certificate.subject_intermediate.common_name
+								}}</p>
+						</div>
+
+						<div class="certificate-section">
+							<div class="center-text">
+								<p><strong>Extensions intermédiaires</strong></p>
+							</div>
+							<p><strong>Nom alternatif:</strong> {{
+								server.dns.certificate.extensions_intermediate.subject_alternative_names }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h5 class="accordion-header" id="headingEight">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+						TLS
+					</button>
+					<p class="note"><strong>{{ server.tls.note }}</strong></p>
+				</h5>
+				<div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+					data-bs-parent="#accordion">
+					<div class="accordion-body">
+						<p><strong>Certificat</strong>: {{ server.tls.certificat }}</p>
+						<p><strong>Liste</strong>: {{ server.tls.liste }}</p>
+						<p><strong>Cypher Suite Faible</strong>: {{ server.tls.cyfaible }}</p>
+						<p><strong>StartTLS</strong>: {{ server.tls.starttls }}</p>
+						<p><strong>Versions</strong>: {{ server.tls.versions }}</p>
+						<p><strong>IP</strong>: {{ server.tls.ip }}</p>
+					</div>
+				</div>
 			</div>
 		</div>
-      </div>
-
-	  <div class="accordion-item">
-        <h5 class="accordion-header" id="headingSix">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-            TLS-RPT
-          </button>
-
-		  <p class="note"><strong>{{ server.dns.tls.note }}</strong></p>
-        </h5>
-        <div id="collapseSix" class="accordion-collapse collapse " aria-labelledby="headingSix" data-bs-parent="#accordion">
-			<div class="accordion-body">
-				<!-- TLS-RPT content here -->
-				<p><strong>Version:</strong> {{ server.dns.tls.v }}</p>
-				<p><strong>Report URI:</strong> {{ server.dns.tls.rua }}</p>
-			</div>
-		</div>
-      </div>
-
-
-      <div class="accordion-item">
-        <h5 class="accordion-header" id="headingSeven">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-            Certificat
-          </button>
-		  <p class="note"><strong>{{ server.dns.certificate.note }}</strong></p>
-        </h5>
-        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordion">
-          <div class="accordion-body">
-			<div class="center-text">
-					<p><strong>Signature</strong></p>
-			</div>
-            <p><strong>Signature</strong>: {{ server.dns.certificate.signature_algorithm_server }}</p>
-
-            <!-- Add styling to group related information -->
-            <div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Issuer</strong></p>
-				</div>
-				<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_server.city }}</p>
-				<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_server.state }}</p>
-				<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_server.locality }}</p>
-				<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_server.organization }}</p>
-				<p><strong>Nom commun:</strong> {{ server.dns.certificate.issuer_server.common_name }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Validity</strong></p>
-				</div>
-				<p><strong>Début de validité:</strong> {{ server.dns.certificate.validity_server.not_before }}</p>
-				<p><strong>Fin de validité:</strong> {{ server.dns.certificate.validity_server.not_after }}</p>
-				<p><strong>Est valide ?:</strong> {{ server.dns.certificate.validity_server.is_valid }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Subject</strong></p>
-				</div>
-				<p><strong>Pays:</strong> {{ server.dns.certificate.subject_server.city }}</p>
-				<p><strong>Etat:</strong> {{ server.dns.certificate.subject_server.state }}</p>
-				<p><strong>Localité:</strong> {{ server.dns.certificate.subject_server.locality }}</p>
-				<p><strong>Organisation:</strong> {{ server.dns.certificate.subject_server.organization }}</p>
-				<p><strong>Nom commun:</strong> {{ server.dns.certificate.subject_server.common_name }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Extensions</strong></p>
-				</div>
-				<p><strong>Nom alternatif:</strong> {{ server.dns.certificate.extensions_server.subject_alternative_names }}</p>
-			</div>
-
-				<!-- Intermediate certificate sections -->
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Signature intermédiaire</strong></p>
-				</div>
-				<p><strong>Signature:</strong> {{ server.dns.certificate.signature_algorithm_intermediate }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Issuer intermédiaire</strong></p>
-				</div>
-				<p><strong>Pays:</strong> {{ server.dns.certificate.issuer_intermediate.city }}</p>
-				<p><strong>Etat:</strong> {{ server.dns.certificate.issuer_intermediate.state }}</p>
-				<p><strong>Localité:</strong> {{ server.dns.certificate.issuer_intermediate.locality }}</p>
-				<p><strong>Organisation:</strong> {{ server.dns.certificate.issuer_intermediate.organization }}</p>
-				<p><strong>Nom commun:</strong> {{ server.dns.certificate.issuer_intermediate.common_name }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Validity intermédiaire</strong></p>
-				</div>
-				<p><strong>Début de validité:</strong> {{ server.dns.certificate.validity_intermediate.not_before }}</p>
-				<p><strong>Fin de validité:</strong> {{ server.dns.certificate.validity_intermediate.not_after }}</p>
-				<p><strong>Est valide ?:</strong> {{ server.dns.certificate.validity_intermediate.is_valid }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Subject intermédiaire</strong></p>
-				</div>
-				<p><strong>Pays:</strong> {{ server.dns.certificate.subject_intermediate.city }}</p>
-				<p><strong>Etat:</strong> {{ server.dns.certificate.subject_intermediate.state }}</p>
-				<p><strong>Localité:</strong> {{ server.dns.certificate.subject_intermediate.locality }}</p>
-				<p><strong>Organisation:</strong> {{ server.dns.certificate.subject_intermediate.organization }}</p>
-				<p><strong>Nom commun:</strong> {{ server.dns.certificate.subject_intermediate.common_name }}</p>
-			</div>
-
-			<div class="certificate-section">
-				<div class="center-text">
-					<p><strong>Extensions intermédiaires</strong></p>
-				</div>
-				<p><strong>Nom alternatif:</strong> {{ server.dns.certificate.extensions_intermediate.subject_alternative_names }}</p>
-			</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>

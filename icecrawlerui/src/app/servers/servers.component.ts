@@ -131,7 +131,15 @@ export class ServersComponent implements OnInit {
         note: "6",
       },
     },
-    tls: "TLS temporary string"
+    tls: {
+      certificat: "example_cert",
+      liste: ["item1", "item2", "item3"],
+      cyfaible: "cyfaible_value",
+      starttls: "starttls_value",
+      versions: ["version1", "version2", "version3", "version4"],
+      note: 10,
+      ip: "192.168.0.1"
+    }
   };
 
 

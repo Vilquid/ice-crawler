@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CacheService } from './cache.service';
-import { map, concat, Observable} from 'rxjs';
+import { map, concat, Observable } from 'rxjs';
 
 import { DNSRecord } from "./shared-interfaces/dns-record"
 import { DATAResult } from './shared-interfaces/data-result';
@@ -15,6 +15,7 @@ import { CertificateRecord } from './shared-interfaces/certificate-record';
 import { IssuerDetails } from './shared-interfaces/issuer-details';
 import { SendToDomain } from './shared-interfaces/send-to-domain';
 import { SendToCIDR } from './shared-interfaces/send-to-cidr';
+import { Retour } from './shared-interfaces/retour';
 
 
 
@@ -24,25 +25,24 @@ import { SendToCIDR } from './shared-interfaces/send-to-cidr';
 })
 export class DataColService {
 
-  constructor(private httpClient: HttpClient, private cache: CacheService) {  }
+  constructor(private httpClient: HttpClient, private cache: CacheService) { }
 
-  launchScanByCIDR(CIDR: SendToCIDR): Observable<DATAResult[]>{            // Post
-      const url = "http://10.10.20.122/database/cidr"
-      return this.httpClient.post<DATAResult[]>(url,CIDR).pipe(
+  launchScanByCIDR(CIDR: SendToCIDR): Observable<DATAResult[]> {            // Post
+    const url = "http://10.10.20.122/database/cidr"
+    return this.httpClient.post<DATAResult[]>(url, CIDR).pipe(
       map((data: any[]) => {
         const AllData: DATAResult[] = []
 
-        for (let k=0; k<data.length; k++){
+        for (let k = 0; k < data.length; k++) {
 
-        let dataresult: DATAResult = {
-          tls: data[k].tls,
-        };
+          let dataresult: DATAResult = {
+          };
 
-        let dnsR: DNSRecord = {
-          domain: data[k].dns.domain,
-          note: data[k].dns.note
+          let dnsR: DNSRecord = {
+            domain: data[k].dns.domain,
+            note: data[k].dns.note
 
-        }
+          }
 
           let dmarcR: DMARCRecord = {
             v: data[k].dns.dmarc.v,
@@ -62,7 +62,6 @@ export class DataColService {
           dnsR.dmarc = dmarcR
 
           let spfR: SPFRecord = {
-
             version: data[k].dns.spf.version,
             mechanisms: [],
             qualifier: data[k].dns.spf.qualifier,
@@ -72,23 +71,23 @@ export class DataColService {
             note: data[k].dns.spf.note
 
           }
-            const mechanismsL: string[]=[];
-            for (let i in data[k].dns.spf.mechanisms){
-              mechanismsL.push(i)
-            }
-            spfR.mechanisms = mechanismsL
+          const mechanismsL: string[] = [];
+          for (let i in data[k].dns.spf.mechanisms) {
+            mechanismsL.push(i)
+          }
+          spfR.mechanisms = mechanismsL
 
-            const ipL: string[]=[];
-            for (let i in data[k].dns.spf.ip){
-              ipL.push(i)
-            }
-            spfR.ip = ipL
+          const ipL: string[] = [];
+          for (let i in data[k].dns.spf.ip) {
+            ipL.push(i)
+          }
+          spfR.ip = ipL
 
-            const includeL: string[]=[];
-            for (let i in data[k].dns.spf.include){
-              includeL.push(i)
-            }
-            spfR.include = includeL
+          const includeL: string[] = [];
+          for (let i in data[k].dns.spf.include) {
+            includeL.push(i)
+          }
+          spfR.include = includeL
           dnsR.spf = spfR
 
           let daneR: DANERecord = {
@@ -120,7 +119,7 @@ export class DataColService {
             note: data[k].dns.mta.note
 
           }
-          dnsR.mta =  mtaR
+          dnsR.mta = mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
@@ -183,32 +182,54 @@ export class DataColService {
           }
           dnsR.certificate = certificateR
 
-        dataresult.dns = dnsR;
+          dataresult.dns = dnsR;
 
-        AllData.push(dataresult)
+          let TLSR: Retour = {
+            certificat: data[k].tls.certificat,
+            liste: [],
+            cyfaible: data[k].tls.cyfaible,
+            starttls: data[k].tls.starttls,
+            versions: ["", "", "", ""],
+            note: data[k].tls.note,
+            ip: data[k].tls.ip,
+          }
+          const listeL: string[] = [];
+          for (let i in data[k].tls.liste) {
+            listeL.push(i)
+          }
+          TLSR.liste = listeL
+
+          const versionL: [string, string, string, string] = ["", "", "", ""];
+          for (let i in data[k].tls.versions) {
+            versionL.push(i)
+          }
+          TLSR.versions = versionL
+
+          dataresult.tls = TLSR;
+
+          AllData.push(dataresult)
         }
         return AllData;
       })
     )
   }
 
-  launchScanByDomain(domainName: SendToDomain): Observable<DATAResult[]>{  // Post
+  launchScanByDomain(domainName: SendToDomain): Observable<DATAResult[]> {  // Post
     const url = "http://10.10.20.122/database/domaine"
-      return this.httpClient.post<DATAResult[]>(url,domainName).pipe(
+    return this.httpClient.post<DATAResult[]>(url, domainName).pipe(
       map((data: any[]) => {
         const AllData: DATAResult[] = []
 
-        for (let k=0; k<data.length; k++){
+        for (let k = 0; k < data.length; k++) {
 
-        let dataresult: DATAResult = {
-          tls: data[k].tls,
-        };
+          let dataresult: DATAResult = {
+          };
 
-        let dnsR: DNSRecord = {
-          domain: data[k].dns.domain,
-          note: data[k].dns.note
+          let dnsR: DNSRecord = {
+            domain: data[k].dns.domain,
+            note: data[k].dns.note
 
-        }
+          }
 
           let dmarcR: DMARCRecord = {
             v: data[k].dns.dmarc.v,
@@ -237,23 +258,23 @@ export class DataColService {
             note: data[k].dns.spf.note
 
           }
-            const mechanismsL: string[]=[];
-            for (let i in data[k].dns.spf.mechanisms){
-              mechanismsL.push(i)
-            }
-            spfR.mechanisms = mechanismsL
+          const mechanismsL: string[] = [];
+          for (let i in data[k].dns.spf.mechanisms) {
+            mechanismsL.push(i)
+          }
+          spfR.mechanisms = mechanismsL
 
-            const ipL: string[]=[];
-            for (let i in data[k].dns.spf.ip){
-              ipL.push(i)
-            }
-            spfR.ip = ipL
+          const ipL: string[] = [];
+          for (let i in data[k].dns.spf.ip) {
+            ipL.push(i)
+          }
+          spfR.ip = ipL
 
-            const includeL: string[]=[];
-            for (let i in data[k].dns.spf.include){
-              includeL.push(i)
-            }
-            spfR.include = includeL
+          const includeL: string[] = [];
+          for (let i in data[k].dns.spf.include) {
+            includeL.push(i)
+          }
+          spfR.include = includeL
           dnsR.spf = spfR
 
           let daneR: DANERecord = {
@@ -285,7 +306,7 @@ export class DataColService {
             note: data[k].dns.mta.note
 
           }
-          dnsR.mta =  mtaR
+          dnsR.mta = mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
@@ -348,9 +369,32 @@ export class DataColService {
           }
           dnsR.certificate = certificateR
 
-        dataresult.dns = dnsR;
+          dataresult.dns = dnsR;
 
-        AllData.push(dataresult)
+          let TLSR: Retour = {
+            certificat: data[k].tls.certificat,
+            liste: [],
+            cyfaible: data[k].tls.cyfaible,
+            starttls: data[k].tls.starttls,
+            versions: ["", "", "", ""],
+            note: data[k].tls.note,
+            ip: data[k].tls.ip,
+          }
+          const listeL: string[] = [];
+          for (let i in data[k].tls.liste) {
+            listeL.push(i)
+          }
+          TLSR.liste = listeL
+
+          const versionL: [string, string, string, string] = ["", "", "", ""];
+          for (let i in data[k].tls.versions) {
+            versionL.push(i)
+          }
+          TLSR.versions = versionL
+
+          dataresult.tls = TLSR;
+
+          AllData.push(dataresult)
         }
         return AllData;
       })
@@ -363,16 +407,16 @@ export class DataColService {
       map((data: any[]) => {
         const AllData: DATAResult[] = []
 
-        for (let k=0; k<data.length; k++){
+        for (let k = 0; k < data.length; k++) {
 
-        let dataresult: DATAResult = {
-          tls: data[k].tls,
-        };
+          let dataresult: DATAResult = {
+            tls: data[k].tls,
+          };
 
-        let dnsR: DNSRecord = {
-          domain: data[k].dns.domain,
-          note: data[k].dns.note
-        }
+          let dnsR: DNSRecord = {
+            domain: data[k].dns.domain,
+            note: data[k].dns.note
+          }
 
           let dmarcR: DMARCRecord = {
             v: data[k].dns.dmarc.v,
@@ -399,23 +443,23 @@ export class DataColService {
             all: data[k].dns.spf.all,
             note: data[k].dns.spf.note
           }
-            const mechanismsL: string[]=[];
-            for (let i in data[k].dns.spf.mechanisms){
-              mechanismsL.push(i)
-            }
-            spfR.mechanisms = mechanismsL
+          const mechanismsL: string[] = [];
+          for (let i in data[k].dns.spf.mechanisms) {
+            mechanismsL.push(i)
+          }
+          spfR.mechanisms = mechanismsL
 
-            const ipL: string[]=[];
-            for (let i in data[k].dns.spf.ip){
-              ipL.push(i)
-            }
-            spfR.ip = ipL
+          const ipL: string[] = [];
+          for (let i in data[k].dns.spf.ip) {
+            ipL.push(i)
+          }
+          spfR.ip = ipL
 
-            const includeL: string[]=[];
-            for (let i in data[k].dns.spf.include){
-              includeL.push(i)
-            }
-            spfR.include = includeL
+          const includeL: string[] = [];
+          for (let i in data[k].dns.spf.include) {
+            includeL.push(i)
+          }
+          spfR.include = includeL
           dnsR.spf = spfR
 
           let daneR: DANERecord = {
@@ -444,7 +488,7 @@ export class DataColService {
             sn: data[k].dns.mta.sn,
             note: data[k].dns.mta.note
           }
-          dnsR.mta =  mtaR
+          dnsR.mta = mtaR
 
           let tlsR: TLSRecord = {
             v: data[k].dns.tls.v,
@@ -505,9 +549,9 @@ export class DataColService {
           }
           dnsR.certificate = certificateR
 
-        dataresult.dns = dnsR;
+          dataresult.dns = dnsR;
 
-        AllData.push(dataresult)
+          AllData.push(dataresult)
         }
         return AllData;
       })
@@ -516,7 +560,7 @@ export class DataColService {
 
   getBackupData(domainName: SendToDomain): Observable<DATAResult> {          // Backup prog, bound to disappear
     const url = 'http://10.10.20.122/data'
-    return this.httpClient.post<DATAResult>(url,domainName).pipe(
+    return this.httpClient.post<DATAResult>(url, domainName).pipe(
       map((data: any) => {
         console.log(data)
         let dataresult: DATAResult = {
@@ -528,136 +572,136 @@ export class DataColService {
           note: data.dns.note
         }
 
-          let dmarcR: DMARCRecord = {
-            v: data.dns.dmarc.v,
-            p: data.dns.dmarc.p,
-            sp: data.dns.dmarc.sp,
-            pct: data.dns.dmarc.pct,
-            ruf: data.dns.dmarc.ruf,
-            rua: data.dns.dmarc.rua,
-            ri: data.dns.dmarc.ri,
-            rf: data.dns.dmarc.rf,
-            aspf: data.dns.dmarc.aspf,
-            adkim: data.dns.dmarc.adkim,
-            fo: data.dns.dmarc.fo,
-            note: data.dns.dmarc.note
-          }
-          dnsR.dmarc = dmarcR
+        let dmarcR: DMARCRecord = {
+          v: data.dns.dmarc.v,
+          p: data.dns.dmarc.p,
+          sp: data.dns.dmarc.sp,
+          pct: data.dns.dmarc.pct,
+          ruf: data.dns.dmarc.ruf,
+          rua: data.dns.dmarc.rua,
+          ri: data.dns.dmarc.ri,
+          rf: data.dns.dmarc.rf,
+          aspf: data.dns.dmarc.aspf,
+          adkim: data.dns.dmarc.adkim,
+          fo: data.dns.dmarc.fo,
+          note: data.dns.dmarc.note
+        }
+        dnsR.dmarc = dmarcR
 
-          let spfR: SPFRecord = {
-            version: data.dns.spf.version,
-            mechanisms: [],
-            qualifier: data.dns.spf.qualifier,
-            ip: [],
-            include: [],
-            all: data.dns.spf.all,
-            note: data.dns.spf.note
-          }
-            const mechanismsL: string[]=[];
-            for (let i in data.dns.spf.mechanisms){
-              mechanismsL.push(i)
-            }
-            spfR.mechanisms = mechanismsL
+        let spfR: SPFRecord = {
+          version: data.dns.spf.version,
+          mechanisms: [],
+          qualifier: data.dns.spf.qualifier,
+          ip: [],
+          include: [],
+          all: data.dns.spf.all,
+          note: data.dns.spf.note
+        }
+        const mechanismsL: string[] = [];
+        for (let i in data.dns.spf.mechanisms) {
+          mechanismsL.push(i)
+        }
+        spfR.mechanisms = mechanismsL
 
-            const ipL: string[]=[];
-            for (let i in data.dns.spf.ip){
-              ipL.push(i)
-            }
-            spfR.ip = ipL
+        const ipL: string[] = [];
+        for (let i in data.dns.spf.ip) {
+          ipL.push(i)
+        }
+        spfR.ip = ipL
 
-            const includeL: string[]=[];
-            for (let i in data.dns.spf.include){
-              includeL.push(i)
-            }
-            spfR.include = includeL
-          dnsR.spf = spfR
+        const includeL: string[] = [];
+        for (let i in data.dns.spf.include) {
+          includeL.push(i)
+        }
+        spfR.include = includeL
+        dnsR.spf = spfR
 
-          let daneR: DANERecord = {
-            forme_certificat: data.dns.dane.forme_certificat,
-            signature_certificat: data.dns.dane.signature_certificat,
-            signature_cle_publique: data.dns.dane.signature_cle_publique,
-            presence_hash: data.dns.dane.presence_hash,
-            hash: data.dns.dane.hash,
-            note: data.dns.dane.note
-          }
-          dnsR.dane = daneR
+        let daneR: DANERecord = {
+          forme_certificat: data.dns.dane.forme_certificat,
+          signature_certificat: data.dns.dane.signature_certificat,
+          signature_cle_publique: data.dns.dane.signature_cle_publique,
+          presence_hash: data.dns.dane.presence_hash,
+          hash: data.dns.dane.hash,
+          note: data.dns.dane.note
+        }
+        dnsR.dane = daneR
 
-          let bimiR: BIMIRecord = {
-            version: data.dns.bimi.version,
-            url_expediteur: data.dns.bimi.url_expediteur,
-            url_politique: data.dns.bimi.url_politique,
-            url_reputation: data.dns.bimi.url_reputation,
-            hash: data.dns.bimi.hash,
-            s: data.dns.bimi.s,
-            note: data.dns.bimi.note
-          }
-          dnsR.bimi = bimiR
+        let bimiR: BIMIRecord = {
+          version: data.dns.bimi.version,
+          url_expediteur: data.dns.bimi.url_expediteur,
+          url_politique: data.dns.bimi.url_politique,
+          url_reputation: data.dns.bimi.url_reputation,
+          hash: data.dns.bimi.hash,
+          s: data.dns.bimi.s,
+          note: data.dns.bimi.note
+        }
+        dnsR.bimi = bimiR
 
-          let mtaR: MTARecord = {
-            version: data.dns.mta.version,
-            sn: data.dns.mta.sn,
-            note: data.dns.mta.note
-          }
-          dnsR.mta =  mtaR
+        let mtaR: MTARecord = {
+          version: data.dns.mta.version,
+          sn: data.dns.mta.sn,
+          note: data.dns.mta.note
+        }
+        dnsR.mta = mtaR
 
-          let tlsR: TLSRecord = {
-            v: data.dns.tls.v,
-            rua: data.dns.tls.rua,
-            note: data.dns.tls.note
-          }
-          dnsR.tls = tlsR
+        let tlsR: TLSRecord = {
+          v: data.dns.tls.v,
+          rua: data.dns.tls.rua,
+          note: data.dns.tls.note
+        }
+        dnsR.tls = tlsR
 
-          let certificateR: CertificateRecord = {
-            domain: data.dns.certificate.domain,
-            signature_algorithm_server: data.dns.certificate.signature_algorithm_server,
-            issuer_server: {
-              city: data.dns.certificate.issuer_server.city,
-              state: data.dns.certificate.issuer_server.state,
-              locality: data.dns.certificate.issuer_server.locality,
-              organization: data.dns.certificate.issuer_server.organization,
-              common_name: data.dns.certificate.issuer_server.common_name
-            },
-            validity_server: {
-              not_before: data.dns.certificate.validity_server.not_before,
-              not_after: data.dns.certificate.validity_server.not_after,
-              is_valid: data.dns.certificate.validity_server.is_valid
-            },
-            subject_server: {
-              city: data.dns.certificate.subject_server.city,
-              state: data.dns.certificate.subject_server.state,
-              locality: data.dns.certificate.subject_server.locality,
-              organization: data.dns.certificate.subject_server.organization,
-              common_name: data.dns.certificate.subject_server.common_name
-            },
-            extensions_server: {
-              subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
-            },
-            signature_algorithm_intermediate: data.dns.certificate.signature_algorithm_intermediate,
-            issuer_intermediate: {
-              city: data.dns.certificate.issuer_intermediate.city,
-              state: data.dns.certificate.issuer_intermediate.state,
-              locality: data.dns.certificate.issuer_intermediate.locality,
-              organization: data.dns.certificate.issuer_intermediate.organization,
-              common_name: data.dns.certificate.issuer_intermediate.common_name
-            },
-            validity_intermediate: {
-              not_before: data.dns.certificate.validity_intermediate.not_before,
-              not_after: data.dns.certificate.validity_intermediate.not_after,
-              is_valid: data.dns.certificate.validity_intermediate.is_valid,
-            },
-            subject_intermediate: {
-              city: data.dns.certificate.subject_intermediate.city,
-              state: data.dns.certificate.subject_intermediate.state,
-              locality: data.dns.certificate.subject_intermediate.locality,
-              organization: data.dns.certificate.subject_intermediate.organization,
-              common_name: data.dns.certificate.subject_intermediate.common_name
-            },
-            extensions_intermediate: {
-              subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
-            },
-            note: data.dns.certificate.note
-          }
-          dnsR.certificate = certificateR
+        let certificateR: CertificateRecord = {
+          domain: data.dns.certificate.domain,
+          signature_algorithm_server: data.dns.certificate.signature_algorithm_server,
+          issuer_server: {
+            city: data.dns.certificate.issuer_server.city,
+            state: data.dns.certificate.issuer_server.state,
+            locality: data.dns.certificate.issuer_server.locality,
+            organization: data.dns.certificate.issuer_server.organization,
+            common_name: data.dns.certificate.issuer_server.common_name
+          },
+          validity_server: {
+            not_before: data.dns.certificate.validity_server.not_before,
+            not_after: data.dns.certificate.validity_server.not_after,
+            is_valid: data.dns.certificate.validity_server.is_valid
+          },
+          subject_server: {
+            city: data.dns.certificate.subject_server.city,
+            state: data.dns.certificate.subject_server.state,
+            locality: data.dns.certificate.subject_server.locality,
+            organization: data.dns.certificate.subject_server.organization,
+            common_name: data.dns.certificate.subject_server.common_name
+          },
+          extensions_server: {
+            subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
+          },
+          signature_algorithm_intermediate: data.dns.certificate.signature_algorithm_intermediate,
+          issuer_intermediate: {
+            city: data.dns.certificate.issuer_intermediate.city,
+            state: data.dns.certificate.issuer_intermediate.state,
+            locality: data.dns.certificate.issuer_intermediate.locality,
+            organization: data.dns.certificate.issuer_intermediate.organization,
+            common_name: data.dns.certificate.issuer_intermediate.common_name
+          },
+          validity_intermediate: {
+            not_before: data.dns.certificate.validity_intermediate.not_before,
+            not_after: data.dns.certificate.validity_intermediate.not_after,
+            is_valid: data.dns.certificate.validity_intermediate.is_valid,
+          },
+          subject_intermediate: {
+            city: data.dns.certificate.subject_intermediate.city,
+            state: data.dns.certificate.subject_intermediate.state,
+            locality: data.dns.certificate.subject_intermediate.locality,
+            organization: data.dns.certificate.subject_intermediate.organization,
+            common_name: data.dns.certificate.subject_intermediate.common_name
+          },
+          extensions_intermediate: {
+            subject_alternative_names: data.dns.certificate.extensions_server.subject_alternative_names
+          },
+          note: data.dns.certificate.note
+        }
+        dnsR.certificate = certificateR
 
         dataresult.dns = dnsR;
 
