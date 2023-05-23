@@ -24,6 +24,7 @@ use crate::tls_rpt::{tls_rtp, TLSRecord};
 #[derive(Serialize, Debug)]
 pub struct DNSRecord
 {
+	#[serde(with = "serde_json::json")]
 	pub domain: String,
 	pub dmarc: DMARCRecord,
 	pub spf: SPFRecord,
