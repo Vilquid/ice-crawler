@@ -12,7 +12,7 @@ export class ServerSingleComponent implements OnInit {
   @Input() server: any
 
   info = {
-    note: 5,
+    note: 8,
     domain: 'example.com'
   }
 
