@@ -55,18 +55,16 @@ async fn pourpost(req: Json<Debut>) -> HttpResponse {
 	for i in list_domain.iter() {
 		//envoi vers l'api des services d'extraction de données
 		println!("envoie de {:?}",i);
-		let mut data=String::new();
-		data = "{\"domaine\": \"".to_owned() + i.domain.as_str() + "\"ip\": \"".to_owned().clone().as_str() + i.ip.as_str() + "\"}";
+		let mut data = serde_json::to_string(&i).unwrap();
 		println!("data= {:?}",data);
-		let chaine = serde_json::to_string(&data).unwrap();
-		println!("chaine= {:?}",chaine);
+		
 		
 		let url = format!("http://data.default");
 		
 		let resp = reqwest::Client::new()
 			.post(&url)
 			.header("Content-Type", "application/json")
-			.body(chaine)
+			.body(data)
 			.send()
 			.await;
 		println!("réponse={:?}",resp);
