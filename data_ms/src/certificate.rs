@@ -20,6 +20,7 @@ use serde::Serialize;
 #[derive(Serialize, Debug)]
 pub struct CertificateRecord
 {
+    #[serde(with = "serde_json::json")]
     pub domain: String,
     pub signature_algorithm_server: String,
     pub issuer_server: IssuerDetails,
