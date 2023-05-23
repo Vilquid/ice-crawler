@@ -16,6 +16,7 @@ use crate::dmarc::dmarc;
 #[derive(Serialize, Debug)]
 pub struct SPFRecord
 {
+	#[serde(with = "serde_json::json")]
 	pub version: String,
 	pub mechanisms: Vec<String>,
 	pub qualifier: String,
