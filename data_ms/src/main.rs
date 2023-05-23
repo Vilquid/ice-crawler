@@ -23,15 +23,18 @@ mod tls;
 
 #[post("/")]
 async fn pourpost(req: Json<Input>) -> HttpResponse {
-	println!("c'est modifié");
+	println!("1");
 	let mut contenu= Input {domain: req.domain.to_string(), ip: req.ip.to_string() };
 	if contenu.domain.eq("") {
 		println!("rien reçu");
 		return HttpResponse::Ok().body("rien... t'es sûr ?");
 	}
+	println!("2");
 	let mut retour = data(contenu);
+	println!("3");
 	println!("serialisation en cours...");
 	let chaine = serde_json::to_string(&retour).unwrap();
+	println!("4");
 	println!("c'est serialisé. {}", chaine);
 	let url = format!("http://database.default");
 
