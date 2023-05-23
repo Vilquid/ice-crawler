@@ -20,7 +20,6 @@ use serde::Serialize;
 #[derive(Serialize, Debug)]
 pub struct CertificateRecord
 {
-    #[serde(with = "serde_json::json")]
     pub domain: String,
     pub signature_algorithm_server: String,
     pub issuer_server: IssuerDetails,
@@ -32,6 +31,7 @@ pub struct CertificateRecord
     pub validity_intermediate: ValidityDetails,
     pub subject_intermediate: SubjectDetails,
     pub extensions_intermediate: ExtensionsDetails,
+    #[serde(serialize_with = "serialize_f32_without_quotes")]
     pub note: f32,
 }
 
@@ -81,6 +81,13 @@ pub struct ValidityDetails
     pub not_before: String,
     pub not_after: String,
     pub is_valid: bool,
+}
+
+fn serialize_f32_without_quotes<S>(value: &f32, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    serializer.serialize_str(&value.to_string())
 }
 
 /// # Brief
