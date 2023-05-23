@@ -16,6 +16,7 @@ use serde::Serialize;
 #[derive(Serialize, Debug)]
 pub struct BIMIRecord
 {
+	#[serde(with = "serde_json::json")]
 	pub version: String,
 	pub url_expediteur: String,
 	pub url_politique: String,
