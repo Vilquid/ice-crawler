@@ -157,8 +157,9 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
     let mut extensions_intermediate = ExtensionsDetails {
         subject_alternative_names: vec![],
     };
-
+    println!("10");
     let print_x509_cert = PrintX509Cert::from_domain(domain.as_str());
+    println!("20");
     match print_x509_cert
     {
         Ok(certificate) => {
@@ -239,6 +240,7 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
             // ssl invalid
         }
     }
+    println!("30");
 
     let mut note: f32 = 0.0;
 
