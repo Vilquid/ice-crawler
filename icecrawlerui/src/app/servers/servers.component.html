@@ -32,9 +32,10 @@
     <ng-container *ngIf="radioForm.value.radio=='domaines'">
         <div class="center">
         <form (ngSubmit)="submitDomain()" [formGroup]="domainForm">
-            <label>Nom de Domaine: </label>
-            <input formControlName="domain">
-            <button type="submit">Envoyer</button>
+            <div class="search-box">
+                <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+                <input formControlName="domain" type="text" class="input-search" placeholder="Nom de Domaine">
+            </div>
         </form>
         </div>
 
