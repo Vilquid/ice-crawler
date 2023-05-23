@@ -1,6 +1,6 @@
 use crate::dns::{dns, DNSRecord};
 use crate::tls::*;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer};
 use crate::tls::tls;
 
 
