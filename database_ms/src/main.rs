@@ -456,7 +456,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 	let cidre = cidr_notation(cidr.as_str());
 	
 				
-	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers.domaine`=`domains.domain` WHERE servers.ip >= \"");
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers`.`domaine`=`domains`.`domain` WHERE servers.ip >= \"");
 	requete=requete + &cidre.debut.clone() + &"\" AND servers.ip <= \"".to_string() + &cidre.fin.clone() + &"\";".to_string();
 		
 	println!("requete={}",requete);
