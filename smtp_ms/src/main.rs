@@ -1,6 +1,7 @@
 use actix_web::{get, post, error::ResponseError, web::Path, web::Json, web::Data, HttpResponse, http::{header::ContentType, StatusCode}, App, HttpServer, HttpRequest};
 use serde::{Serialize, Deserialize};
 use reqwest;
+use actix_cors::Cors;
 use serde_json::json;
 use crate::lister_serveurs_port_25::lister_serveurs_port_25;
 
