@@ -66,7 +66,7 @@
 
     <div class="person-boxes" *ngIf="servers!=null">
         <ng-container *ngFor="let server of servers | filter:texterecherche">
-            <app-server-single [server]="server" data-aos="fade-up" data-aos-delay="600"></app-server-single>
+            <app-server-single [server]="server" [index]="servers.indexOf(server)" data-aos="fade-up" data-aos-delay="600"></app-server-single>
         </ng-container>
     </div>
     <div class="person-boxes" *ngIf="(servers | filter:texterecherche).length==0">

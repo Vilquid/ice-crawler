@@ -10,6 +10,7 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 export class ServerSingleComponent implements OnInit {
 
   @Input() server: any
+  @Input() index: any
 
   info = {
     note: 0,
@@ -27,11 +28,32 @@ export class ServerSingleComponent implements OnInit {
     this.hiddenswitch.card = !this.hiddenswitch.card;
   }
 
+  getParentId() {
+    return 'accordion_' + this.index;
+  }
+
+  getParentIdh() {
+    return '#accordion_' + this.index;
+  }
+
+  getHeadingId(accordion:string) {
+    return 'heading' + accordion + '_' + this.index;
+  }
+
+  getCollapseId(accordion:string) {
+    return 'collapse' + accordion + '_' + this.index;
+  }
+
+  getCollapseTarget(accordion:string) {
+    return '#collapse' + accordion + '_' + this.index;
+  }
+
   constructor() { }
 
   ngOnInit(): void {
     this.info.note = this.server.dns.note
     this.info.domain = this.server.dns.domain
+    console.log(this.index)
   }
 
 }

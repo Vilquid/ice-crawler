@@ -6,17 +6,17 @@
 		</h4>
 	</div>
 	<div class="card-body">
-		<div id="accordion">
+		<div [attr.id]="getParentId()">
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingOne">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('One')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						[attr.data-bs-target]="getCollapseTarget('One')" aria-expanded="false" [attr.aria-controls]="getCollapseId('One')">
 						DMARC
 					</button>
 					<p class="note"><strong>{{ server.dns.dmarc.note }}</strong></p>
 				</h5>
-				<div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('One')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('One')"
+					[attr.data-bs-parent]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>v:</strong> {{ server.dns.dmarc.v }}</p>
@@ -35,15 +35,15 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingTwo">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Two')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						[attr.data-bs-target]="getCollapseTarget('Two')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Two')">
 						SPF
 					</button>
 					<p class="note"><strong>{{ server.dns.spf.note }}</strong></p>
 				</h5>
-				<div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Two')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Two')"
+					data-bs-parent="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>version:</strong> {{ server.dns.spf.version }}</p>
@@ -57,15 +57,15 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingThree">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Three')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						[attr.data-bs-target]="getCollapseTarget('Three')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Three')">
 						DANE
 					</button>
 					<p class="note"><strong>{{ server.dns.dane.note }}</strong></p>
 				</h5>
-				<div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Three')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Three')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>Forme du certificat:</strong> {{ server.dns.dane.forme_certificat }}</p>
@@ -79,15 +79,15 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingFour">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Four')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+						[attr.data-bs-target]="getCollapseTarget('Four')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Four')">
 						BIMI
 					</button>
 					<p class="note"><strong>{{ server.dns.bimi.note }}</strong></p>
 				</h5>
-				<div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Four')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Four')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>Version:</strong> {{ server.dns.bimi.version }}</p>
@@ -101,15 +101,15 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingFive">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Five')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+						[attr.data-bs-target]="getCollapseTarget('Five')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Five')">
 						MTA-STS
 					</button>
 					<p class="note"><strong>{{ server.dns.mta.note }}</strong></p>
 				</h5>
-				<div id="collapseFive" class="accordion-collapse collapse " aria-labelledby="headingFive"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Five')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Five')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>Version:</strong> {{ server.dns.mta.version }}</p>
@@ -119,16 +119,16 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingSix">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Six')">
 					<button class="accordion-button" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+						[attr.data-bs-target]="getCollapseTarget('Six')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Six')">
 						TLS-RPT
 					</button>
 
 					<p class="note"><strong>{{ server.dns.tls.note }}</strong></p>
 				</h5>
-				<div id="collapseSix" class="accordion-collapse collapse " aria-labelledby="headingSix"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Six')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Six')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>Version:</strong> {{ server.dns.tls.v }}</p>
@@ -139,15 +139,15 @@
 
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingSeven">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Seven')">
 					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+						[attr.data-bs-target]="getCollapseTarget('Seven')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Seven')">
 						Certificat
 					</button>
 					<p class="note"><strong>{{ server.dns.certificate.note }}</strong></p>
 				</h5>
-				<div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Seven')" class="accordion-collapse collapse" [attr.aria-labelledby]="getHeadingId('Seven')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 						<div class="center-text">
 							<p><strong>Signature</strong></p>
@@ -258,15 +258,15 @@
 			</div>
 
 			<div class="accordion-item">
-				<h5 class="accordion-header" id="headingEight">
+				<h5 class="accordion-header" [attr.id]="getHeadingId('Eight')">
 					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+						[attr.data-bs-target]="getCollapseTarget('Eight')" aria-expanded="false" [attr.aria-controls]="getCollapseId('Eight')">
 						TLS
 					</button>
 					<p class="note"><strong>{{ server.tls.note }}</strong></p>
 				</h5>
-				<div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
-					data-bs-parent="#accordion">
+				<div [attr.id]="getCollapseId('Eight')" class="accordion-collapse collapse" [attr.aria-labelledby]="getHeadingId('Eight')"
+					[attr.data-bs-target]="getParentIdh()">
 					<div class="accordion-body">
 						<p><strong>Certificat</strong>: {{ server.tls.certificat }}</p>
 						<p><strong>Liste</strong>: {{ server.tls.liste }}</p>
