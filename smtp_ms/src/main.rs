@@ -63,6 +63,7 @@ async fn pourpost(req: Json<Debut>) -> HttpResponse {
 			.body(chaine)
 			.send()
 			.await;
+		println!("réponse={:?}",resp);
 	}
 
 
