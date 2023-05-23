@@ -20,7 +20,7 @@ mod cidr;
 
 
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Output
 {
 	domain: String,
