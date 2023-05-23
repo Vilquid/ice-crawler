@@ -15,6 +15,7 @@ use serde::Serialize;
 #[derive(Serialize, Debug)]
 pub struct DANERecord
 {
+	#[serde(with = "serde_json::json")]
 	pub forme_certificat: String,
 	pub signature_certificat: bool,
 	pub signature_cle_publique: bool,
