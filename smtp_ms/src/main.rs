@@ -44,13 +44,16 @@ pub struct Debut {
 
 #[post("/")]
 async fn pourpost(req: Json<Debut>) -> HttpResponse {
+	println!("je suis vivant");
 	let mut contenu=req.cidr.to_string();
 	if contenu.eq("") {
 		return HttpResponse::Ok().body("erreur j'ai rien reçu");
 	}
 	let list_domain = lister_serveurs_port_25(contenu.as_str());
+	println!("paré à envoyer");
 	for i in list_domain.iter() {
 		//envoi vers l'api des services d'extraction de données
+		println!("envoie de {:?}",i);
 		let mut data=String::new();
 		data = "{\"domaine\": \"".to_owned() + i.domain.as_str() + "\"ip\": \"".to_owned().clone().as_str() + i.ip.as_str() + "\"}";
 		let chaine = serde_json::to_string(&data).unwrap();
