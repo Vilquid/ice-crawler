@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `ice_crawler_DB`.`servers` (
   PRIMARY KEY (`id`),
   CONSTRAINT `domaine`
     FOREIGN KEY (`domaine`)
-    REFERENCES `ice_crawler_DB`.`domains` (`id`)
+    REFERENCES `ice_crawler_DB`.`domains` (`domain`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
