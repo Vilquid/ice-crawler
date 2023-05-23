@@ -23,7 +23,7 @@ use serde::{Serialize, Serializer};
 #[derive(Serialize, Debug)]
 pub struct DMARCRecord
 {
-	#[serde(with = "serde_json::json")]
+	
 	pub v: String,
 	pub p: String,
 	pub sp: String,
