@@ -142,6 +142,122 @@ export class ServersComponent implements OnInit {
     }
   };
 
+  server_test2: DATAResult = {
+    dns: {
+      domain: "example2.com",
+      note: "4",
+      dmarc: {
+        v: "DMARC version",
+        p: "DMARC policy",
+        sp: "DMARC subdomain policy",
+        pct: "50",
+        ruf: "DMARC RUF address",
+        rua: "DMARC RUA address",
+        ri: "DMARC reporting interval",
+        rf: "DMARC forensic reports",
+        aspf: "DMARC alignment mode for SPF",
+        adkim: "DMARC alignment mode for DKIM",
+        fo: "DMARC failure options",
+        note: "3",
+      },
+      spf: {
+        version: "SPF version",
+        mechanisms: ["SPF mechanisms 1", "SPF mechanisms 2"],
+        qualifier: "SPF qualifier",
+        ip: ["SPF IP 1", "SPF IP 2"],
+        include: ["SPF include 1", "SPF include 2"],
+        all: "SPF all",
+        note: "7",
+      },
+      dane: {
+        forme_certificat: "DANE certificate form",
+        signature_certificat: true,
+        signature_cle_publique: true,
+        presence_hash: true,
+        hash: "DANE hash",
+        note: "2",
+      },
+      bimi: {
+        version: "BIMI version",
+        url_expediteur: "BIMI sender URL",
+        url_politique: "BIMI policy URL",
+        url_reputation: "BIMI reputation URL",
+        hash: "BIMI hash",
+        s: "BIMI s",
+        note: "8",
+      },
+      mta: {
+        version: "MTA-STS version",
+        sn: "MTA-STS sn",
+        note: "9",
+      },
+      tls: {
+        v: "TLS-RPT version",
+        rua: "TLS-RPT report URI",
+        note: "1",
+      },
+      certificate: {
+        domain: "example.com",
+        signature_algorithm_server: "Certificate server signature algorithm",
+        issuer_server: {
+          city: "Issuer city",
+          state: "Issuer state",
+          locality: "Issuer locality",
+          organization: "Issuer organization",
+          common_name: "Issuer common name",
+        },
+        validity_server: {
+          not_before: "Certificate server validity start",
+          not_after: "Certificate server validity end",
+          is_valid: true,
+        },
+        subject_server: {
+          city: "Subject city",
+          state: "Subject state",
+          locality: "Subject locality",
+          organization: "Subject organization",
+          common_name: "Subject common name",
+        },
+        extensions_server: {
+          subject_alternative_names: ["Subject alternative names 1", "Subject alternative names 2"],
+        },
+        signature_algorithm_intermediate: "Intermediate certificate signature algorithm",
+        issuer_intermediate: {
+          city: "Intermediate issuer city",
+          state: "Intermediate issuer state",
+          locality: "Intermediate issuer locality",
+          organization: "Intermediate issuer organization",
+          common_name: "Intermediate issuer common name",
+        },
+        validity_intermediate: {
+          not_before: "Intermediate certificate validity start",
+          not_after: "Intermediate certificate validity end",
+          is_valid: true,
+        },
+        subject_intermediate: {
+          city: "Intermediate subject city",
+          state: "Intermediate subject state",
+          locality: "Intermediate subject locality",
+          organization: "Intermediate subject organization",
+          common_name: "Intermediate subject common name",
+        },
+        extensions_intermediate: {
+          subject_alternative_names: ["Intermediate subject alternative names 1", "Intermediate subject alternative names 2"],
+        },
+        note: "2",
+      },
+    },
+    tls: {
+      certificat: "example_cert",
+      liste: ["item1", "item2", "item3"],
+      cyfaible: "cyfaible_value",
+      starttls: "starttls_value",
+      versions: ["version1", "version2", "version3", "version4"],
+      note: 8,
+      ip: "192.168.0.1"
+    }
+  };
+
 
   constructor(private dataCol: DataColService, private cache: CacheService, private papa: Papa, private snackBar: MatSnackBar) {
 
@@ -167,6 +283,7 @@ export class ServersComponent implements OnInit {
 
 
     this.servers.push(this.server_test)
+    this.servers.push(this.server_test2)
 
     this.radioForm.setValue({radio: "cidr"})
   }
