@@ -2,6 +2,7 @@ FROM rust:1.65.0 AS constructeur
 WORKDIR /usr/src
 
 RUN apt-get install libpq-dev && \
+apt-get install clang llvm-dev libclang-dev && \
 USER=root cargo new authentification_ms && \
 cargo install diesel_cli --no-default-features --features postgres
 
