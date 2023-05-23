@@ -48,3 +48,11 @@ services:
       paths:
       - /postgres_db
       strip_path: true
+
+- name: grafana
+  url: http://grafana.default:3000
+  routes:
+    - name: grafana-route
+      paths:
+      - /grafana
+      strip_path: true
