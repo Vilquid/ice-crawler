@@ -23,6 +23,7 @@ struct Rapport {
 
 #[derive(Debug, Serialize)]
 pub struct Retour{
+	#[serde(with = "serde_json::json")]
 	certificat: String,
 	liste: Vec<String>,
 	cyfaible: String,
