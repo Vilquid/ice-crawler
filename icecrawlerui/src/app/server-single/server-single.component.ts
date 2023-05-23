@@ -12,13 +12,26 @@ export class ServerSingleComponent implements OnInit {
   @Input() server: any
 
   info = {
-    note: 8,
+    note: 0,
     domain: 'example.com'
+  }
+
+  hiddenswitch = {
+    circle: false,
+    card: true
+  }
+
+  handleClick() {
+    console.log('Progress bar clicked!');
+    this.hiddenswitch.circle = !this.hiddenswitch.circle;
+    this.hiddenswitch.card = !this.hiddenswitch.card;
   }
 
   constructor() { }
 
   ngOnInit(): void {
+    this.info.note = this.server.dns.note
+    this.info.domain = this.server.dns.domain
   }
 
 }
