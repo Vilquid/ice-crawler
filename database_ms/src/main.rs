@@ -400,7 +400,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	if test[0].eq("") {
 		return HttpResponse::Ok().body("rien reçu");
 	}
-	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers.domaine`=`domains.domain` WHERE domains.domain=");
+	let mut requete = String::from("SELECT * FROM servers INNER JOIN domains ON `servers`.`domaine`=`domains`.`domain` WHERE domains.domain=");
 	let taille = test.len();
 	let mut flag = 1;
 	for i in test {
