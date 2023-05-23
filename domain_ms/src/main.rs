@@ -18,27 +18,29 @@ pub struct Output
 
 #[derive(Deserialize)]
 pub struct Debut {
-	domaine: String,
+	domaine: Vec<String>,
 }
 
 
 
 #[post("/")]
 async fn service(req: Json<Debut>) -> HttpResponse {
-	let demande = req.domaine.to_string();
+	let demande = req.domaine[0].to_string();
 	if demande.eq("") {
 		return HttpResponse::Ok().body("je n'ai rien reçu!");
 	}
-	let mut reponse = mx_records(&demande);
-	for i in reponse {
+	for i in req.domaine {
+		let mut reponse = mx_record(&i);
+		let url = format!("http://data.default");
 		let mut payload = serde_json::to_string(&i).unwrap();
 		let resp = reqwest::Client::new()
-		    .post("0.0.0.0:9002")
+		    .post(&url)
 		    .header("Content-Type", "application/json")
 		    .body(payload.clone())
 		    .send()
 		    .await;
 	}
+	
 	return HttpResponse::Ok().body("OK");
 }
 
@@ -50,9 +52,9 @@ async fn service(req: Json<Debut>) -> HttpResponse {
 async fn main() -> std::io::Result<()> {
 
 	HttpServer::new( move || {
-		//let cors = Cors::default().allow_any_origin().send_wildcard();
+		let cors = Cors::default().allow_any_origin().send_wildcard();
 		App::new()
-			//.wrap(cors)
+			.wrap(cors)
 			.service(service)
 	})
 		.bind(("0.0.0.0", 9000)).expect("REASON")
