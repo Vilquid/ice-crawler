@@ -1,5 +1,5 @@
-<div class="card">
-	<div class="card-header">
+<div class="card" [hidden]="hiddenswitch.card">
+	<div class="card-header" (click)="handleClick()" style="cursor: pointer;">
 		<h3 class="card-title">{{ server.dns.domain }}</h3>
 		<h4>
 			<p class="note"><strong>{{ server.dns.note }}</strong></p>
@@ -281,4 +281,6 @@
 	</div>
 </div>
 
-<app-progress-bar [info]="info"></app-progress-bar>
+<div>
+	<app-progress-bar [info]="info" (click)="handleClick()" style="cursor: pointer;" [hidden]="hiddenswitch.circle"></app-progress-bar>
+</div>
