@@ -1,6 +1,6 @@
 use std::process::Command;
 use std::str::from_utf8;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 
 
 /// # Brief
