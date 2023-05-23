@@ -107,17 +107,3 @@ pub struct LoginUser {
     pub username: String,
     pub password: String,
 }
-
-
-
-
-impl NewPost {
-    pub fn from_post_form(title: String, link: String, uid: i32) -> Self {
-        NewPost {
-            title: title,
-            link: link,
-            author: uid,
-            created_at: chrono::Local::now().naive_utc(),
-        }
-    }
-}
