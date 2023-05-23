@@ -13,6 +13,7 @@ use serde::Serialize;
 #[derive(Serialize, Debug)]
 pub struct MTARecord
 {
+	#[serde(with = "serde_json::json")]
 	pub version: String,
 	pub sn: String,
 	pub note: f32,
