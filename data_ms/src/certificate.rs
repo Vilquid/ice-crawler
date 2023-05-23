@@ -1,5 +1,5 @@
 use printx509cert::{PrintX509Cert};
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 
 
 /// # Brief
