@@ -6,7 +6,7 @@ use std::sync::mpsc;
 use std::convert::TryInto;
 use std::process::Termination;
 use std::process::ExitCode;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 
 
 pub struct Renvoi<'a> {
