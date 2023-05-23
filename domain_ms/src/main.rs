@@ -3,6 +3,7 @@ use actix_web::{get, post, error::ResponseError, web::Path, web::Json, web::Data
 use serde::{Serialize, Deserialize};
 use reqwest;
 use serde_json::json;
+use actix_cors::Cors;
 
 
 mod mx_records;
@@ -29,8 +30,8 @@ async fn service(req: Json<Debut>) -> HttpResponse {
 	if demande.eq("") {
 		return HttpResponse::Ok().body("je n'ai rien reçu!");
 	}
-	for i in req.domaine {
-		let mut reponse = mx_record(&i);
+	for i in &req.domaine {
+		let mut reponse = mx_records(&i);
 		let url = format!("http://data.default");
 		let mut payload = serde_json::to_string(&i).unwrap();
 		let resp = reqwest::Client::new()
