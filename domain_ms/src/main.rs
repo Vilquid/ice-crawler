@@ -27,11 +27,13 @@ pub struct Debut {
 #[post("/")]
 async fn service(req: Json<Debut>) -> HttpResponse {
 	let demande = req.domaine[0].to_string();
+	println!("demande={:?}", demande);
 	if demande.eq("") {
 		return HttpResponse::Ok().body("je n'ai rien reçu!");
 	}
 	for i in &req.domaine {
 		let mut reponse = mx_records(&i);
+		println!("reponse={:?}", reponse);
 		let url = format!("http://data.default");
 		let mut payload = serde_json::to_string(&i).unwrap();
 		let resp = reqwest::Client::new()
@@ -40,6 +42,7 @@ async fn service(req: Json<Debut>) -> HttpResponse {
 		    .body(payload.clone())
 		    .send()
 		    .await;
+		println!("resp={:?}", resp);
 	}
 	
 	return HttpResponse::Ok().body("OK");
