@@ -8,6 +8,7 @@ use std::process::Command;
 #[derive(Serialize, Debug)]
 pub struct TLSRecord
 {
+	#[serde(with = "serde_json::json")]
 	pub v: String,
 	pub rua: String,
 	pub note: f32,
