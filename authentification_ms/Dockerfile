@@ -1,11 +1,13 @@
 FROM rust:1.65.0 AS constructeur
 WORKDIR /usr/src
 
-RUN USER=root cargo new authentification_ms
+RUN sudo apt-get install libpq-dev && \
+USER=root cargo new authentification_ms && \
+cargo install diesel_cli --no-default-features --features postgres
+
 WORKDIR /usr/src/authentification_ms
 COPY Cargo.toml Cargo.lock .env diesel.toml ./
 COPY src ./src
-COPY migrations ./migrations
 COPY templates ./templates
 RUN cargo build --release
 
