@@ -1,6 +1,6 @@
 use std::clone;
 use regex::Regex;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 use crate::bimi::{bimi, BIMIRecord};
 use crate::certificate::{certificat, CertificateRecord};
 use crate::dane::{dane, DANERecord};
