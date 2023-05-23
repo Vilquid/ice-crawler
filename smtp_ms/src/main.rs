@@ -73,8 +73,9 @@ async fn pourpost(req: Json<Debut>) -> HttpResponse {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-	HttpServer::new( move || {
+	HttpServer::new( move || { let cors = Cors::default().allow_any_origin().send_wildcard();
 		App::new()
+			.wrap(cors)
 			.service(pourpost)
 	})
 		.bind(("0.0.0.0", 9001)).expect("REASON")
