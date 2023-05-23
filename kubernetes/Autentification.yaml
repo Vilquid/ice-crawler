@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentification
+  namespace: default 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9008
+  selector:
+    pod-name: authentification
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentification
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-name: authentification
+  template:
+    metadata:
+      labels:
+        pod-name: authentification
+    spec:
+      containers:
+      - name: authentification
+        image: "docker.io/icecrawler/authentification:latest"
+        imagePullPolicy: Always 
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 9008
+
+

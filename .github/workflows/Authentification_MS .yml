@@ -1,0 +1,40 @@
+name: Build-Data_MS
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'authentification_ms/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'authentification_ms/**'
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+  GIT_COMMIT: ${{ github.sha }}
+jobs:
+  clone:
+    name: clone down repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: upload repo
+        uses: actions/upload-artifact@v3
+        with:
+          name: code
+          path: .
+  Build-Authentification_MS:
+    runs-on: ubuntu-latest
+    needs: [clone]
+    steps:
+      - name: download code
+        uses: actions/download-artifact@v1
+        with:
+          name: code
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh authentification
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh authentification
