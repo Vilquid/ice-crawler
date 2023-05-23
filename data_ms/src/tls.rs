@@ -29,7 +29,7 @@ pub struct Retour{
 	cyfaible: String,
 	starttls: String,
 	versions: [String;4],
-	#[serde(serialize_with = "serialize_f32_without_quotes")]
+	#[serde(serialize_with = "serialize_u16_without_quotes")]
 	note: u16,
 	ip: String,
 }
