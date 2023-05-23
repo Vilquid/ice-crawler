@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: domain
+  namespace: default 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    pod-name: domain
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: domain
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-name: domain
+  template:
+    metadata:
+      labels:
+        pod-name: domain
+    spec:
+      containers:
+      - name: domain
+        image: "docker.io/icecrawler/domain:latest"
+        imagePullPolicy: Always 
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 9000
