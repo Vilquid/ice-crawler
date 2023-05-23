@@ -1,5 +1,5 @@
 use std::process::Command;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 use crate::dmarc::dmarc;
 
 
