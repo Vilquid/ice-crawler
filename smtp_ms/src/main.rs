@@ -46,6 +46,7 @@ pub struct Debut {
 async fn pourpost(req: Json<Debut>) -> HttpResponse {
 	println!("je suis vivant");
 	let mut contenu=req.cidr.to_string();
+	println!("contenu= {:?}", contenu);
 	if contenu.eq("") {
 		return HttpResponse::Ok().body("erreur j'ai rien reçu");
 	}
@@ -59,8 +60,11 @@ async fn pourpost(req: Json<Debut>) -> HttpResponse {
 		println!("data= {:?}",data);
 		let chaine = serde_json::to_string(&data).unwrap();
 		println!("chaine= {:?}",chaine);
+		
+		let url = format!("http://data.default");
+		
 		let resp = reqwest::Client::new()
-			.post("0.0.0.0:9002")
+			.post(&url)
 			.header("Content-Type", "application/json")
 			.body(chaine)
 			.send()
