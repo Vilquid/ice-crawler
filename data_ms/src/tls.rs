@@ -28,7 +28,6 @@ pub struct Retour{
 	cyfaible: String,
 	starttls: String,
 	versions: [String;4],
-	#[serde(serialize_with = "serialize_u16_without_quotes")]
 	note: u16,
 	ip: String,
 }
@@ -41,12 +40,7 @@ impl Termination for Retour {
     }
 }
 
-fn serialize_u16_without_quotes<S>(value: &u16, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    serializer.serialize_str(&value.to_string())
-}
+
 
 ///le main prends en argument une addresse ip au format string, effectue une première connection toute simple pour vérifier si starttls est présent
 ///si ce n'est pas le cas il s'arrête et renvoie une note de 0. dans l'autre cas il lance pleins de threads qui seront chargés chacun de tester une suite
