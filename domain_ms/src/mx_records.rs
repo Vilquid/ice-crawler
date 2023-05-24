@@ -77,7 +77,7 @@ pub(crate) async fn mx_records(ip_domain: &str) -> Vec<Output>
 							{
 								// ip.push(ip_addr.to_string());
 								list_domain_ip.push(Output {
-									domain: ip_info(ip_addr.to_string().as_str()),
+									domain: ip_info(ip_addr.to_string().as_str()).to_string(),
 									ip: ip_addr.to_string(),
 								});
 							}
