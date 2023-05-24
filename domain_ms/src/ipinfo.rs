@@ -7,7 +7,7 @@ use ipinfo::{IpInfo, IpInfoConfig};
 /// - ip *&str* : adresse IP à analyser
 /// # Return
 /// Retourne le nom de domaine de type *String* associé à l'adresse IP.
-pub(crate) async fn ip_info(ip: &str) -> String
+pub(crate) fn ip_info(ip: &str) -> String
 {
  	let config = IpInfoConfig { token: Some("aa3b89b7853f6c".to_string()), ..Default::default() };
 
