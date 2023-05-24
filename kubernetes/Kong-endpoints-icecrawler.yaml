@@ -25,6 +25,14 @@ services:
     - /smtp
     strip_path: true
 
+- name: domain
+  url: http://domain.default/
+  routes:
+  - name: domain-route
+    paths:
+    - /domain
+    strip_path: true
+
 - name: bdd
   url: http://mysql.default:3306
   routes:
