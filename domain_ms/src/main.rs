@@ -19,7 +19,7 @@ pub struct Output
 
 #[derive(Deserialize)]
 pub struct Debut {
-	domaine: Vec<String>,
+	domaine: String,
 }
 
 
