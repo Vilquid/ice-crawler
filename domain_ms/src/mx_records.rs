@@ -29,7 +29,7 @@ pub(crate) async fn mx_records(ip_domain: &str) -> Vec<Output>
 	// Si l'input match avec l'expression régulière, c'est une adresse IP
 	if Regex::new(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$").unwrap().is_match(ip_domain) == true
 	{
-		domain = ip_info(ip_domain).await;
+		domain = ip_info(ip_domain);
 	}
 
 	// Sinon, c'est un nom de domaine
@@ -77,7 +77,7 @@ pub(crate) async fn mx_records(ip_domain: &str) -> Vec<Output>
 							{
 								// ip.push(ip_addr.to_string());
 								list_domain_ip.push(Output {
-									domain: ip_info(ip_addr.to_string().as_str()).to_string(),
+									domain: ip_info(ip_addr.to_string().as_str()),
 									ip: ip_addr.to_string(),
 								});
 							}
