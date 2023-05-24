@@ -21,7 +21,7 @@ use crate::Output;
 /// 	mx_records("google.com.");
 /// }
 /// ```
-pub(crate) fn mx_records(ip_domain: &str) -> Vec<Output>
+pub(crate) async fn mx_records(ip_domain: &str) -> Vec<Output>
 {
 	#[allow(unused_assignments)]
 		let mut domain = String::new();
