@@ -32,7 +32,7 @@ async fn service(req: Json<Debut>) -> HttpResponse {
 		return HttpResponse::Ok().body("je n'ai rien reçu!");
 	}
 	for i in &req.domaine {
-		let mut reponse = mx_records(&i).await();
+		let mut reponse = mx_records(&i).await;
 		let url = format!("http://data.default");
 		let mut payload = serde_json::to_string(&i).unwrap();
 		let resp = reqwest::Client::new()
