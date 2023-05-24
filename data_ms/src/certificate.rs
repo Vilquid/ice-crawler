@@ -31,7 +31,6 @@ pub struct CertificateRecord
     pub validity_intermediate: ValidityDetails,
     pub subject_intermediate: SubjectDetails,
     pub extensions_intermediate: ExtensionsDetails,
-    #[serde(serialize_with = "serialize_f32_without_quotes")]
     pub note: f32,
 }
 
@@ -83,12 +82,7 @@ pub struct ValidityDetails
     pub is_valid: bool,
 }
 
-fn serialize_f32_without_quotes<S>(value: &f32, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    serializer.serialize_str(&value.to_string())
-}
+
 
 /// # Brief
 /// Structure contenant les données des extensions
