@@ -16,17 +16,11 @@ pub struct MTARecord
 	
 	pub version: String,
 	pub sn: String,
-	#[serde(serialize_with = "serialize_f32_without_quotes")]
 	pub note: f32,
 }
 
 
-fn serialize_f32_without_quotes<S>(value: &f32, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    serializer.serialize_str(&value.to_string())
-}
+
 
 
 /// # Brief
