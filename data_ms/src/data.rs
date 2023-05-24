@@ -18,6 +18,7 @@ pub struct DATAResult
 	pub tls: Retour,
 }
 
+
 pub(crate) fn data(structure: Input) -> DATAResult
 {
 	let dns = dns(&structure.domain);
