@@ -47,6 +47,7 @@ async fn pourpost(req: Json<Input>) -> HttpResponse {
 		.send()
 		.await;
 	println!("{:?}",resp);
+	println!("{:?}",resp);
 	return HttpResponse::Ok().body("ok");
 }
 
