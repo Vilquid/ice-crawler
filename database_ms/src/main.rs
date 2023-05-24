@@ -545,7 +545,7 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
      for i in &req.dns.spf.ip {
     	requete2=requete2 + &i;
      }
-     requete2 = requete2 + &"\", \"".to_string() + &"\", \"".to_string();
+     requete2 = requete2 + &"\", \"".to_string();
 	for i in &req.dns.spf.include {
     		requete2=requete2 + &i;
         }
