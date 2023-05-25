@@ -7,3 +7,10 @@
 ```bash
 cargo new <nom_du_projet>
 ```
+
+## Mettre à jour Cargo
+
+Dans un terminal :
+```bash
+rustup update
+```
