@@ -522,6 +522,11 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse
     // //let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( 192.168.22.223, google.com, hthqeh, qehteht, thrth, Sgrgge, drhrhrh)");
 	//
 	println!("req = {:?}", req);
+
+	// get data from req
+	let mut data:DATAResult = req.into_inner();
+	println!("data = {:#?}", data);
+
 	//
     // let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( \" ");
     // requete=requete + &req.tls.ip.clone() + &&"\", \"".to_string() + &req.dns.domain.clone() + &"\", \"".to_string() + &req.tls.certificat.clone() + &"\", \"".to_string();
