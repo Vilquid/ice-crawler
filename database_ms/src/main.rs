@@ -22,14 +22,14 @@ use std::net::{IpAddr, Ipv4Addr};
 use regex::Regex;
 
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DATAResult
 {
 	pub dns: DNSRecord,
 	pub tls: Retour,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct Retour{
 	certificat: String,
 	liste: Vec<String>,
@@ -40,7 +40,7 @@ pub struct Retour{
 	ip: String,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DNSRecord
 {
 	pub domain: String,
@@ -54,7 +54,7 @@ pub struct DNSRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DMARCRecord
 {
 	pub v: String,
@@ -71,7 +71,7 @@ pub struct DMARCRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct SPFRecord
 {
 	pub version: String,
@@ -83,7 +83,7 @@ pub struct SPFRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DANERecord
 {
 	pub forme_certificat: String,
@@ -94,7 +94,7 @@ pub struct DANERecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct BIMIRecord
 {
 	pub version: String,
@@ -106,7 +106,7 @@ pub struct BIMIRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct MTARecord
 {
 	pub version: String,
@@ -114,7 +114,7 @@ pub struct MTARecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct TLSRecord
 {
 	pub v: String,
@@ -122,7 +122,7 @@ pub struct TLSRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct CertificateRecord
 {
 	pub domain: String,
@@ -139,7 +139,7 @@ pub struct CertificateRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct IssuerDetails
 {
 	pub city: String,
@@ -149,7 +149,7 @@ pub struct IssuerDetails
 	pub common_name: String,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct SubjectDetails
 {
 	pub city: String,
@@ -159,7 +159,7 @@ pub struct SubjectDetails
 	pub common_name: String,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct ValidityDetails
 {
 	pub not_before: String,
@@ -167,7 +167,7 @@ pub struct ValidityDetails
 	pub is_valid: bool,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct ExtensionsDetails
 {
 	pub subject_alternative_names: Vec<String>,
@@ -178,25 +178,25 @@ pub struct Re<T>{
 	resultat: Vec<T>
 }
 
-#[derive(Serialize, Deserialize, Encode, Type)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct Utilisateur{
 	pub mail: String,
 	pub hash: String,
 	pub sel: String,
 }
 
-#[derive(Serialize, Deserialize, Encode, Type)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 #[allow(non_snake_case)]
 pub struct Cidr{
 	CIDR: String,
 }
 
-#[derive(Serialize, Deserialize, Encode, Type)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct Domaine{
 	domain: Vec<String>,
 }
 		
-#[derive(Serialize, Deserialize, Encode, Type)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct IpRange
 {
 	pub debut: String,
@@ -512,81 +512,84 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse
 async fn admission(req: Json<DATAResult>) -> HttpResponse
 {
 	println!("Début fonction admission");
-
-    let test = req.tls.ip.clone();
-    if test.eq("")
-	{
-        return HttpResponse::Ok().body("error empty data structure!!");
-    }
-    
-    //let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( 192.168.22.223, google.com, hthqeh, qehteht, thrth, Sgrgge, drhrhrh)");
-    let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( \" ");
-    requete=requete + &req.tls.ip.clone() + &&"\", \"".to_string() + &req.dns.domain.clone() + &"\", \"".to_string() + &req.tls.certificat.clone() + &"\", \"".to_string();
-    for i in &req.tls.liste {
-    	requete=requete + &i.clone();
-    }
-    
-    requete=requete + &"\", \"".to_string() + &req.tls.cyfaible.clone() + &"\", \"".to_string() + &req.tls.starttls.clone() + &"\", ".to_string() + &req.tls.note.to_string() + &");".to_string();
-	println!("requete = {}", requete);
-
-    let mut requete2=String::from("INSERT INTO domains (`domain`,`note`,`bimi.version`,`bimi.url_expediteur`,`bimi.url_politique`,`bimi.url_reputation`,`bimi.hash`,`bimi.s`,`certificate.signature_algorithm_server`,`certificate.IssuerDetails.city`,`certificate.IssuerDetails.state`,`certificate.IssuerDetails.locality`,`certificate.IssuerDetails.organization`,`certificate.IssuerDetails.common_name`,`certificate.ValidityDetails.not_before`,`certificate.ValidityDetails.not_after`,`certificate.ValidityDetails.is_valid`,`certificate.SubjectDetails.city`,`certificate.SubjectDetails.state`,`certificate.SubjectDetails.locality`,`certificate.SubjectDetails.organization`,`certificate.SubjectDetails.common_name`,`certificate.ExtensionsDetails.subject_alternative_names`,`certificate.signature_algorithm_intermediate`,`certificate.issuer_intermediate.city`,`certificate.issuer_intermediate.state`,`certificate.issuer_intermediate.locality`,`certificate.issuer_intermediate.organization`,`certificate.issuer_intermediate.common_name`,`certificate.validity_intermediate.not_before`,`certificate.validity_intermediate.not_after`,`certificate.validity_intermediate.is_valid`,`certificate.subject_intermediate.city`,`certificate.subject_intermediate.state`,`certificate.subject_intermediate.locality`,`certificate.subject_intermediate.organization`,`certificate.subject_intermediate.common_name`,`certificate.extensions_intermediate.subject_alternative_names`,`dane.forme_certificat`,`dane.signature_certificat`,`dane.signature_cle_publique`,`dane.presence_hash`,`dane.hash`,`dmarc.v`,`dmarc.p` ,`dmarc.sp`,`dmarc.pct`,`dmarc.ruf` ,`dmarc.rua`,`dmarc.ri`,`dmarc.rf`,`dmarc.aspf`,`dmarc.adkim`,`dmarc.fo`,`mta_sts.version`,`mta_sts.sn`,`spf.version`,`spf.mechanisms`,`spf.qualifier`,`spf.ip`,`spf.include` ,`spf.all` ,`tls_rpt.v`,`tls_rpt.rua`,`bimi.note`,`certificate.note`,`dane.note` ,`dmarc.note` ,`mta_sts.note`,`spf.note`,`tls_rpt.note`) VALUES ( \""); 
-    requete2= requete2 + &req.dns.domain.clone() + &"\", ".to_string() + &req.dns.note.to_string() + &",\" ".to_string() + &req.dns.bimi.version.clone() + &"\", \"".to_string() + &req.dns.bimi.url_expediteur.clone() + &"\", \"".to_string() + &req.dns.bimi.url_politique.clone() + &"\", \"".to_string() + &req.dns.bimi.url_reputation.clone()  + &"\", \"".to_string() +  &req.dns.bimi.hash.clone()  + &"\", \"".to_string() + &req.dns.bimi.s.clone() + &"\", \"".to_string() + &req.dns.certificate.signature_algorithm_server.clone()  + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.city.clone()  + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.common_name.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_before.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_after.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.is_valid.to_string() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.common_name.clone() + &"\", \"".to_string();
-    
-    for i in &req.dns.certificate.extensions_server.subject_alternative_names{
-    	requete2=requete2 + &i;
-    }
-	
-     requete2 = requete2 + &"\", \"".to_string() + &req.dns.certificate.signature_algorithm_intermediate.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.common_name.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_before.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_after.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.is_valid.to_string() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.common_name.clone() + &"\", \"".to_string();
-
-	for i in &req.dns.certificate.extensions_intermediate.subject_alternative_names
-	{
-    	requete2=requete2 + &i;
-	}
-
-	requete2 = requete2 + &"\", \"".to_string() + &"\", \"".to_string() + &req.dns.dane.forme_certificat.clone() + &"\", \"".to_string() + &req.dns.dane.signature_certificat.to_string() + &"\", \"".to_string() + &req.dns.dane.signature_cle_publique.to_string() + &"\", \"".to_string() + &req.dns.dane.presence_hash.to_string() + &"\", \"".to_string() + &req.dns.dane.hash.clone() + &"\", \"".to_string() + &req.dns.dmarc.v.clone() + &"\", \"".to_string() + &req.dns.dmarc.p.clone()  + &"\", \"".to_string() + &req.dns.dmarc.sp.clone() + &"\", \"".to_string() + &req.dns.dmarc.pct.clone() + &"\", \"".to_string() + &req.dns.dmarc.ruf.clone()  + &"\", \"".to_string() + &req.dns.dmarc.rua.clone() + &"\", \"".to_string() + &req.dns.dmarc.ri.clone() + &"\", \"".to_string() + &req.dns.dmarc.rf.clone() + &"\", \"".to_string() + &req.dns.dmarc.aspf.clone() + &"\", \"".to_string() + &req.dns.dmarc.adkim.clone() + &"\", \"".to_string() + &req.dns.dmarc.fo.clone() + &"\", \"".to_string() + &req.dns.mta.version.clone() + &"\", \"".to_string() + &req.dns.mta.sn.clone() + &"\", \"".to_string() + &req.dns.spf.version.clone() + &"\", \"".to_string();
-
-    for i in &req.dns.spf.mechanisms
-	{
-    	requete2=requete2 + &i;
-    }
-
-    requete2 = requete2 + &"\", \"".to_string() + &req.dns.spf.qualifier.clone() + &"\", \"".to_string();
-
-    for i in &req.dns.spf.ip
-	{
-    	requete2=requete2 + &i;
-    }
-
-	requete2 = requete2 + &"\", \"".to_string();
-	for i in &req.dns.spf.ip {
-    	requete2=requete2 + &i;
-    }
-
-	requete2 = requete2 + &"\", \"".to_string();
-
-	for i in &req.dns.spf.include
-	{
-    	requete2=requete2 + &i;
-	}
-    requete2 = requete2  + &"\", \"".to_string() + &req.dns.spf.all.clone()  + &"\", \"".to_string() + &req.dns.tls.v.clone() + &"\", \"".to_string() + &req.dns.tls.rua.clone() + &"\",".to_string() + &req.dns.bimi.note.to_string() + &", ".to_string() + &req.dns.certificate.note.to_string() + &", ".to_string() + &req.dns.dane.note.to_string()  + &", ".to_string() + &req.dns.dmarc.note.to_string()  + &", ".to_string() + &req.dns.mta.note.to_string() + &", ".to_string() + &req.dns.spf.note.to_string() + &", ".to_string() + &req.dns.tls.note.to_string() + &"); ".to_string();
-		
-	let mut pool = mysql::MySqlConnectOptions::new()
-    	.host("mysql.default")
-    	.username("ice_crawler_user")
-    	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
-    	.database("ice_crawler_DB")
-    	.connect().await.expect("Erreur lors de la connexion à la base de données");
-
-	println!("requete = {}", requete);
-	println!("requete2 = {}", requete2);
-
-    sqlx::query(requete.as_str())
-        .execute(&mut pool)
-        .await.expect("Erreur lors de l'insertion dans la table 'servers'");
-        
-    sqlx::query(requete2.as_str())
-        .execute(&mut pool)
-        .await.expect("Erreur lors de l'insertion dans la table 'domains'");
+	//
+    // let test = req.tls.ip.clone();
+    // if test.eq("")
+	// {
+    //     return HttpResponse::Ok().body("error empty data structure!!");
+    // }
+    //
+    // //let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( 192.168.22.223, google.com, hthqeh, qehteht, thrth, Sgrgge, drhrhrh)");
+	//
+	println!("req = {:?}", req);
+	//
+    // let mut requete=String::from("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( \" ");
+    // requete=requete + &req.tls.ip.clone() + &&"\", \"".to_string() + &req.dns.domain.clone() + &"\", \"".to_string() + &req.tls.certificat.clone() + &"\", \"".to_string();
+    // for i in &req.tls.liste {
+    // 	requete=requete + &i.clone();
+    // }
+    //
+    // requete=requete + &"\", \"".to_string() + &req.tls.cyfaible.clone() + &"\", \"".to_string() + &req.tls.starttls.clone() + &"\", ".to_string() + &req.tls.note.to_string() + &");".to_string();
+	// println!("requete = {}", requete);
+	//
+    // let mut requete2=String::from("INSERT INTO domains (`domain`,`note`,`bimi.version`,`bimi.url_expediteur`,`bimi.url_politique`,`bimi.url_reputation`,`bimi.hash`,`bimi.s`,`certificate.signature_algorithm_server`,`certificate.IssuerDetails.city`,`certificate.IssuerDetails.state`,`certificate.IssuerDetails.locality`,`certificate.IssuerDetails.organization`,`certificate.IssuerDetails.common_name`,`certificate.ValidityDetails.not_before`,`certificate.ValidityDetails.not_after`,`certificate.ValidityDetails.is_valid`,`certificate.SubjectDetails.city`,`certificate.SubjectDetails.state`,`certificate.SubjectDetails.locality`,`certificate.SubjectDetails.organization`,`certificate.SubjectDetails.common_name`,`certificate.ExtensionsDetails.subject_alternative_names`,`certificate.signature_algorithm_intermediate`,`certificate.issuer_intermediate.city`,`certificate.issuer_intermediate.state`,`certificate.issuer_intermediate.locality`,`certificate.issuer_intermediate.organization`,`certificate.issuer_intermediate.common_name`,`certificate.validity_intermediate.not_before`,`certificate.validity_intermediate.not_after`,`certificate.validity_intermediate.is_valid`,`certificate.subject_intermediate.city`,`certificate.subject_intermediate.state`,`certificate.subject_intermediate.locality`,`certificate.subject_intermediate.organization`,`certificate.subject_intermediate.common_name`,`certificate.extensions_intermediate.subject_alternative_names`,`dane.forme_certificat`,`dane.signature_certificat`,`dane.signature_cle_publique`,`dane.presence_hash`,`dane.hash`,`dmarc.v`,`dmarc.p` ,`dmarc.sp`,`dmarc.pct`,`dmarc.ruf` ,`dmarc.rua`,`dmarc.ri`,`dmarc.rf`,`dmarc.aspf`,`dmarc.adkim`,`dmarc.fo`,`mta_sts.version`,`mta_sts.sn`,`spf.version`,`spf.mechanisms`,`spf.qualifier`,`spf.ip`,`spf.include` ,`spf.all` ,`tls_rpt.v`,`tls_rpt.rua`,`bimi.note`,`certificate.note`,`dane.note` ,`dmarc.note` ,`mta_sts.note`,`spf.note`,`tls_rpt.note`) VALUES ( \"");
+    // requete2= requete2 + &req.dns.domain.clone() + &"\", ".to_string() + &req.dns.note.to_string() + &",\" ".to_string() + &req.dns.bimi.version.clone() + &"\", \"".to_string() + &req.dns.bimi.url_expediteur.clone() + &"\", \"".to_string() + &req.dns.bimi.url_politique.clone() + &"\", \"".to_string() + &req.dns.bimi.url_reputation.clone()  + &"\", \"".to_string() +  &req.dns.bimi.hash.clone()  + &"\", \"".to_string() + &req.dns.bimi.s.clone() + &"\", \"".to_string() + &req.dns.certificate.signature_algorithm_server.clone()  + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.city.clone()  + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.common_name.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_before.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_after.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.is_valid.to_string() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.common_name.clone() + &"\", \"".to_string();
+    //
+    // for i in &req.dns.certificate.extensions_server.subject_alternative_names{
+    // 	requete2=requete2 + &i;
+    // }
+	//
+    //  requete2 = requete2 + &"\", \"".to_string() + &req.dns.certificate.signature_algorithm_intermediate.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.issuer_intermediate.common_name.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_before.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.not_after.clone() + &"\", \"".to_string() + &req.dns.certificate.validity_intermediate.is_valid.to_string() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.city.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.state.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.locality.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.organization.clone() + &"\", \"".to_string() + &req.dns.certificate.subject_intermediate.common_name.clone() + &"\", \"".to_string();
+	//
+	// for i in &req.dns.certificate.extensions_intermediate.subject_alternative_names
+	// {
+    // 	requete2=requete2 + &i;
+	// }
+	//
+	// requete2 = requete2 + &"\", \"".to_string() + &"\", \"".to_string() + &req.dns.dane.forme_certificat.clone() + &"\", \"".to_string() + &req.dns.dane.signature_certificat.to_string() + &"\", \"".to_string() + &req.dns.dane.signature_cle_publique.to_string() + &"\", \"".to_string() + &req.dns.dane.presence_hash.to_string() + &"\", \"".to_string() + &req.dns.dane.hash.clone() + &"\", \"".to_string() + &req.dns.dmarc.v.clone() + &"\", \"".to_string() + &req.dns.dmarc.p.clone()  + &"\", \"".to_string() + &req.dns.dmarc.sp.clone() + &"\", \"".to_string() + &req.dns.dmarc.pct.clone() + &"\", \"".to_string() + &req.dns.dmarc.ruf.clone()  + &"\", \"".to_string() + &req.dns.dmarc.rua.clone() + &"\", \"".to_string() + &req.dns.dmarc.ri.clone() + &"\", \"".to_string() + &req.dns.dmarc.rf.clone() + &"\", \"".to_string() + &req.dns.dmarc.aspf.clone() + &"\", \"".to_string() + &req.dns.dmarc.adkim.clone() + &"\", \"".to_string() + &req.dns.dmarc.fo.clone() + &"\", \"".to_string() + &req.dns.mta.version.clone() + &"\", \"".to_string() + &req.dns.mta.sn.clone() + &"\", \"".to_string() + &req.dns.spf.version.clone() + &"\", \"".to_string();
+	//
+    // for i in &req.dns.spf.mechanisms
+	// {
+    // 	requete2=requete2 + &i;
+    // }
+	//
+    // requete2 = requete2 + &"\", \"".to_string() + &req.dns.spf.qualifier.clone() + &"\", \"".to_string();
+	//
+    // for i in &req.dns.spf.ip
+	// {
+    // 	requete2=requete2 + &i;
+    // }
+	//
+	// requete2 = requete2 + &"\", \"".to_string();
+	// for i in &req.dns.spf.ip {
+    // 	requete2=requete2 + &i;
+    // }
+	//
+	// requete2 = requete2 + &"\", \"".to_string();
+	//
+	// for i in &req.dns.spf.include
+	// {
+    // 	requete2=requete2 + &i;
+	// }
+    // requete2 = requete2  + &"\", \"".to_string() + &req.dns.spf.all.clone()  + &"\", \"".to_string() + &req.dns.tls.v.clone() + &"\", \"".to_string() + &req.dns.tls.rua.clone() + &"\",".to_string() + &req.dns.bimi.note.to_string() + &", ".to_string() + &req.dns.certificate.note.to_string() + &", ".to_string() + &req.dns.dane.note.to_string()  + &", ".to_string() + &req.dns.dmarc.note.to_string()  + &", ".to_string() + &req.dns.mta.note.to_string() + &", ".to_string() + &req.dns.spf.note.to_string() + &", ".to_string() + &req.dns.tls.note.to_string() + &"); ".to_string();
+	//
+	// let mut pool = mysql::MySqlConnectOptions::new()
+    // 	.host("mysql.default")
+    // 	.username("ice_crawler_user")
+    // 	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
+    // 	.database("ice_crawler_DB")
+    // 	.connect().await.expect("Erreur lors de la connexion à la base de données");
+	//
+	// println!("requete = {}", requete);
+	// println!("requete2 = {}", requete2);
+	//
+    // sqlx::query(requete.as_str())
+    //     .execute(&mut pool)
+    //     .await.expect("Erreur lors de l'insertion dans la table 'servers'");
+    //
+    // sqlx::query(requete2.as_str())
+    //     .execute(&mut pool)
+    //     .await.expect("Erreur lors de l'insertion dans la table 'domains'");
 
 	return HttpResponse::Ok().body("ok");
 }
