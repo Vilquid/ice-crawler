@@ -591,6 +591,7 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse
     //     .execute(&mut pool)
     //     .await.expect("Erreur lors de l'insertion dans la table 'domains'");
 
+
 	return HttpResponse::Ok().body("ok");
 }
 
