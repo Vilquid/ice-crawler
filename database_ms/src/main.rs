@@ -23,7 +23,7 @@ use regex::Regex;
 
 
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DATAResult
 {
 	pub dns: DNSRecord,
@@ -31,7 +31,7 @@ pub struct DATAResult
 }
 
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct Retour{
 	certificat: String,
 	liste: Vec<String>,
@@ -44,7 +44,7 @@ pub struct Retour{
 
 
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DNSRecord
 {
 	pub domain: String,
@@ -58,7 +58,7 @@ pub struct DNSRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DMARCRecord
 {
 	pub v: String,
@@ -76,7 +76,7 @@ pub struct DMARCRecord
 }
 
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct SPFRecord
 {
 	pub version: String,
@@ -88,7 +88,7 @@ pub struct SPFRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DANERecord
 {
 	pub forme_certificat: String,
@@ -99,7 +99,7 @@ pub struct DANERecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct BIMIRecord
 {
 	pub version: String,
@@ -111,7 +111,7 @@ pub struct BIMIRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct MTARecord
 {
 	pub version: String,
@@ -119,7 +119,7 @@ pub struct MTARecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct TLSRecord
 {
 	pub v: String,
@@ -127,7 +127,7 @@ pub struct TLSRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct CertificateRecord
 {
 	pub domain: String,
@@ -144,7 +144,7 @@ pub struct CertificateRecord
 	pub note: f32,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct IssuerDetails
 {
 	pub city: String,
@@ -154,7 +154,7 @@ pub struct IssuerDetails
 	pub common_name: String,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct SubjectDetails
 {
 	pub city: String,
@@ -164,7 +164,8 @@ pub struct SubjectDetails
 	pub common_name: String,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct ValidityDetails
 {
 	pub not_before: String,
@@ -172,7 +173,7 @@ pub struct ValidityDetails
 	pub is_valid: bool,
 }
 
-#[derive(Deserialize,Serialize, Encode, Type)]
+#[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct ExtensionsDetails
 {
 	pub subject_alternative_names: Vec<String>,
@@ -181,7 +182,7 @@ pub struct ExtensionsDetails
 
 
 
-#[derive(Serialize, Deserialize, Encode, Type)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct Re<T>{
 	resultat: Vec<T>
 }
