@@ -392,7 +392,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 
 #[post("/")]
 async fn admission(req: Json<DATAResult>) -> HttpResponse {
-	println!("bougez-vous, j'arrive!");
+	println!("bougez-vous, j'arrive! {:?}", req);
     let test = req.tls.ip.clone();
     if test.eq("") {
         return HttpResponse::Ok().body("error empty data structure!!");
@@ -474,11 +474,6 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
     
     
     
-    
-    
-    /*let pool = mysql::MySqlPoolOptions::new()
-        .connect("mysql://ice_crawler_user:fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG@mysql.default")
-        .await;*/
         
       
       
@@ -574,9 +569,11 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
     	.execute(&mut pool)
         .await {
         Ok(_) => {
+		println!("it just works");
             return HttpResponse::Ok().body("ok");
         }
         Err(err) => {
+		println!("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
             return HttpResponse::Ok().body("c'est la merde!!!!");
         }
     }
