@@ -492,7 +492,7 @@ async fn bureaudesservs(req: Json<DATAResult>) {
      
      println!("jaj={:?}",jaj);
      println!("30");
-     bureaudomain(req);
+     bureaudomain(req).await;
 }
 
 async fn bureaudomain(req: Json<DATAResult>) {
@@ -670,7 +670,7 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
         return HttpResponse::Ok().body("error empty data structure!!");
     }
     println!("1");
-    bureaudesservs(req);
+    bureaudesservs(req).await;
     println!("2");
     return HttpResponse::Ok().body("it just works");
     
