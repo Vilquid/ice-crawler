@@ -61,11 +61,11 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 		
 
 	add=add+":25";
-	let mut pol=String::new();
+	let mut pol=String::from("");
 	// let domain = domain;
 	let mut vec: Vec<String> = vec![pol.clone(); 600];
 	let init="test";
-	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: Default::default(), note: 0, ip: ipa.clone()};
+	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: vec!["","","",""], note: 0, ip: ipa.clone()};
 	let mut juj=0;
 	let (tx, rx) = mpsc::channel::<Renvoi>();
 	pol.push_str("test");
@@ -131,7 +131,7 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 
 	match rep2 {
 		compare => {resultatsannalyse[positionanalyse].push_str("STARTTLS supporté");positionanalyse=1;},
-		_ => resultatsannalyse[positionanalyse].push_str("pas de starttls: serveur pourri"),
+		_ => resultatsannalyse[positionanalyse].push_str("pas de starttls: communications non chiffrées"),
 	}
 	if positionanalyse==0 {
 		println!("{:#?}",resultatsannalyse[0]);
