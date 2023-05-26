@@ -65,7 +65,7 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 	// let domain = domain;
 	let mut vec: Vec<String> = vec![pol.clone(); 600];
 	let init="test";
-	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: vec!["","","",""], note: 0, ip: ipa.clone()};
+	let mut fin=Retour{certificat: String::from(""), liste: vec.clone(), cyfaible: String::from(""), starttls: String::from("test"), versions: ["".to_string(),"".to_string(),"".to_string(),"".to_string()], note: 0, ip: ipa.clone()};
 	let mut juj=0;
 	let (tx, rx) = mpsc::channel::<Renvoi>();
 	pol.push_str("test");
