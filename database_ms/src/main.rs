@@ -391,17 +391,8 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 }
 
 
-#[post("/")]
-async fn admission(req: Json<DATAResult>) -> HttpResponse {
-	println!("bougez-vous, j'arrive! {:?}", req);
-    let test = req.tls.ip.clone();
-    if test.eq("") {
-        return HttpResponse::Ok().body("error empty data structure!!");
-    }
-    
-    
-    
-    let mut tlsliste=String::new();
+async fn bureaudesservs(req: Json<DATAResult>) {
+	let mut tlsliste=String::new();
     
     for i in &req.tls.liste {
     	tlsliste = tlsliste + &", ".to_string() + &i;
@@ -488,7 +479,7 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
         
         
     
-    match sqlx::query("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( ?,?,?,?,?,?,? ); INSERT INTO domains (`domain`,`note`,`bimi.version`,`bimi.url_expediteur`,`bimi.url_politique`,`bimi.url_reputation`,`bimi.hash`,`bimi.s`,`certificate.signature_algorithm_server`,`certificate.IssuerDetails.city`,`certificate.IssuerDetails.state`,`certificate.IssuerDetails.locality`,`certificate.IssuerDetails.organization`,`certificate.IssuerDetails.common_name`,`certificate.ValidityDetails.not_before`,`certificate.ValidityDetails.not_after`,`certificate.ValidityDetails.is_valid`,`certificate.SubjectDetails.city`,`certificate.SubjectDetails.state`,`certificate.SubjectDetails.locality`,`certificate.SubjectDetails.organization`,`certificate.SubjectDetails.common_name`,`certificate.ExtensionsDetails.subject_alternative_names`,`certificate.signature_algorithm_intermediate`,`certificate.issuer_intermediate.city`,`certificate.issuer_intermediate.state`,`certificate.issuer_intermediate.locality`,`certificate.issuer_intermediate.organization`,`certificate.issuer_intermediate.common_name`,`certificate.validity_intermediate.not_before`,`certificate.validity_intermediate.not_after`,`certificate.validity_intermediate.is_valid`,`certificate.subject_intermediate.city`,`certificate.subject_intermediate.state`,`certificate.subject_intermediate.locality`,`certificate.subject_intermediate.organization`,`certificate.subject_intermediate.common_name`,`certificate.extensions_intermediate.subject_alternative_names`,`dane.forme_certificat`,`dane.signature_certificat`,`dane.signature_cle_publique`,`dane.presence_hash`,`dane.hash`,`dmarc.v`,`dmarc.p` ,`dmarc.sp`,`dmarc.pct`,`dmarc.ruf` ,`dmarc.rua`,`dmarc.ri`,`dmarc.rf`,`dmarc.aspf`,`dmarc.adkim`,`dmarc.fo`,`mta_sts.version`,`mta_sts.sn`,`spf.version`,`spf.mechanisms`,`spf.qualifier`,`spf.ip`,`spf.include` ,`spf.all` ,`tls_rpt.v`,`tls_rpt.rua`,`bimi.note`,`certificate.note`,`dane.note` ,`dmarc.note` ,`mta_sts.note`,`spf.note`,`tls_rpt.note`) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? );")
+    let jaj = sqlx::query("INSERT INTO servers (`ip`, `domaine`, `tls.certificat`, `tls.liste`, `tls.cyfaible`, `tls.starttls`, `tls.note`) VALUES ( ?,?,?,?,?,?,? );")
     	.bind(&req.tls.ip.clone())
         .bind(&req.dns.domain.clone())
         .bind(&req.tls.certificat.clone())
@@ -496,6 +487,103 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
         .bind(&req.tls.cyfaible.clone())
         .bind(&req.tls.starttls.clone())
         .bind(&req.tls.note)
+    	.execute(&mut pool)
+        .await;
+     
+     println!("jaj={:?}",jaj);
+        
+     bureaudomain(req);
+}
+
+async fn bureaudomain(req: Json<DATAResult>) {
+	let mut tlsliste=String::new();
+    
+    for i in &req.tls.liste {
+    	tlsliste = tlsliste + &", ".to_string() + &i;
+    }
+    
+    let mut altnames=String::new();
+    
+    for i in &req.dns.certificate.extensions_server.subject_alternative_names {
+    	altnames = altnames + &", ".to_string() + &i;
+    }
+    
+    
+    
+    let mut altnames2=String::new();
+    
+    for i in &req.dns.certificate.extensions_intermediate.subject_alternative_names {
+    	altnames2 = altnames2 + &", ".to_string() + &i;
+    }
+    
+    let mut mechspf=String::new();
+    
+    for i in &req.dns.spf.mechanisms {
+    	mechspf = mechspf + &", ".to_string() + &i;
+    }
+    
+    
+    
+    let mut spfip=String::new();
+    
+    for i in &req.dns.spf.ip {
+    	spfip = spfip + &", ".to_string() + &i;
+    }
+    
+    
+    let mut spfinc=String::new();
+    
+    for i in &req.dns.spf.include {
+    	spfinc = spfinc + &", ".to_string() + &i;
+    }
+    
+    
+    
+    let mut altnames3=String::new();
+    
+    for i in &req.dns.certificate.extensions_intermediate.subject_alternative_names {
+    	altnames3 = altnames3 + &", ".to_string() + &i;
+    }
+    
+    
+    let mut spfip2=String::new();
+    
+    for i in &req.dns.spf.ip {
+    	spfip2 = spfip2 + &", ".to_string() + &i;
+    }
+    
+    
+    
+    let mut spfmech2=String::new();
+    
+    for i in &req.dns.spf.mechanisms {
+    	spfmech2 = spfmech2 + &", ".to_string() + &i;
+    }
+    
+    
+    let mut spfinc2=String::new();
+    
+    for i in &req.dns.spf.include {
+    	spfinc2 = spfinc2 + &", ".to_string() + &i;
+    }
+    
+    
+    
+    
+        
+      
+      
+      let mut pool = mysql::MySqlConnectOptions::new()
+    	.host("mysql.default")
+    	.username("ice_crawler_user")
+    	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
+    	.database("ice_crawler_DB")
+    	.connect().await.expect("defaut de connexion");
+        
+        
+        
+    
+    let jaj = sqlx::query("INSERT INTO domains (`domain`,`note`,`bimi.version`,`bimi.url_expediteur`,`bimi.url_politique`,`bimi.url_reputation`,`bimi.hash`,`bimi.s`,`certificate.signature_algorithm_server`,`certificate.IssuerDetails.city`,`certificate.IssuerDetails.state`,`certificate.IssuerDetails.locality`,`certificate.IssuerDetails.organization`,`certificate.IssuerDetails.common_name`,`certificate.ValidityDetails.not_before`,`certificate.ValidityDetails.not_after`,`certificate.ValidityDetails.is_valid`,`certificate.SubjectDetails.city`,`certificate.SubjectDetails.state`,`certificate.SubjectDetails.locality`,`certificate.SubjectDetails.organization`,`certificate.SubjectDetails.common_name`,`certificate.ExtensionsDetails.subject_alternative_names`,`certificate.signature_algorithm_intermediate`,`certificate.issuer_intermediate.city`,`certificate.issuer_intermediate.state`,`certificate.issuer_intermediate.locality`,`certificate.issuer_intermediate.organization`,`certificate.issuer_intermediate.common_name`,`certificate.validity_intermediate.not_before`,`certificate.validity_intermediate.not_after`,`certificate.validity_intermediate.is_valid`,`certificate.subject_intermediate.city`,`certificate.subject_intermediate.state`,`certificate.subject_intermediate.locality`,`certificate.subject_intermediate.organization`,`certificate.subject_intermediate.common_name`,`certificate.extensions_intermediate.subject_alternative_names`,`dane.forme_certificat`,`dane.signature_certificat`,`dane.signature_cle_publique`,`dane.presence_hash`,`dane.hash`,`dmarc.v`,`dmarc.p` ,`dmarc.sp`,`dmarc.pct`,`dmarc.ruf` ,`dmarc.rua`,`dmarc.ri`,`dmarc.rf`,`dmarc.aspf`,`dmarc.adkim`,`dmarc.fo`,`mta_sts.version`,`mta_sts.sn`,`spf.version`,`spf.mechanisms`,`spf.qualifier`,`spf.ip`,`spf.include` ,`spf.all` ,`tls_rpt.v`,`tls_rpt.rua`,`bimi.note`,`certificate.note`,`dane.note` ,`dmarc.note` ,`mta_sts.note`,`spf.note`,`tls_rpt.note`) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? );")
     	.bind(&req.dns.domain.clone())
     	.bind(&req.dns.note.to_string())
     	.bind(&req.dns.bimi.version.clone())
@@ -568,16 +656,26 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
     	.bind(&req.dns.spf.note.to_string())
     	.bind(&req.dns.tls.note.to_string())
     	.execute(&mut pool)
-        .await {
-        Ok(_) => {
-		println!("it just works");
-            return HttpResponse::Ok().body("ok");
-        }
-        Err(err) => {
-		println!("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH {:?}",err );
-            return HttpResponse::Ok().body("c'est la merde!!!!");
-        }
+        .await;
+        
+        println!("jaj={:?}",jaj);
+}
+
+
+#[post("/")]
+async fn admission(req: Json<DATAResult>) -> HttpResponse {
+	println!("bougez-vous, j'arrive! {:?}", req);
+    let test = req.tls.ip.clone();
+    if test.eq("") {
+        return HttpResponse::Ok().body("error empty data structure!!");
     }
+    
+    bureaudesservs(req);
+    
+    return HttpResponse::Ok().body("it just works");
+    
+    
+    
 }
 
 
