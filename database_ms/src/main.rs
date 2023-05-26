@@ -313,11 +313,12 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		let mut tamp=Vec::new();
 		println!("i={:?}",i);
 	    
-	    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = '?';")
-	    	.bind(&domaine)
-		.bind(&domaine2)
-	    	.fetch(&mut pool);
-		
+		    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = \"?\";")
+		    	.bind(&domaine)
+			.bind(&domaine2)
+		    	.fetch(&mut pool);
+	
+		println!("result");
 	    	while let Some(row) = result.next().await {
 	    		println!("log du while let");
 			tamp.push(row.expect("mais voilà c'était sûr en fait!"));
@@ -366,7 +367,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
         let mut fin = cidre.fin.clone();
         
     
-    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`ip` >= ? AND `servers`.`ip` <= ?;")
+    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`ip` >= \"?\" AND `servers`.`ip` <= \"?\";")
     	.bind(&debut)
 	.bind(&fin)
     	.fetch(&mut pool);
