@@ -309,7 +309,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
         for i in &req.domain {
 		let mut domaine = i.clone();
 		let mut domaine2 = i.clone();
-		
+		println!("i={:?}",i);
 	    
 	    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = \"?\";")
 	    	.bind(&domaine)
@@ -317,7 +317,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	    	.fetch(&mut pool);
 		
 	    	while let Some(row) = result.next().await {
-	    	
+	    		println!("log du while let");
 			tamp.push(row.expect("mais voilà c'était sûr en fait!"));
 	    	}
 	    	for j in &tamp{
