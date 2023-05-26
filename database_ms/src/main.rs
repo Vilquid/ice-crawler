@@ -316,7 +316,6 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		.bind(&domaine2)
 	    	.fetch(&mut pool);
 		
-	    println!("result={:?}",result);
 	    	while let Some(row) = result.next().await {
 	    	
 			tamp.push(row.expect("mais voilà c'était sûr en fait!"));
@@ -593,8 +592,7 @@ async fn main() -> std::io::Result<()> {
     		.service(admission)
             	.service(recupcidr)
             	.service(recupdomain)
-            	.service(ajoututilisateur)
-            	.service(rechercheutilisateur)
+            	
     })
     .bind(("0.0.0.0", 9009)).expect("REASON")
     .run()
