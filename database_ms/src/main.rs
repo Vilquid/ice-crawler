@@ -574,7 +574,7 @@ async fn admission(req: Json<DATAResult>) -> HttpResponse {
             return HttpResponse::Ok().body("ok");
         }
         Err(err) => {
-		println!("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
+		println!("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH {:?}",err );
             return HttpResponse::Ok().body("c'est la merde!!!!");
         }
     }
