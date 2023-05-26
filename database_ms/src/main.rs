@@ -216,120 +216,7 @@ pub struct IpRange
 		
 		
 		
-#[get("/users")]
-async fn rechercheutilisateur(req: HttpRequest) -> HttpResponse {
-	println!("bougez-vous, j'arrive!");
-	let requet = req.query_string();
-    if requet.eq("") {
-        return HttpResponse::Ok().body("rien reçu");
-    }
-    
-    let mut caracteristique = String::new();
-    let mut select = String::new();
-    let mut controle = String::from("&");
-    let mut flag=0;
-    for i in requet.chars(){
-        if i.eq(&'=') {
-            controle = '='.to_string();
-            caracteristique =  caracteristique + &i.to_string();
-            flag=0;
-        }
-        else if i.eq(&'&') {
-            if flag == 2 {
-                caracteristique = caracteristique + &"\"".to_string();
-            }
-            controle = '&'.to_string();
-            caracteristique =  caracteristique + &" AND ".to_string();
-            select = select + &", ".to_string();
-        }
-        else if controle.eq("&") {
-            select = select + &i.to_string();
-            caracteristique =  caracteristique + &i.to_string();
-        }
-        else if controle.eq("="){
-            if flag == 0 {
-                if i.eq(&'0') || i.eq(&'1') || i.eq(&'2') || i.eq(&'3') || i.eq(&'4') || i.eq(&'5') || i.eq(&'6') || i.eq(&'7') || i.eq(&'8') || i.eq(&'9') || i.eq(&'T') {
-                    flag=1;
-                }
-                else{
-                    flag = 2;
-                    caracteristique = caracteristique + &"\"".to_string();
-                }
-            }
-                    
-            caracteristique =  caracteristique + &i.to_string();
-        }
-        //println!("{select}");
-    }
-    if flag == 2 {
-        caracteristique = caracteristique + &"\"".to_string();
-    }
-    //let mut ordre=select.clone();
-    select = "SELECT ".to_string() + &select + &" FROM users WHERE ".to_string() + &caracteristique.clone();
-        
-        
-    let mut conn = mysql::MySqlConnectOptions::new()
-    	.host("mysql.default")
-    	.username("ice_crawler_user")
-    	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
-    	.database("ice_crawler_DB")
-    	.connect().await.expect("skill issue");
-    
-    let mut result = sqlx::query(requet)
-        .fetch(&mut conn);
-    
-    
-    
-    let mut tamp=Vec::new();
-    let mut reponse=String::new();
-    
-    while let Some(row) = result.next().await {
-    	
-        tamp.push(row.expect("mais voilà c'était sûr en fait!"));
-    }
-    for j in tamp{
-    	for i in j.columns(){
-    		reponse=reponse + j.get(i.ordinal());
-    	}
-    	
-    }
-    
-    let retour = Re{resultat: vec![reponse]};
-    
-    
-    
-    
-    let renvoi = serde_json::to_string(&retour);
-    
-    
-    
-    return HttpResponse::Ok().body(renvoi.expect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh!!!!").clone());
-}
 
-#[post("/users")]
-async fn ajoututilisateur(req: Json<Utilisateur>) -> HttpResponse {
-	println!("bougez-vous, j'arrive!");
-	let test = req.hash.clone();
-   	if test.eq("") {
-        	return HttpResponse::Ok().body("error empty data structure!!");
-    	}
-    	
-    	let mut requete=String::from("INSERT INTO users (mail, hash, sel) VALUES ( "); 
-    	requete=requete + &req.mail.clone() + &",".to_string() + &req.hash.clone() + &",".to_string() + &req.sel.clone() + &");".to_string();
-    	let mut pool = mysql::MySqlConnectOptions::new()
-    		.host("mysql.default")
-    		.username("ice_crawler_user")
-    		.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
-    		.database("ice_crawler_DB")
-    		.connect().await.expect("skill issue");
-        
-        
-    	sqlx::query(requete.as_str())
-        	.execute(&mut pool)
-        	.await.expect("bruh");
-       
-       return HttpResponse::Ok().body("ok");
-}
 
 
 fn parse_cidr(cidr: &str) -> Result<(IpAddr, u8)>
@@ -407,6 +294,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	if test[0].eq("") {
 		return HttpResponse::Ok().body("rien reçu");
 	}
+	println!("test={:?}",test);
 	let mut pool = mysql::MySqlConnectOptions::new()
     	.host("mysql.default")
     	.username("ice_crawler_user")
@@ -428,7 +316,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		.bind(&domaine2)
 	    	.fetch(&mut pool);
 		
-	    
+	    println!("result={:?}",result);
 	    	while let Some(row) = result.next().await {
 	    	
 			tamp.push(row.expect("mais voilà c'était sûr en fait!"));
@@ -436,6 +324,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	    	for j in &tamp{
 	    		for i in j.columns(){
 	    			reponse=reponse + j.get(i.ordinal());
+				println!("reponse={:?}",reponse);
 	    		}
 	    	
 	    	}
