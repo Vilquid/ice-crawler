@@ -604,8 +604,6 @@ async fn main() -> std::io::Result<()> {
     		.service(admission)
             	.service(recupcidr)
             	.service(recupdomain)
-            	.service(ajoututilisateur)
-            	.service(rechercheutilisateur)
     })
     .bind(("0.0.0.0", 9009)).expect("REASON")
     .run()
