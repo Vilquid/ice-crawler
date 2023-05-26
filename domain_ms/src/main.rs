@@ -34,7 +34,7 @@ async fn service(req: Json<Debut>) -> HttpResponse {
 	for i in &req.domaine {
 		let mut reponse = mx_records(&i.to_string()).await;
 		let url = format!("http://data.default");
-		let mut payload = serde_json::to_string(&i).unwrap();
+		let mut payload = serde_json::to_string(&reponse).unwrap();
 		let resp = reqwest::Client::new()
 		    .post(&url)
 		    .header("Content-Type", "application/json")
