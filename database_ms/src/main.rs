@@ -303,15 +303,16 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
     	.connect().await.expect("defaut de connexion");
         
         
-        let mut tamp=Vec::new();
+       
 	let mut reponse=String::new();
 		
         for i in &req.domain {
 		let mut domaine = i.clone();
 		let mut domaine2 = i.clone();
+		let mut tamp=Vec::new();
 		println!("i={:?}",i);
 	    
-	    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = \"?\";")
+	    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = '?';")
 	    	.bind(&domaine)
 		.bind(&domaine2)
 	    	.fetch(&mut pool);
