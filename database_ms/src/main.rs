@@ -317,7 +317,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = ?;")
 		    	.bind(&domaine)
 			.bind(&domaine2)
-		    	.fetch_all(&mut pool);
+		    	.fetch(&mut pool);
 	
 		println!("result");
 		
