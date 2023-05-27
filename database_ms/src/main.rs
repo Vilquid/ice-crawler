@@ -183,10 +183,10 @@ pub struct ExtensionsDetails
 
 
 
-/*#[derive(Serialize, Deserialize, Encode, Type, Debug)]
+#[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct Re{
 	resultat: Vec<DATAResult>
-}*/
+}
 
 
 #[derive(Serialize, Deserialize, Encode, Type)]
@@ -306,6 +306,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
         
         
 	let mut donnees: Vec<DATAResult> = Vec::new();
+	let mut re = Re { resultat: vec![DATAResult {tls: Retour {certificat: String::new(), liste: Vec::new(), cyfaible: String::new(), starttls: String::new(), versions: ["fail".to_string(),"fail".to_string(),"fail".to_string(),"fail".to_string()], note: 0 as u16, ip: String::new() }, dns: DNSRecord { domain: String::new(), note: 0 as f32, dmarc: DMARCRecord { v: String::new(), p: String::new(), sp: String::new(), pct: String::new(), ruf: String::new(), rua: String::new(), ri: String::new(), rf: String::new(), aspf: String::new(), adkim: String::new(), fo: String::new(), note: 0 as f32 } , spf: SPFRecord { version: String::new(), mechanisms: Vec::new(), qualifier: String::new(), ip: Vec::new(), include: Vec::new(), all: String::new(), note: 0 as f32 } , dane : DANERecord { forme_certificat: String::new(), signature_certificat: false, signature_cle_publique: false, presence_hash: false, hash: String::new(), note: 0 as f32 } , bimi: BIMIRecord { version: String::new(), url_expediteur: String::new(), url_politique: String::new(), url_reputation: String::new(), hash: String::new(), s: String::new(), note: 0 as f32 } , mta: MTARecord { version: String::new(), sn: String::new(), note: 0 as f32 } , tls: TLSRecord { v: String::new(), rua: String::new(), note: 0 as f32 } , certificate : CertificateRecord { domain: String::new(), signature_algorithm_server: String::new(), issuer_server: IssuerDetails { city: String::new(), state: String::new(), locality: String::new(), organization: String::new(), common_name: String::new() } , validity_server: ValidityDetails { not_before: String::new(), not_after: String::new(), is_valid: false } , subject_server: SubjectDetails { city: String::new(), state: String::new(), locality: String::new(), organization: String::new(), common_name: String::new() } , extensions_server: ExtensionsDetails { subject_alternative_names: Vec::new() } , signature_algorithm_intermediate: String::new(), issuer_intermediate: IssuerDetails { city: String::new(), state: String::new(), locality: String::new(), organization: String::new(), common_name: String::new() } , validity_intermediate: ValidityDetails { not_before: String::new(), not_after: String::new(), is_valid: false } , subject_intermediate: SubjectDetails { city: String::new(), state: String::new(), locality: String::new(), organization: String::new(), common_name: String::new() } , extensions_intermediate: ExtensionsDetails { subject_alternative_names: Vec::new() } , note: 0 as f32 } /*, note: row.try_get("domains.note").expect("recuperation ratée")*/ } }] };
 		
         for i in &req.domain {
 		let mut domaine = i.clone();
@@ -316,7 +317,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		    let mut result = sqlx::query("SELECT * FROM servers INNER JOIN domains WHERE `servers`.`domaine` = `domains`.`domain` AND `servers`.`domaine` = \"?\";")
 		    	.bind(&domaine)
 			.bind(&domaine2)
-		    	.fetch(&mut pool);
+		    	.fetch_all(&mut pool);
 	
 		println!("result");
 		
