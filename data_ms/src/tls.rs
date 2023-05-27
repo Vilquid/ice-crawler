@@ -924,6 +924,27 @@ pub(crate) fn tls(mut add: String, domain: String) -> Retour {
 	println!("fin.liste={:?}",fin.liste);
 	println!("la note={:?}",fin.note);
 	println!("ip={:?}",fin.ip);
+	
+	
+	//partie nettoyage de la structure
+	
+	if fin.cyfaible.eq("test") {
+		fin.cyfaible = "".to_string();
+	}
+	
+	let mut parkour = Vec::new();
+	for i in &fin.liste {
+		if i.ne("test") {
+			parkour.push(i.clone());
+		}
+	}
+	
+	fin.liste = parkour;
+	
+	println!("cyfaible={:?}",fin.cyfaible);
+	println!("fin.liste={:?}",fin.liste);
+	println!("la note={:?}",fin.note);
+	println!("ip={:?}",fin.ip);
 
 	return fin;
 
