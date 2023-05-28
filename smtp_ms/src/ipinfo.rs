@@ -16,10 +16,14 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	ip_25.push_str(":25");
 
 	let mut stream = TcpStream::connect_timeout(&ip_25.parse().unwrap(), Duration::from_secs(1))?;
+	
+	if stream.peer_addr()?.ip().is_loopback() {
+	    return Err("La connexion a échoué".into());
+	}
 
 	stream.write_all(String::from("netcat ".to_owned() + &*ip +" 25").as_bytes())?;
 
-	let mut buffer = [0; 512];
+	let mut buffer = [0; 4096];
 	stream.read(&mut buffer)?;
 
 	let reponse = String::from_utf8_lossy(&buffer).to_string();
@@ -38,6 +42,12 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 			break;
 		}
 	}
+	
+	
+	let test1 = contains_tld(&"shoottothrill");
+	let test2 = contains_tld(&".abb");
+	
+	println!("testfail = {:?} \ntesttrue = {:?}",test1,test2);
 
 	// return a if it's not empty, else return "vide"
 	if a.len() != 0
