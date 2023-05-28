@@ -326,8 +326,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		    
 		    
 		   let mut oui: f32 = row.try_get("tls.note").expect("recuperation ratée");
-		    let mut boolist: Vec<String> = vec![row.try_get("dane.signature_certificat").expect("recuperation ratée"),row.try_get("dane.signature_cle_publique").expect("recuperation ratée"),row.try_get("dane.presence_hash").expect("recuperation ratée")];
-		    let signature = if boolist[0].eq("true") || boolist[0].eq("TRUE") { true as bool } else { false as bool };
+		    let mut boolist: Vec<String> = vec![row.try_get("dane.signature_certificat").expect("recuperation ratée"),row.try_get("dane.signature_cle_publique").expect("recuperation ratée"),row.try_get("dane.presence_hash").expect("recuperation ratée"), row.try_get("certificate.ValidityDetails.is_valid").expect("recuperation ratée"), row.try_get("certificate.validity_intermediate.is_valid").expect("recuperation ratée")];		    let signature = if boolist[0].eq("true") || boolist[0].eq("TRUE") { true as bool } else { false as bool };
 		    let clepub = if boolist[1].eq("true") || boolist[1].eq("TRUE") { true as bool } else { false as bool };
 		    let hashi = if boolist[2].eq("true") || boolist[2].eq("TRUE") { true as bool } else { false as bool };
 		    let isvalid1 = if boolist[3].eq("true") || boolist[3].eq("TRUE") { true as bool } else { false as bool };
