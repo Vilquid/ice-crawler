@@ -27,6 +27,8 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	stream.read(&mut buffer)?;
 
 	let reponse = String::from_utf8_lossy(&buffer).to_string();
+	
+	println!("reponse = {:?}",reponse);
 
 	let mut a = String::new();
 	// split the string by " "
@@ -44,7 +46,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	}
 	
 	
-	let test1 = contains_tld(&"shoottothrill");
+	let test1 = contains_tld(&"666");
 	let test2 = contains_tld(&".abb");
 	
 	println!("testfail = {:?} \ntesttrue = {:?}",test1,test2);
