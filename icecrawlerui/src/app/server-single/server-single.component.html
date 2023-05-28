@@ -43,7 +43,7 @@
 					<p class="note"><strong>{{ server.dns.spf.note }}</strong></p>
 				</h5>
 				<div [attr.id]="getCollapseId('Two')" class="accordion-collapse collapse " [attr.aria-labelledby]="getHeadingId('Two')"
-					data-bs-parent="getParentIdh()">
+					[attr.data-bs-parent]="getParentIdh()">
 					<div class="accordion-body">
 
 						<p><strong>version:</strong> {{ server.dns.spf.version }}</p>
