@@ -35,8 +35,9 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	let reponse = String::from_utf8_lossy(&buffer).to_string();*/
 	
 	
+	println!("ip = {:?}", ip);
 	let mut calcul=String::from("HELO ".to_owned() + "\r\n");
-	let mut warp=TcpStream::connect(&ip);
+	let mut warp=TcpStream::connect(ip);
 	let mut jaj=1;
 	match warp {
 		Err(_) => {println!("tentative échouée, reconnection en cours...");}
@@ -44,7 +45,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	}
 	while jaj != 0 {
 		println!("tentative échouée, reconnection en cours...");
-		warp=TcpStream::connect(&ip);
+		warp=TcpStream::connect(ip);
 		match warp {
 			Err(_) => {println!("tentative échouée, reconnection en cours...");jaj+=1;}
 			Ok(_) => {jaj=0;}
