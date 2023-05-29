@@ -78,7 +78,20 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
 	rep1=(&String::from_utf8_lossy(&temp2 [..])).to_string();
 	println!("message reçu: {}",rep1);
-	
+	temp2 = [0;10000];
+	thread::sleep(Duration::from_secs(2));
+	calcul=String::from("STARTTLS\r\n");
+	rep1=String::from("");
+	warp.as_ref().expect("un truc").write(calcul.as_bytes()).unwrap();
+	warp.as_ref().expect("deux trucs").flush().unwrap();
+	println!("envoi du starttls...");
+	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
+	rep1=(&String::from_utf8_lossy(&temp2 [..])).to_string();
+	println!("message reçu: {}",rep1);
+	temp2 = [0;10000];
+	thread::sleep(Duration::from_secs(2));
+	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
+	println!("reponse au starttls {}",&String::from_utf8_lossy(&temp2 [..]));
 	let mut alestorm = &String::from_utf8_lossy(&temp2 [..]);
 	
 	//println!("reponse = {:?}",reponse);
