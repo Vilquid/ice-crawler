@@ -112,7 +112,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	let test1 = contains_tld(&"666");
 	let test2 = contains_tld(&".abb");
 	
-	println!("testfail = {:?} \ntesttrue = {:?}",test1,test2);
+	println!("testfail = {:?} \ntesttrue = {:?}\na = {:?}",test1,test2,a);
 
 	// return a if it's not empty, else return "vide"
 	if a.len() != 0
