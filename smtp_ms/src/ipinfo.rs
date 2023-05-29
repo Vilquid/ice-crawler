@@ -131,7 +131,9 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 		}
 		posi = posi + 1;
 	}
-	debut = debut + 1;
+	if debut != 0 {
+		debut = debut + 1;
+	}
 	posi = 0;
 	let mut b = String::new();
 	for j in a.chars() {
