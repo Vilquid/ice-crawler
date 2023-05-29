@@ -111,13 +111,43 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	
 	let test1 = contains_tld(&"666");
 	let test2 = contains_tld(&".abb");
+	let mut fin = 0;
+	let mut debut = 0;
+	let mut posi = 0;
+	for i in a.chars() {
+		if i.to_string().eq(".")  {
+			fin = posi;
+		}
+		 
+		posi = posi + 1;
+	}
+	posi = 0;
+	for j in a.chars() {
+		if posi==fin {
+			break;
+		}
+		else if j.to_string().eq(".") {
+			debut = posi;
+		}
+		posi = posi + 1;
+	}
+	debut = debut + 1;
+	posi = 0;
+	let mut b = String::new();
+	for j in a.chars() {
+		if posi >= debut {
+			b = b + j.to_string().as_str();
+		}
+		posi = posi + 1;
+	}
 	
-	println!("testfail = {:?} \ntesttrue = {:?}\na = {:?}",test1,test2,a);
+	
+	println!("testfail = {:?} \ntesttrue = {:?}\na= {:?}\nb={:?}",test1,test2,a,b);
 
 	// return a if it's not empty, else return "vide"
 	if a.len() != 0
 	{
-		Ok(a)
+		Ok(b)
 	}
 	else
 	{
