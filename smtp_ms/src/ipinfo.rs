@@ -1,7 +1,13 @@
 use std::error::Error;
 use std::io::{Read, Write};
-use std::net::TcpStream;
 use std::time::{Duration, Instant};
+use std::io::prelude::*;
+use std::net::{TcpStream,Shutdown};
+use std::thread;
+use std::sync::mpsc;
+use std::convert::TryInto;
+use std::process::Termination;
+use std::process::ExitCode;
 
 
 /// # Brief
@@ -30,7 +36,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	
 	
 	let mut calcul=String::from("HELO ".to_owned() + "\r\n");
-	let mut warp=TcpStream::connect(&add);
+	let mut warp=TcpStream::connect(&ip);
 	let mut jaj=1;
 	match warp {
 		Err(_) => {println!("tentative échouée, reconnection en cours...");}
@@ -38,7 +44,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	}
 	while jaj != 0 {
 		println!("tentative échouée, reconnection en cours...");
-		warp=TcpStream::connect(&add);
+		warp=TcpStream::connect(&ip);
 		match warp {
 			Err(_) => {println!("tentative échouée, reconnection en cours...");jaj+=1;}
 			Ok(_) => {jaj=0;}
@@ -48,6 +54,7 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 		}
 	}
 	println!("mise en place de la cellule d'écoute");
+	let mut juj = 0;
 	let mut status=warp.as_ref().expect("un truc").write(calcul.as_bytes());
 	match status {
 		Err(_) => juj=1,
