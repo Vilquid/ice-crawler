@@ -12,7 +12,7 @@ use std::time::{Duration, Instant};
 /// Retourne le nom de domaine de type *String* associé à l'adresse IP.
 pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 {
-	let mut ip_25 = ip.clone().to_string();
+	/*let mut ip_25 = ip.clone().to_string();
 	ip_25.push_str(":25");
 
 	let mut stream = TcpStream::connect_timeout(&ip_25.parse().unwrap(), Duration::from_secs(1))?;
@@ -26,13 +26,68 @@ pub(crate) fn ip_info(ip: &str) -> Result<String, Box<dyn Error>>
 	let mut buffer = [0; 4096];
 	stream.read(&mut buffer)?;
 
-	let reponse = String::from_utf8_lossy(&buffer).to_string();
+	let reponse = String::from_utf8_lossy(&buffer).to_string();*/
 	
-	println!("reponse = {:?}",reponse);
+	
+	let mut calcul=String::from("HELO ".to_owned() + "\r\n");
+	let mut warp=TcpStream::connect(&add);
+	let mut jaj=1;
+	match warp {
+		Err(_) => {println!("tentative échouée, reconnection en cours...");}
+		Ok(_) => {jaj=0;}
+	}
+	while jaj != 0 {
+		println!("tentative échouée, reconnection en cours...");
+		warp=TcpStream::connect(&add);
+		match warp {
+			Err(_) => {println!("tentative échouée, reconnection en cours...");jaj+=1;}
+			Ok(_) => {jaj=0;}
+		}
+		if jaj >= 10 {
+			break;
+		}
+	}
+	println!("mise en place de la cellule d'écoute");
+	let mut status=warp.as_ref().expect("un truc").write(calcul.as_bytes());
+	match status {
+		Err(_) => juj=1,
+		Ok(_) => (),
+	}
+	while juj == 1 {
+		status=warp.as_ref().expect("un truc").write(calcul.as_bytes());
+		match status {
+			Err(_) => juj=1,
+			Ok(_) => juj=0,
+		}
+	}
+	warp.as_ref().expect("deux trucs").flush().unwrap();
+	println!("message envoyé");
+	let mut temp2 = [0;10000];
+	let mut rep1=String::new();
+	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
+	rep1=(&String::from_utf8_lossy(&temp2 [..])).to_string();
+	println!("message reçu: {}",rep1);
+	temp2 = [0;10000];
+	thread::sleep(Duration::from_secs(2));
+	calcul=String::from("STARTTLS\r\n");
+	rep1=String::from("");
+	warp.as_ref().expect("un truc").write(calcul.as_bytes()).unwrap();
+	warp.as_ref().expect("deux trucs").flush().unwrap();
+	println!("envoi du starttls...");
+	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
+	rep1=(&String::from_utf8_lossy(&temp2 [..])).to_string();
+	println!("message reçu: {}",rep1);
+	temp2 = [0;10000];
+	thread::sleep(Duration::from_secs(2));
+	warp.as_ref().expect("reason").read(&mut temp2).unwrap();
+	println!("reponse au starttls {}",&String::from_utf8_lossy(&temp2 [..]));
+	let mut alestorm = &String::from_utf8_lossy(&temp2 [..]);
+	
+	//println!("reponse = {:?}",reponse);
 
 	let mut a = String::new();
 	// split the string by " "
-	let words: Vec<&str> = reponse.split(' ').collect();
+	let words: Vec<&str> = alestorm.split(' ').collect(); //reponse.split(' ').collect();
 
 	for word in words
 	{
