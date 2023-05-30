@@ -9,18 +9,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent {
   username = '';
   password = '';
-  //errorMessage: any;
   message='';
 
   constructor(private userService: UserService,private snackBar: MatSnackBar) {
   }
 
   login() {
-    /*this.userService.login(this.username, this.password)
-      .subscribe(
-        () => console.log('User logged successfully'),
-        (error: any) => console.error(error),
-      );*/
+
 
     this.userService.login(this.username, this.password).subscribe(
 
