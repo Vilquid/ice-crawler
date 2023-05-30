@@ -8,7 +8,7 @@ diesel::table! {
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, AsExpression, FromSqlRow)]
-#[sql_type = "diesel::sql_types::Varchar"]
+#[diesel(sql_type = diesel::sql_types::Varchar)]
 struct Username(String);
 
 impl Username {

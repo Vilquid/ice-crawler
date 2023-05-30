@@ -4,33 +4,20 @@ extern crate diesel;
 pub mod schema;
 pub mod models;
 
-use std::env;
-use diesel::sql_types::Varchar;
-use jsonwebtoken::{encode, decode, Header, Algorithm, Validation, EncodingKey, DecodingKey};
+use jsonwebtoken::{encode, Header, EncodingKey};
 use actix_cors::Cors;
 use actix_web::{HttpServer, App, web, HttpResponse, Responder, http::header, post};
 use actix_web::web::Data;
 use actix_identity::{Identity, CookieIdentityPolicy, IdentityService};
 use actix_web::middleware::Logger;
-use aes_gcm::aead::{Aead, OsRng};
-use aes_gcm::aead::rand_core::RngCore;
-use aes_gcm::{Aes256Gcm, KeyInit, Nonce};
-use aes_gcm::aes::Aes256;
-use argonautica::{Hasher, Verifier};
 use diesel::prelude::*;
 use diesel::pg::PgConnection;
 use diesel::{r2d2::ConnectionManager};
 use serde::{Deserialize, Serialize};
-use base64;
-use base64::Engine;
-use base64::engine::general_purpose;
-
 
 type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
 
 use dotenv::dotenv;
-use generic_array::GenericArray;
-use rand::thread_rng;
 
 use models::{User, NewUser, LoginUser};
 use crate::models::dechiffrement;
@@ -83,7 +70,7 @@ struct UsernameEmailCheck {
     email_available: bool,
 }
 
-async fn check_username_email(data: web::Json<UsernameEmailCheck>, pool: web::Data<Pool>) -> Result<HttpResponse, ServerError> {
+async fn check_username_email(data: web::Json<UsernameEmailCheck>, pool: Data<Pool>) -> Result<HttpResponse, ServerError> {
     use schema::users::dsl::*;
 
     let username_to_check = &data.username;
@@ -226,7 +213,7 @@ async fn main() -> std::io::Result<()> {
         .expect("DATABASE_URL must be set");
 
     let manager = ConnectionManager::<PgConnection>::new(database_url);
-    let pool = r2d2::Pool::builder().build(manager)
+    let pool = Pool::builder().build(manager)
         .expect("Failed to create postgres pool.");
 
 

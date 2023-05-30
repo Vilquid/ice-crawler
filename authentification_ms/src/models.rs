@@ -1,23 +1,13 @@
 use std::env;
-
 use super::schema::{users};
-use aes_gcm::aead::OsRng;
 use diesel::{Queryable, Insertable};
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use dotenv::dotenv;
 use argonautica::{Hasher, Verifier};
-use argon2::{self, Config};
-use sha3::{Digest, Sha3_512};
-use aes_gcm::{Key};
 use aes_gcm::{
     aead::{Aead, KeyInit},
     Aes256Gcm, Nonce,
 };
-use rand::{Rng, thread_rng};
-use generic_array::{GenericArray, sequence::GenericSequence};
-use generic_array::typenum::{U12, U32, U48, U256};
-use crypto::symmetriccipher::BlockEncryptor;
-use rand::RngCore;
 use base64;
 use base64::Engine;
 use base64::engine::general_purpose;
@@ -41,8 +31,8 @@ pub struct NewUser {
 }
 
 pub fn dechiffrement(password_browser: String, mut password_db: String) -> bool {
-    let mut key_bytes = env::var("SECRET_KEY").unwrap();
-    let mut nonce_bytes = env::var("NONCE").unwrap();
+    let key_bytes = env::var("SECRET_KEY").unwrap();
+    let nonce_bytes = env::var("NONCE").unwrap();
     let nonce = Nonce::from_slice(nonce_bytes.as_bytes());
 
 
@@ -82,12 +72,12 @@ impl NewUser {
 
         // Création d'un nonce unique
         //let nonce = rng.gen();
-        let mut nonce_bytes = env::var("NONCE").unwrap();
+        let nonce_bytes = env::var("NONCE").unwrap();
         let nonce = Nonce::from_slice(nonce_bytes.as_bytes());
 
 
         // Chiffrement du hash avec AES-GCM
-        let mut key_bytes = env::var("SECRET_KEY").unwrap();
+        let key_bytes = env::var("SECRET_KEY").unwrap();
         let cipher = Aes256Gcm::new_from_slice(key_bytes.as_bytes()).unwrap();
         let ciphertext = cipher.encrypt(&nonce, hash.as_bytes()).unwrap();
 
