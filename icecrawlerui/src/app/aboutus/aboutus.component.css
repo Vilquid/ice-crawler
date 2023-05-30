@@ -27,14 +27,14 @@
   .member img{
     width: 60%;
   }
-  
-  
+
+
   .rowteam{
     margin-left:20px;
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   .team .member .member-img {
     position: relative;
     overflow: hidden;
@@ -43,28 +43,28 @@
   .team .member .member-info {
     padding: 25px 15px;
   }
-  
+
   .team .member .member-info h4 {
     font-weight: 700;
     margin-bottom: 5px;
     font-size: 20px;
     color: #0b132c;
   }
-  
+
   .team .member .member-info span {
     display: block;
     font-size: 15px;
     font-weight: 600;
     color: #0b132c;
   }
-  
+
   .team .member .member-info p {
     font-style: italic;
     font-size: 14px;
     line-height: 26px;
     color: #777777;
   }
-  
+
 
   .member img{
     width:70%;
@@ -76,6 +76,10 @@
 
 
   /*Espacer les elements de la liste*/
-  li:not(:last-child) { 
-    margin-bottom: 1%;  
+  li:not(:last-child) {
+    margin-bottom: 1%;
  }
+
+
+
+

@@ -19,7 +19,7 @@ import { UserService } from '../service/UserService';
 
                 <li><a routerLink="/search" class="hover-underline-animation">Recherche</a></li>
 
-                <li><a routerLink="/undefined" class="hover-underline-animation">A propos</a></li>
+                <li><a routerLink="/aboutus" class="hover-underline-animation">A propos</a></li>
 
                 <li *ngIf="userService.isLoggedIn()">
                   <button (click)="logout()" class="btn btn-danger">Logout</button>

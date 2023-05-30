@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       ])
     }, {
       validators: [],
-      //asyncValidators: this.submitted ? [this.usernameAndEmailValidator.bind(this)] : []
+
     });
   }
 
