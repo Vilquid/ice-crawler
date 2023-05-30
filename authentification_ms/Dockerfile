@@ -10,7 +10,6 @@ cargo install diesel_cli --no-default-features --features postgres
 WORKDIR /usr/src/authentification_ms
 COPY Cargo.toml Cargo.lock .env diesel.toml ./
 COPY src ./src
-COPY templates ./templates
 RUN cargo build --release
 
 EXPOSE 9008
