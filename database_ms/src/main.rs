@@ -23,14 +23,12 @@ use regex::Regex;
 use futures::TryStreamExt;
 
 
-
 #[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DATAResult
 {
 	pub dns: DNSRecord,
 	pub tls: Retour,
 }
-
 
 #[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct Retour{
@@ -42,8 +40,6 @@ pub struct Retour{
 	note: u16,
 	ip: String,
 }
-
-
 
 #[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct DNSRecord
@@ -75,7 +71,6 @@ pub struct DMARCRecord
 	pub fo: String,
 	pub note: f32,
 }
-
 
 #[derive(Deserialize,Serialize, Encode, Type, Debug)]
 pub struct SPFRecord
@@ -180,14 +175,10 @@ pub struct ExtensionsDetails
 	pub subject_alternative_names: Vec<String>,
 }
 
-
-
-
 #[derive(Serialize, Deserialize, Encode, Type, Debug)]
 pub struct Re{
 	resultat: Vec<DATAResult>
 }
-
 
 #[derive(Serialize, Deserialize, Encode, Type)]
 pub struct Utilisateur{
@@ -212,13 +203,6 @@ pub struct IpRange
 	pub debut: String,
 	pub fin: String,
 }
-
-		
-
-		
-		
-		
-
 
 
 fn parse_cidr(cidr: &str) -> Result<(IpAddr, u8)>
@@ -289,7 +273,6 @@ pub(crate) fn cidr_notation(cidr: &str) -> IpRange
 	}
 }
 
-
 #[post("/domaine")]
 async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 	let test = req.domain.clone();
@@ -319,10 +302,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		    	.fetch(&mut pool);
 	
 		println!("result");
-		
-		
-		
-		
+
 		while let Some(row) = result.try_next().await.expect("ah") {
 		    
 		    let mut oui: f32 = row.try_get("tls.note").expect("recuperation ratée");
@@ -339,10 +319,7 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
 		    
 		    donnees.push(donnee);
 		}
-			
-			
-			
-			
+
     	}
     	
     	println!("en tout ça fait ça: {:?}",donnees);
@@ -352,8 +329,6 @@ async fn recupdomain(req: Json<Domaine>) -> HttpResponse {
     	println!("serialisé ça donne: {:?}",renvoi);
     	
     	return HttpResponse::Ok().body(renvoi.expect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh!!!!").clone());
-	
-
 }
 
 #[post("/cidr")]
@@ -364,21 +339,16 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
 	if cidr.eq("") {
 		return HttpResponse::Ok().body("rien reçu");
 	}
-	
-	
+
 	let cidre = cidr_notation(cidr.as_str());
-	
-	
-	
-	
+
 	let mut pool = mysql::MySqlConnectOptions::new()
     	.host("mysql.default")
     	.username("ice_crawler_user")
     	.password("fuI0hwM9bKhf0NrtZpM08xadJ1YtUB0XyanSZykG")
     	.database("ice_crawler_DB")
     	.connect().await.expect("defaut de connexion");
-        
-        
+
         let mut debut = cidre.debut.clone();
         let mut fin = cidre.fin.clone();
         
@@ -387,9 +357,7 @@ async fn recupcidr(req: Json<Cidr>) -> HttpResponse {
     	.bind(&debut)
 	.bind(&fin)
     	.fetch(&mut pool);
-    
-    
-    
+
     let mut donnees: Vec<DATAResult> = Vec::new();
     
     while let Some(row) = result.try_next().await.expect("ah") {
@@ -427,9 +395,7 @@ async fn bureaudesservs(req: Json<DATAResult>) {
     for i in &req.dns.certificate.extensions_server.subject_alternative_names {
     	altnames = altnames + &", ".to_string() + &i;
     }
-    
-    
-    
+
     let mut altnames2=String::new();
     
     for i in &req.dns.certificate.extensions_intermediate.subject_alternative_names {
@@ -486,13 +452,6 @@ async fn bureaudesservs(req: Json<DATAResult>) {
     for i in &req.dns.spf.include {
     	spfinc2 = spfinc2 + &", ".to_string() + &i;
     }
-    
-    
-    
-    
-        
-      
-      
       let mut pool = mysql::MySqlConnectOptions::new()
     	.host("mysql.default")
     	.username("ice_crawler_user")

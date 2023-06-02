@@ -12,7 +12,7 @@ use crate::dmarc::dmarc;
 /// - include *Vec<String>* : liste des domaines inclus
 /// - redirect *String* : domaine de redirection
 /// - all *String* : mécanisme de vérification
-/// - note *String* : note de SPF
+/// - note *f32* : note de SPF
 #[derive(Serialize, Debug)]
 pub struct SPFRecord
 {
@@ -25,8 +25,6 @@ pub struct SPFRecord
 	pub note: f32,
 }
 	
-
-
 
 pub(crate) fn spf(domain: String) -> SPFRecord
 {

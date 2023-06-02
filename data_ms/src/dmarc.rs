@@ -17,7 +17,7 @@ use serde::{Serialize, Serializer};
 /// - adkim *String* : mode d’alignement pour DKIM
 /// - aspf *String* : mode d’alignement pour SPF
 /// - fo *String* :
-/// - note *String* : note de DMARC
+/// - note *f32* : note de DMARC
 /// # Warning
 /// Cette structure n'est pas complète
 #[derive(Serialize, Debug)]
@@ -37,7 +37,6 @@ pub struct DMARCRecord
 	pub fo: String,
 	pub note: f32,
 }
-
 
 
 pub(crate) fn dmarc(domain: String) -> DMARCRecord

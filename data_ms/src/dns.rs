@@ -20,7 +20,7 @@ use crate::tls_rpt::{tls_rtp, TLSRecord};
 /// - dane *DANERecord* : structure DANE
 /// - bimi *BIMIRecord* : structure BIMI
 /// - mta *MTARecord* : structure MTA-STS
-/// - note *String* : note de DNS
+/// - note *f32* : note de DNS
 #[derive(Serialize, Debug)]
 pub struct DNSRecord
 {
@@ -35,8 +35,6 @@ pub struct DNSRecord
 	pub certificate: CertificateRecord,
 	pub note: f32,
 }
-
-
 
 
 pub(crate) fn dns(ip_domain: &str) -> DNSRecord
