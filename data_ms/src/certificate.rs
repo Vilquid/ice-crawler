@@ -16,7 +16,7 @@ use serde::{Serialize, Serializer};
 /// * validity_intermediate *ValidityDetails* : structure contenant les details sur la validité du serveur intermédiaire
 /// * subject_intermediate *SubjectDetails* : structure contenant les details sur le sujet du serveur intermédiaire
 /// * extensions_intermediate *ExtensionsDetails* : structure contenant les details sur les extensions du serveur intermédiaire
-/// * note *String* : note du certificat
+/// * note *f32* : note du certificat
 #[derive(Serialize, Debug)]
 pub struct CertificateRecord
 {
@@ -81,7 +81,6 @@ pub struct ValidityDetails
     pub not_after: String,
     pub is_valid: bool,
 }
-
 
 
 /// # Brief
@@ -151,90 +150,6 @@ pub(crate) fn certificat(domain: String) -> CertificateRecord
     let mut extensions_intermediate = ExtensionsDetails {
         subject_alternative_names: vec![],
     };
-    println!("10");
-   /* let print_x509_cert = PrintX509Cert::from_domain(domain.as_str());
-    println!("20");
-    match print_x509_cert
-    {
-        Ok(certificate) => {
-            signature_server = certificate.server.signature_algorithm;
-
-            issuer_server.city = certificate.server.issuer_country;
-            issuer_server.state = certificate.server.issuer_state;
-            issuer_server.locality = certificate.server.issuer_locality;
-            issuer_server.organization = certificate.server.issuer_organization;
-            issuer_server.common_name = certificate.server.issuer_common_name;
-
-            validity_server.not_before = certificate.server.not_before.to_string();
-            validity_server.not_after = certificate.server.not_after.to_string();
-            validity_server.is_valid = certificate.server.is_valid;
-
-            subject_server.city = certificate.server.subject_country;
-            subject_server.state = certificate.server.subject_state;
-            subject_server.locality = certificate.server.subject_locality;
-            subject_server.organization = certificate.server.subject_organization;
-            subject_server.common_name = certificate.server.subject_common_name;
-
-
-
-            println!("Server PKI Algorithm OID: {}", certificate.server.pki_algorithm_oid);
-            println!("Server PKI Algorithm Bytes: {}", certificate.server.pki_algorithm_bytes);
-            println!("Server PKI Algorithm Exponent: {}", certificate.server.pki_algorithm_exponent);
-            println!("Server Signature Value: {}", certificate.server.signature_value);
-            println!("Server Extensions authority key id: {}", certificate.server.extensions_authority_key_identifier);
-            println!("Server Extensions authority key cert issuer: {}", certificate.server.extensions_authority_key_cert_issuer);
-            println!("Server Extensions authority key cert serial: {}", certificate.server.extensions_authority_key_cert_serial);
-            println!("Server Extensions Basic Constraints: {}", certificate.server.extensions_basic_constraints);
-            println!("Server Extensions crl full name: {}", certificate.server.extensions_crl_full_name);
-            println!("Server Extensions crl reasons: {}", certificate.server.extensions_crl_reasons);
-            println!("Server Extensions crl issue: {}", certificate.server.extensions_crl_issuer);
-            println!("Server Extensions crl key usage: {}", certificate.server.extensions_key_usage);
-            println!("Server Extensions subject key identifier: {}", certificate.server.extensions_subject_key_identifier);
-            println!("Server Extensions SANS: {}", certificate.server.extensions_subject_alternate_names);
-
-
-
-            signature_intermediate = certificate.intermediate.signature_algorithm;
-
-            issuer_intermediate.city = certificate.intermediate.issuer_country;
-            issuer_intermediate.state = certificate.intermediate.issuer_state;
-            issuer_intermediate.locality = certificate.intermediate.issuer_locality;
-            issuer_intermediate.organization = certificate.intermediate.issuer_organization;
-            issuer_intermediate.common_name = certificate.intermediate.issuer_common_name;
-
-            validity_intermediate.not_before = certificate.intermediate.not_before.to_string();
-            validity_intermediate.not_after = certificate.intermediate.not_after.to_string();
-            validity_intermediate.is_valid = certificate.intermediate.is_valid;
-
-            subject_intermediate.city = certificate.intermediate.subject_country;
-            subject_intermediate.state = certificate.intermediate.subject_state;
-            subject_intermediate.locality = certificate.intermediate.subject_locality;
-            subject_intermediate.organization = certificate.intermediate.subject_organization;
-            subject_intermediate.common_name = certificate.intermediate.subject_common_name;
-
-            println!("Intermediate PKI Algorithm OID: {}", certificate.intermediate.pki_algorithm_oid);
-            println!("Intermediate PKI Algorithm Bytes: {}", certificate.intermediate.pki_algorithm_bytes);
-            println!("Intermediate PKI Algorithm Exponent: {}", certificate.intermediate.pki_algorithm_exponent);
-            println!("Intermediate Signature Value: {}", certificate.intermediate.signature_value);
-            println!("Intermediate Extensions authority key id: {}", certificate.intermediate.extensions_authority_key_identifier);
-            println!("Intermediate Extensions authority key cert issuer: {}", certificate.intermediate.extensions_authority_key_cert_issuer);
-            println!("Intermediate Extensions authority key cert serial: {}", certificate.intermediate.extensions_authority_key_cert_serial);
-            println!("Intermediate Extensions Basic Constraints: {}", certificate.intermediate.extensions_basic_constraints);
-            println!("Intermediate Extensions crl full name: {}", certificate.intermediate.extensions_crl_full_name);
-            println!("Intermediate Extensions crl reasons: {}", certificate.intermediate.extensions_crl_reasons);
-            println!("Intermediate Extensions crl issue: {}", certificate.intermediate.extensions_crl_issuer);
-            println!("Intermediate Extensions crl key usage: {}", certificate.intermediate.extensions_key_usage);
-            println!("Intermediate Extensions subject key identifier: {}", certificate.intermediate.extensions_subject_key_identifier);
-            println!("Intermediate Extensions SANS: {}", certificate.intermediate.extensions_subject_alternate_names);
-
-
-        }
-
-        Err(_e) => {
-            // ssl invalid
-        }
-    }
-    println!("30");*/
 
     let mut note: f32 = 0.0;
 

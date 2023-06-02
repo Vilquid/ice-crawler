@@ -2,7 +2,6 @@ use std::process::Command;
 use serde::{Serialize, Serializer};
 
 
-
 /// # Brief
 /// Structure BIMI
 /// # Attributes
@@ -12,7 +11,7 @@ use serde::{Serialize, Serializer};
 /// - url_reputation *String* : URL de la réputation de l'expéditeur
 /// - hash *String* : hash de l'image de l'expéditeur
 /// - s *String* : signature de l'image de l'expéditeur
-/// - note *String* : note de BIMI
+/// - note *f32* : note de BIMI
 #[derive(Serialize, Debug)]
 pub struct BIMIRecord
 {
@@ -24,8 +23,6 @@ pub struct BIMIRecord
 	pub s: String,
 	pub note: f32,
 }
-
-
 
 
 pub(crate) fn bimi(domain: String) -> BIMIRecord

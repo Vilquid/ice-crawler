@@ -7,7 +7,7 @@ use serde::{Serialize, Serializer};
 /// # Attributes
 /// - version *String* : version de MTA-STS
 /// - sn *String* : numéro de série
-/// - note *String* : note de MTA-STS
+/// - note *f32* : note de MTA-STS
 /// # Warning
 /// version doit être un *i32* et pas un *String*.
 #[derive(Serialize, Debug)]
@@ -18,9 +18,6 @@ pub struct MTARecord
 	pub sn: String,
 	pub note: f32,
 }
-
-
-
 
 
 /// # Brief

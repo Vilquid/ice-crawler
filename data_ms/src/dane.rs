@@ -2,7 +2,6 @@ use std::process::Command;
 use serde::{Serialize, Serializer};
 
 
-
 /// # Brief
 /// Structure DANE
 /// # Attributes
@@ -11,7 +10,7 @@ use serde::{Serialize, Serializer};
 /// - signature_cle_publique *bool* : présence de signature de la clé publique
 /// - presence_hash *bool* : présence d'un hash
 /// - hash *String* : hash
-/// - note *String* : note de dane
+/// - note *f32* : note de dane
 #[derive(Serialize, Debug)]
 pub struct DANERecord
 {

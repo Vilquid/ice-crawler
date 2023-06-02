@@ -15,7 +15,6 @@ pub struct TLSRecord
 }
 
 
-
 pub(crate) fn tls_rtp(domain: String) -> TLSRecord
 {
 	// Run the `dig` command to retrieve the TLS-RPT record for the domain
